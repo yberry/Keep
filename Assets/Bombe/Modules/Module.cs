@@ -1,7 +1,9 @@
 ﻿using UnityEngine;
-using System.Collections;
 
-public class Module : MonoBehaviour {
+public abstract class Module : Carre {
+
+    protected bool desamorce = false;
+    public Light lumiere;
 
 	// Use this for initialization
 	void Start () {
@@ -12,4 +14,10 @@ public class Module : MonoBehaviour {
 	void Update () {
 	
 	}
+
+    void Resolu()
+    {
+        desamorce = true;
+        //bombe
+    }
 }

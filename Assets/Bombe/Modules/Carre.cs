@@ -11,4 +11,9 @@ public abstract class Carre : MonoBehaviour {
 	void Update () {
 	
 	}
+
+    protected void Faute()
+    {
+
+    }
 }

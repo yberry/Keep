@@ -21,7 +21,7 @@ public class Bombe : MonoBehaviour {
     {
         get
         {
-            return numSerie[5] % 2 == 0;
+            return numSerie[nbCharSerie - 1] % 2 == 0;
         }
     }
     public bool voyelle
