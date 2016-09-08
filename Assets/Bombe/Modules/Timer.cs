@@ -3,6 +3,17 @@ using UnityEngine.UI;
 
 public class Timer : Carre {
 
+    #region Timer
+    private static Timer instance;
+    public static Timer Get
+    {
+        get
+        {
+            return instance;
+        }
+    }
+    #endregion
+
     private float tempsDepart;
     private float temps;
     private string chiffres;
@@ -68,5 +79,13 @@ public class Timer : Carre {
     public void Erreur()
     {
         erreurs++;
+        if (hardcore)
+        {
+            Bombe.Get.Mort();
+        }
+        else if (erreurs == 3)
+        {
+            Bombe.Get.Mort();
+        }
     }
 }

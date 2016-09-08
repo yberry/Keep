@@ -53,6 +53,18 @@ public class Bombe : MonoBehaviour {
     private bool hardcore = false;
     #endregion
 
+    #region Piles et indicateurs
+    private int nbPiles;
+    public int NbPiles
+    {
+        get
+        {
+            return nbPiles;
+        }
+    }
+    private Indic[] indicateurs;
+    #endregion
+
     // Use this for initialization
     void Start () {
 	    if (instance == null)
@@ -82,18 +94,16 @@ public class Bombe : MonoBehaviour {
         return alpha[Random.Range(last ? 26 : 0, alpha.Length)];
     }
 
-    public void Faute()
+    public bool HasLightIndic(string ind)
     {
-        erreurs++;
-        timer.Erreur();
-        if (hardcore)
+        foreach (Indic indic in indicateurs)
         {
-            Mort();
+            if (indic.Mention == ind && indic.lumiere.enabled)
+            {
+                return true;
+            }
         }
-        else if (erreurs == 3)
-        {
-            Mort();
-        }
+        return false;
     }
 
     public void Verif()

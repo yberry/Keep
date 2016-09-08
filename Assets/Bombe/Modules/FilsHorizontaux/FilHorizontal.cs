@@ -11,7 +11,6 @@ public class FilHorizontal : MonoBehaviour {
         Color.yellow,
         Color.red
     };
-
     private Color couleur;
     public Color Couleur
     {
