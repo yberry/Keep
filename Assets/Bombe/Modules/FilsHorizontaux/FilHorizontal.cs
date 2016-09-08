@@ -22,7 +22,7 @@ public class FilHorizontal : MonoBehaviour {
     }
 
     private bool aCouper = false;
-    private bool coupe = false;
+    private bool estCoupe = false;
 
 	// Use this for initialization
 	void Start () {
@@ -38,5 +38,19 @@ public class FilHorizontal : MonoBehaviour {
     public void Objectif()
     {
         aCouper = true;
+    }
+
+    public void Coupe()
+    {
+        estCoupe = true;
+        FilsHorizontaux fils = transform.parent.GetComponent<FilsHorizontaux>();
+        if (aCouper)
+        {
+            fils.Resolu();
+        }
+        else
+        {
+            fils.Faute();
+        }
     }
 }

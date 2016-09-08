@@ -3,6 +3,13 @@
 public abstract class Module : Carre {
 
     protected bool desamorce = false;
+    public bool Desamorce
+    {
+        get
+        {
+            return desamorce;
+        }
+    }
     public Light lumiere;
 
 	// Use this for initialization
@@ -15,9 +22,9 @@ public abstract class Module : Carre {
 	
 	}
 
-    void Resolu()
+    public void Resolu()
     {
         desamorce = true;
-        //bombe
+        Bombe.Get.Verif();
     }
 }

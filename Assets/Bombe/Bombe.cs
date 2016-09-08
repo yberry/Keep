@@ -45,6 +45,12 @@ public class Bombe : MonoBehaviour {
     #region Carres
     private Timer timer;
     private Carre[] carres;
+    private Module[] modules;
+    #endregion
+
+    #region Fautes
+    private int erreurs = 0;
+    private bool hardcore = false;
     #endregion
 
     // Use this for initialization
@@ -76,9 +82,36 @@ public class Bombe : MonoBehaviour {
         return alpha[Random.Range(last ? 26 : 0, alpha.Length)];
     }
 
-    public void End()
+    public void Faute()
     {
+        erreurs++;
+        timer.Erreur();
+        if (hardcore)
+        {
+            Mort();
+        }
+        else if (erreurs == 3)
+        {
+            Mort();
+        }
+    }
 
+    public void Verif()
+    {
+        bool defused = true;
+        foreach (Module module in modules)
+        {
+            defused &= module.Desamorce;
+        }
+        if (defused)
+        {
+            Defused();
+        }
+    }
+
+    public void Defused()
+    {
+        timer.defile = false;
     }
 
     public void Mort()

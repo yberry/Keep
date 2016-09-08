@@ -9,7 +9,7 @@ public class Timer : Carre {
     public bool defile = false;
     public Text affichageTemps;
 
-    private int erreursMax;
+    private bool hardcore;
     private int erreurs;
 
 	// Use this for initialization
@@ -31,11 +31,11 @@ public class Timer : Carre {
         SetChiffres();
 	}
 
-    public void SetStart(int sec, int err)
+    public void SetStart(int sec, bool hard)
     {
         tempsDepart = sec;
         temps = tempsDepart;
-        erreursMax = err;
+        hardcore = hard;
     }
 
     void SetChiffres()
@@ -63,5 +63,10 @@ public class Timer : Carre {
             chiffres = sec1.ToString() + sec0.ToString() + '.' + dec1.ToString() + dec0.ToString();
         }
         affichageTemps.text = chiffres;
+    }
+
+    public void Erreur()
+    {
+        erreurs++;
     }
 }

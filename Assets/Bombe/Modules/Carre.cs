@@ -12,8 +12,8 @@ public abstract class Carre : MonoBehaviour {
 	
 	}
 
-    protected void Faute()
+    public void Faute()
     {
-
+        Bombe.Get.Faute();
     }
 }

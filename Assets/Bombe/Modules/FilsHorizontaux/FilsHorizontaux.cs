@@ -108,11 +108,41 @@ public class FilsHorizontaux : Module {
                 return;
 
             case 5:
-
+                if (fils[nbFils - 1].Couleur == Color.black && !Bombe.Get.numPair)
+                {
+                    fils[3].Objectif();
+                }
+                else if (NbCouleurs(Color.red) == 1 && NbCouleurs(Color.yellow) > 1)
+                {
+                    fils[0].Objectif();
+                }
+                else if (NbCouleurs(Color.black) == 0)
+                {
+                    fils[1].Objectif();
+                }
+                else
+                {
+                    fils[0].Objectif();
+                }
                 return;
 
             case 6:
-
+                if (NbCouleurs(Color.yellow) == 0 && !Bombe.Get.numPair)
+                {
+                    fils[2].Objectif();
+                }
+                else if (NbCouleurs(Color.yellow) == 1 && NbCouleurs(Color.white) > 1)
+                {
+                    fils[3].Objectif();
+                }
+                else if (NbCouleurs(Color.red) == 0)
+                {
+                    fils[nbFils - 1].Objectif();
+                }
+                else
+                {
+                    fils[3].Objectif();
+                }
                 return;
         }
     }
