@@ -43,6 +43,7 @@ public class Bombe : MonoBehaviour {
     #endregion
 
     #region Carres
+    private Timer timer;
     private Carre[] carres;
     #endregion
 
@@ -73,5 +74,15 @@ public class Bombe : MonoBehaviour {
     {
         string alpha = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
         return alpha[Random.Range(last ? 26 : 0, alpha.Length)];
+    }
+
+    public void End()
+    {
+
+    }
+
+    public void Mort()
+    {
+
     }
 }

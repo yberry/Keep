@@ -5,7 +5,7 @@ public class Timer : Carre {
 
     private float tempsDepart;
     private float temps;
-    private int[] chiffres;
+    private string chiffres;
     public bool defile = false;
     public Text affichageTemps;
 
@@ -14,7 +14,7 @@ public class Timer : Carre {
 
 	// Use this for initialization
 	void Start () {
-        chiffres = new int[4];
+        chiffres = "";
         erreurs = 0;
 	}
 	
@@ -22,9 +22,13 @@ public class Timer : Carre {
 	void Update () {
 	    if (defile)
         {
-            return;
+            temps -= Time.deltaTime * (1f + erreurs / 4f);
+            if (temps <= 0f)
+            {
+                Bombe.Get.Mort();
+            }
         }
-
+        SetChiffres();
 	}
 
     public void SetStart(int sec, int err)
@@ -32,5 +36,32 @@ public class Timer : Carre {
         tempsDepart = sec;
         temps = tempsDepart;
         erreursMax = err;
+    }
+
+    void SetChiffres()
+    {
+        int sec = (int)temps % 60;
+        int min = ((int)temps - sec) / 60;
+        if (min > 0)
+        {
+            int min0 = min % 10;
+            int min1 = (min - (min % 10)) / 10;
+
+            int sec0 = sec % 10;
+            int sec1 = (sec - (sec % 10)) / 10;
+
+            chiffres = min1.ToString() + min0.ToString() + ':' + sec1.ToString() + sec0.ToString();
+        }
+        else
+        {
+            int sec0 = sec % 10;
+            int sec1 = (sec - (sec % 10)) / 10;
+
+            int dec0 = (int)((temps * 100f) % 10f);
+            int dec1 = (int)((temps * 10f) % 10f);
+
+            chiffres = sec1.ToString() + sec0.ToString() + '.' + dec1.ToString() + dec0.ToString();
+        }
+        affichageTemps.text = chiffres;
     }
 }
