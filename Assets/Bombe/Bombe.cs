@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 
 public class Bombe : MonoBehaviour {
 
@@ -14,6 +15,7 @@ public class Bombe : MonoBehaviour {
     #endregion
 
     #region NumSerie
+    private const int nbCharSerie = 6;
     private string numSerie;
     public bool numPair
     {
@@ -36,6 +38,12 @@ public class Bombe : MonoBehaviour {
             return false;
         }
     }
+    [Tooltip("Affichage du numéro de série")]
+    public Text textSerie;
+    #endregion
+
+    #region Carres
+    private Carre[] carres;
     #endregion
 
     // Use this for initialization
@@ -55,9 +63,9 @@ public class Bombe : MonoBehaviour {
     void SetSerial()
     {
         numSerie = "";
-        for (int i = 0; i < 6; i++)
+        for (int i = 0; i < nbCharSerie; i++)
         {
-            numSerie += RandomLetter(i == 5);
+            numSerie += RandomLetter(i == nbCharSerie - 1);
         }
     }
 
