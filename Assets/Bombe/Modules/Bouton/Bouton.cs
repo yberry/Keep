@@ -1,8 +1,9 @@
 ﻿using UnityEngine;
-using System.Collections;
+using UnityEngine.UI;
 
 public class Bouton : Module {
 
+    #region Config bouton
     private static Color[] couleurs =
     {
         Color.yellow,
@@ -23,19 +24,38 @@ public class Bouton : Module {
 
     private bool aMaintenir;
 
+    public Transform bouton;
+    public Text affichage;
     public Light bande;
+    #endregion
 
-	// Use this for initialization
-	void Start () {
+    private const float tempsActivation = 0.5f;
+    private float temps;
+    private bool maintien;
+
+    // Use this for initialization
+    void Start () {
         couleur = couleurs[Random.Range(0, couleurs.Length)];
         texte = textes[Random.Range(0, textes.Length)];
+        bouton.GetComponent<Renderer>().material.color = couleur;
+        affichage.text = texte;
         bande.enabled = false;
         SetObjectif();
+        temps = 0f;
+        maintien = false;
     }
 	
 	// Update is called once per frame
 	void Update () {
-	
+	    if (maintien && !lumiere.enabled)
+        {
+            temps += Time.deltaTime;
+            if (temps >= tempsActivation)
+            {
+                lumiere.color = couleurs[Random.Range(0, couleurs.Length)];
+                lumiere.enabled = true;
+            }
+        }
 	}
 
     void SetObjectif()
@@ -68,5 +88,71 @@ public class Bouton : Module {
         {
             aMaintenir = true;
         }
+    }
+
+    public void Maintien()
+    {
+        maintien = true;
+    }
+
+    public void Relache()
+    {
+        if (lumiere.enabled)
+        {
+            if (aMaintenir)
+            {
+                if (lumiere.color == Color.blue)
+                {
+                    if (Timer.Get.HasNb("4"))
+                    {
+                        Resolu();
+                    }
+                    else
+                    {
+                        Faute();
+                    }
+                }
+                else if (lumiere.color == Color.yellow)
+                {
+                    if (Timer.Get.HasNb("4"))
+                    {
+                        Resolu();
+                    }
+                    else
+                    {
+                        Faute();
+                    }
+                }
+                else
+                {
+                    if (Timer.Get.HasNb("1"))
+                    {
+                        Resolu();
+                    }
+                    else
+                    {
+                        Faute();
+                    }
+                }
+            }
+            else
+            {
+                Faute();
+            }
+        }
+        else
+        {
+            if (aMaintenir)
+            {
+                Faute();
+            }
+            else
+            {
+                Resolu();
+            }
+        }
+        temps = 0f;
+        maintien = false;
+        lumiere.enabled = false;
     }
 }
