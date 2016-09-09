@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
+using System.Collections.Generic;
 
 public class Bombe : MonoBehaviour {
 
@@ -44,8 +45,8 @@ public class Bombe : MonoBehaviour {
 
     #region Carres
     private Timer timer;
-    private Carre[] carres;
-    private Module[] modules;
+    private List<Carre> carres;
+    private List<Module> modules;
     #endregion
 
     #region Fautes
@@ -53,16 +54,22 @@ public class Bombe : MonoBehaviour {
     private bool hardcore = false;
     #endregion
 
-    #region Piles et indicateurs
-    private int nbPiles;
+    #region Peripheriques
+    private List<Indic> indicateurs;
+    private List<Port> ports;
+    private List<Pile> piles;
     public int NbPiles
     {
         get
         {
-            return nbPiles;
+            int nb = 0;
+            foreach (Pile pile in piles)
+            {
+                nb += pile.NbPiles;
+            }
+            return nb;
         }
     }
-    private Indic[] indicateurs;
     #endregion
 
     // Use this for initialization
@@ -71,7 +78,15 @@ public class Bombe : MonoBehaviour {
         {
             instance = this;
         }
+        carres = new List<Carre>();
+        modules = new List<Module>();
         SetSerial();
+        SetIndics();
+        SetPorts();
+        SetPiles();
+        timer = Timer.Get;
+
+
 	}
 	
 	// Update is called once per frame
@@ -94,11 +109,40 @@ public class Bombe : MonoBehaviour {
         return alpha[Random.Range(last ? 26 : 0, alpha.Length)];
     }
 
+    void SetPorts()
+    {
+        ports = new List<Port>();
+        Port.Reset();
+    }
+
+    void SetIndics()
+    {
+        indicateurs = new List<Indic>();
+        Indic.Reset();
+    }
+
+    void SetPiles()
+    {
+        piles = new List<Pile>();
+    }
+
     public bool HasLightIndic(string ind)
     {
         foreach (Indic indic in indicateurs)
         {
             if (indic.Mention == ind && indic.lumiere.enabled)
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public bool HasPort(Port.Type p)
+    {
+        foreach (Port port in ports)
+        {
+            if (port.Nom == p)
             {
                 return true;
             }

@@ -25,6 +25,10 @@ public class Timer : Carre {
 
 	// Use this for initialization
 	void Start () {
+        if (instance == null)
+        {
+            instance = this;
+        }
         chiffres = "";
         erreurs = 0;
 	}

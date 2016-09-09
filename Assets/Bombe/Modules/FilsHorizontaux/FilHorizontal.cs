@@ -41,6 +41,11 @@ public class FilHorizontal : MonoBehaviour {
 
     public void Coupe()
     {
+        if (estCoupe)
+        {
+            return;
+        }
+
         estCoupe = true;
         FilsHorizontaux fils = transform.parent.GetComponent<FilsHorizontaux>();
         if (aCouper)
