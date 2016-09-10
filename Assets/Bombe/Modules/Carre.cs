@@ -12,7 +12,7 @@ public abstract class Carre : MonoBehaviour {
 	
 	}
 
-    public void Faute()
+    public virtual void Faute()
     {
         Timer.Get.Erreur();
     }

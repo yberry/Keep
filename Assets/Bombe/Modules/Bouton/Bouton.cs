@@ -101,38 +101,28 @@ public class Bouton : Module {
         {
             if (aMaintenir)
             {
+                string chiffre = "";
+
                 if (lumiere.color == Color.blue)
                 {
-                    if (Timer.Get.HasNb("4"))
-                    {
-                        Resolu();
-                    }
-                    else
-                    {
-                        Faute();
-                    }
+                    chiffre = "4";
                 }
                 else if (lumiere.color == Color.yellow)
                 {
-                    if (Timer.Get.HasNb("4"))
-                    {
-                        Resolu();
-                    }
-                    else
-                    {
-                        Faute();
-                    }
+                    chiffre = "5";
                 }
                 else
                 {
-                    if (Timer.Get.HasNb("1"))
-                    {
-                        Resolu();
-                    }
-                    else
-                    {
-                        Faute();
-                    }
+                    chiffre = "1";
+                }
+
+                if (Timer.Get.HasNb(chiffre))
+                {
+                    Resolu();
+                }
+                else
+                {
+                    Faute();
                 }
             }
             else
