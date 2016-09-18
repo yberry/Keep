@@ -23,6 +23,7 @@ public class Bouton : Module {
     private string texte;
 
     private bool aMaintenir;
+    private char chiffre;
 
     public Transform bouton;
     public Text affichage;
@@ -39,21 +40,33 @@ public class Bouton : Module {
         texte = textes[Random.Range(0, textes.Length)];
         bouton.GetComponent<Renderer>().material.color = couleur;
         affichage.text = texte;
-        bande.enabled = false;
         SetObjectif();
+        bande.enabled = false;
         temps = 0f;
         maintien = false;
     }
 	
 	// Update is called once per frame
 	void Update () {
-	    if (maintien && !lumiere.enabled)
+	    if (maintien && !bande.enabled)
         {
             temps += Time.deltaTime;
             if (temps >= tempsActivation)
             {
-                lumiere.color = couleurs[Random.Range(0, couleurs.Length)];
-                lumiere.enabled = true;
+                bande.color = couleurs[Random.Range(0, couleurs.Length)];
+                if (bande.color == Color.blue)
+                {
+                    chiffre = '4';
+                }
+                else if (bande.color == Color.yellow)
+                {
+                    chiffre = '5';
+                }
+                else
+                {
+                    chiffre = '1';
+                }
+                bande.enabled = true;
             }
         }
 	}
@@ -97,25 +110,10 @@ public class Bouton : Module {
 
     public void Relache()
     {
-        if (lumiere.enabled)
+        if (bande.enabled)
         {
             if (aMaintenir)
             {
-                string chiffre = "";
-
-                if (lumiere.color == Color.blue)
-                {
-                    chiffre = "4";
-                }
-                else if (lumiere.color == Color.yellow)
-                {
-                    chiffre = "5";
-                }
-                else
-                {
-                    chiffre = "1";
-                }
-
                 if (Timer.Get.HasNb(chiffre))
                 {
                     Resolu();
@@ -143,6 +141,6 @@ public class Bouton : Module {
         }
         temps = 0f;
         maintien = false;
-        lumiere.enabled = false;
+        bande.enabled = false;
     }
 }

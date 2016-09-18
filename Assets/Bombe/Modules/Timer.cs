@@ -80,9 +80,9 @@ public class Timer : Carre {
         affichageTemps.text = chiffres;
     }
 
-    public bool HasNb(string nb)
+    public bool HasNb(char nb)
     {
-        return chiffres.Contains(nb);
+        return chiffres.IndexOf(nb) >= 0;
     }
 
     public void Erreur()

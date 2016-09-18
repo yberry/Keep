@@ -14,6 +14,9 @@ public abstract class Module : Carre {
     private const float tempsFaute = 0.5f;
     private float temps = 0f;
     private bool faute = false;
+
+    [Header("Paramètres module")]
+    [Tooltip("Lumière d'indication")]
     public Light lumiere;
 
 	// Use this for initialization
