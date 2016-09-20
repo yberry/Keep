@@ -6,7 +6,7 @@ public class Port : MonoBehaviour {
     public enum Type
     {
         DVI_D,
-        Parralele,
+        Parallele,
         PS_2,
         RJ_45,
         Serie,

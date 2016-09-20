@@ -32,6 +32,7 @@ public class FilVertical : MonoBehaviour {
         }
         LED.enabled = Random.Range(0, 2) == 0;
         etoile.SetActive(Random.Range(0, 2) == 0);
+        Objectif();
 	}
 
     void Objectif()
@@ -48,7 +49,7 @@ public class FilVertical : MonoBehaviour {
 
         else if (b && ((e && r && !l) || (l && !r)))
         {
-            aCouper = Bombe.Get.HasPort(Port.Type.Parralele);
+            aCouper = Bombe.Get.HasPort(Port.Type.Parallele);
         }
 
         else if ((r && !e && (b || !l)) || (r && !e && !b && !l))
@@ -56,7 +57,7 @@ public class FilVertical : MonoBehaviour {
             aCouper = Bombe.Get.numPair;
         }
 
-        else if (!b && l && (r || l))
+        else if (!b && l && (r || e))
         {
             aCouper = Bombe.Get.NbPiles >= 2;
         }
