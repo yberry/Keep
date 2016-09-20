@@ -19,6 +19,11 @@ public class FilVertical : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+        Reset();
+	}
+
+    public void Reset()
+    {
         int nbCouleurs = Random.Range(1, 3);
         couleurs = new List<Color>();
         for (int i = 0; i < nbCouleurs; i++)
@@ -33,7 +38,7 @@ public class FilVertical : MonoBehaviour {
         LED.enabled = Random.Range(0, 2) == 0;
         etoile.SetActive(Random.Range(0, 2) == 0);
         Objectif();
-	}
+    }
 
     void Objectif()
     {

@@ -38,16 +38,29 @@ public class FilsVerticaux : Module {
                 i--;
             }
         }
+
+        while (VerifDebut())
+        {
+            foreach (FilVertical fil in fils)
+            {
+                fil.Reset();
+            }
+        }
     }
 
-    public void Verif()
+    bool VerifDebut()
     {
         bool complet = true;
         foreach (FilVertical fil in fils)
         {
             complet &= fil.Complet();
         }
-        if (complet)
+        return complet;
+    }
+
+    public void Verif()
+    {
+        if (VerifDebut())
         {
             Resolu();
         }
