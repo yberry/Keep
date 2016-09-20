@@ -43,4 +43,28 @@ public class FilVertical : MonoBehaviour {
 	void Update () {
 	
 	}
+
+    public void Coupe()
+    {
+        if (estCoupe)
+        {
+            return;
+        }
+
+        estCoupe = true;
+        FilsVerticaux filsVert = transform.parent.GetComponent<FilsVerticaux>();
+        if (aCouper)
+        {
+            filsVert.Verif();
+        }
+        else
+        {
+            filsVert.Faute();
+        }
+    }
+
+    public bool Complet()
+    {
+        return !aCouper || (aCouper && estCoupe);
+    }
 }
