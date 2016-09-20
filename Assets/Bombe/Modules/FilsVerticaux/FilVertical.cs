@@ -16,6 +16,13 @@ public class FilVertical : MonoBehaviour {
 
     private bool aCouper = false;
     private bool estCoupe = false;
+    public bool Complet
+    {
+        get
+        {
+            return !aCouper || (aCouper && estCoupe);
+        }
+    }
 
 	// Use this for initialization
 	void Start () {
@@ -56,7 +63,7 @@ public class FilVertical : MonoBehaviour {
         {
             aCouper = Bombe.Get.HasPort(Port.Type.Parallele);
         }
-
+        // pas sur
         else if ((r && !e && (b || !l)) || (r && !e && !b && !l))
         {
             aCouper = Bombe.Get.numPair;
@@ -97,10 +104,5 @@ public class FilVertical : MonoBehaviour {
         {
             filsVert.Faute();
         }
-    }
-
-    public bool Complet()
-    {
-        return !aCouper || (aCouper && estCoupe);
     }
 }

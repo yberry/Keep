@@ -8,6 +8,19 @@ public class FilsVerticaux : Module {
     private int nbFils;
     private List<FilVertical> fils;
 
+    private bool Complet
+    {
+        get
+        {
+            bool complet = true;
+            foreach (FilVertical fil in fils)
+            {
+                complet &= fil.Complet;
+            }
+            return complet;
+        }
+    }
+
 	// Use this for initialization
 	void Start () {
         nbFils = Random.Range(3, 7);
@@ -39,7 +52,7 @@ public class FilsVerticaux : Module {
             }
         }
 
-        while (VerifDebut())
+        while (Complet)
         {
             foreach (FilVertical fil in fils)
             {
@@ -48,19 +61,9 @@ public class FilsVerticaux : Module {
         }
     }
 
-    bool VerifDebut()
-    {
-        bool complet = true;
-        foreach (FilVertical fil in fils)
-        {
-            complet &= fil.Complet();
-        }
-        return complet;
-    }
-
     public void Verif()
     {
-        if (VerifDebut())
+        if (Complet)
         {
             Resolu();
         }
