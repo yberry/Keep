@@ -46,7 +46,7 @@ public class FilVertical : MonoBehaviour {
             aCouper = true;
         }
 
-        else if (b && ((e && r && !l) || (l && !r && !e) || (!r && e && l)))
+        else if (b && ((e && r && !l) || (l && !r)))
         {
             aCouper = Bombe.Get.HasPort(Port.Type.Parralele);
         }
