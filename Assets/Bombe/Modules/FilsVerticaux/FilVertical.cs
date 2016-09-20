@@ -7,7 +7,8 @@ public class FilVertical : MonoBehaviour {
     {
         Color.blue,
         Color.red,
-        Color.white
+        Color.white,
+        Color.yellow
     };
 
     private List<Color> couleurs;
@@ -63,8 +64,8 @@ public class FilVertical : MonoBehaviour {
         {
             aCouper = Bombe.Get.HasPort(Port.Type.Parallele);
         }
-        // pas sur
-        else if ((r && !e && (b || !l)) || (!r && !e && b && !l))
+
+        else if (!e && ((r && (b || !l)) || (!r && b && !l)))
         {
             aCouper = Bombe.Get.numPair;
         }
