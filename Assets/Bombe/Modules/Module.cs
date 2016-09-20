@@ -50,6 +50,7 @@ public abstract class Module : Carre {
     public override void Faute()
     {
         base.Faute();
+        temps = 0f;
         faute = true;
         lumiere.color = Color.red;
         lumiere.enabled = true;

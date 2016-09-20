@@ -64,7 +64,7 @@ public class FilVertical : MonoBehaviour {
             aCouper = Bombe.Get.HasPort(Port.Type.Parallele);
         }
         // pas sur
-        else if ((r && !e && (b || !l)) || (r && !e && !b && !l))
+        else if ((r && !e && (b || !l)) || (!r && !e && b && !l))
         {
             aCouper = Bombe.Get.numPair;
         }
