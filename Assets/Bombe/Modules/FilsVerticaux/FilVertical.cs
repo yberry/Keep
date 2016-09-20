@@ -67,6 +67,13 @@ public class FilVertical : MonoBehaviour {
         }
     }
 
+    public void Desaffiche()
+    {
+        LED.enabled = false;
+        etoile.SetActive(false);
+        gameObject.SetActive(false);
+    }
+
     public void Coupe()
     {
         if (estCoupe)

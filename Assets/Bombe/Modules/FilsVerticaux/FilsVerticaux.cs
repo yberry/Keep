@@ -30,7 +30,7 @@ public class FilsVerticaux : Module {
             }
             else if (vide > 0)
             {
-                prefabsFils[i].gameObject.SetActive(false);
+                prefabsFils[i].Desaffiche();
                 vide--;
             }
             else
