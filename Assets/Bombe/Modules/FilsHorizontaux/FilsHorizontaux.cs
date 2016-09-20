@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 public class FilsHorizontaux : Module {
 
-    public GameObject[] prefabsFils;
+    public FilHorizontal[] prefabsFils;
 
     private int nbFils;
     private List<FilHorizontal> fils;
@@ -31,13 +31,12 @@ public class FilsHorizontaux : Module {
         {
             if (plein > 0 && Random.Range(0, 2) == 0)
             {
-                GameObject fil = Instantiate(prefabsFils[i]) as GameObject;
-                fil.transform.SetParent(transform);
-                fils.Add(fil.GetComponent<FilHorizontal>());
+                fils.Add(prefabsFils[i]);
                 plein--;
             }
             else if (vide > 0)
             {
+                prefabsFils[i].gameObject.SetActive(false);
                 vide--;
             }
             else
