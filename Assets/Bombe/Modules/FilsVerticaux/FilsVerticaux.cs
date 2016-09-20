@@ -39,11 +39,6 @@ public class FilsVerticaux : Module {
             }
         }
     }
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
 
     public void Verif()
     {

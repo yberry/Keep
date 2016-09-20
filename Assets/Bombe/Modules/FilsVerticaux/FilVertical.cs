@@ -36,13 +36,36 @@ public class FilVertical : MonoBehaviour {
 
     void Objectif()
     {
+        bool b = couleurs.Contains(Color.blue);
+        bool r = couleurs.Contains(Color.red);
+        bool l = LED.enabled;
+        bool e = etoile.activeInHierarchy;
 
+        if (!b && !l && (e || !r))
+        {
+            aCouper = true;
+        }
+
+        else if (b && ((e && r && !l) || (l && !r && !e) || (!r && e && l)))
+        {
+            aCouper = Bombe.Get.HasPort(Port.Type.Parralele);
+        }
+
+        else if ((r && !e && (b || !l)) || (r && !e && !b && !l))
+        {
+            aCouper = Bombe.Get.numPair;
+        }
+
+        else if (!b && l && (r || l))
+        {
+            aCouper = Bombe.Get.NbPiles >= 2;
+        }
+
+        else
+        {
+            aCouper = false;
+        }
     }
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
 
     public void Coupe()
     {
