@@ -170,6 +170,7 @@ public class Bombe : MonoBehaviour {
 
     public void Mort()
     {
-
+        instance = null;
+        Destroy(gameObject);
     }
 }
