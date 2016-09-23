@@ -17,14 +17,16 @@ public class Timer : Carre {
     private float tempsDepart;
     private float temps;
     private string chiffres;
-    public bool defile = false;
-    public Text affichageTemps;
 
     private bool hardcore;
     private int erreurs;
 
-	// Use this for initialization
-	void Start () {
+    public bool defile = false;
+    public Text affichageTemps;
+    public AudioSource source;
+
+    // Use this for initialization
+    void Start () {
         if (instance == null)
         {
             instance = this;
