@@ -3,6 +3,11 @@ using System.Collections.Generic;
 
 public class Symboles : Module {
 
+    public enum Type
+    {
+
+    }
+
     public Symbole[] symboles;
 
     private const int nbColonnes = 6;
@@ -18,7 +23,7 @@ public class Symboles : Module {
         { },
     };*/
 
-    private static Symbole.Type[,] colonnes;
+    private static Type[,] colonnes;
 
 	// Use this for initialization
 	void Start () {
@@ -33,13 +38,21 @@ public class Symboles : Module {
             {
                 num = Random.Range(0, nbSymboles);
             }
-            symboles[i].SetSymbole(colonnes[col, num]);
+            //symboles[i].SetSymbole(colonnes[col, num]);
             numPris.Add(num);
         }
 	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
+
+    public void Verif()
+    {
+        bool valide = true;
+        foreach (Symbole symbole in symboles)
+        {
+            valide &= symbole.Appuye;
+        }
+        if (valide)
+        {
+            Resolu();
+        }
+    }
 }

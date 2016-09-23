@@ -4,35 +4,69 @@ using System.Collections.Generic;
 
 public class Symbole : MonoBehaviour {
 
-    public enum Type
-    {
-
-    }
-
-    private static Dictionary<Type, Sprite> dico = new Dictionary<Type, Sprite>()
-    {
-
-    };
-
-    private Type type;
+    private Symboles.Type type;
+    private bool suivant = false;
     private bool appuye = false;
+    public bool Appuye
+    {
+        get
+        {
+            return appuye;
+        }
+    }
+    private const float tempsFaute = 0.5f;
+    private float temps = 0f;
+    private bool faute = false;
 
     public Light bande;
     public Image image;
 
 	// Use this for initialization
 	void Start () {
-	
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
+        bande.enabled = false;
 	}
 
-    public void SetSymbole(Type t)
+    void Update() {
+        if (faute)
+        {
+            temps += Time.deltaTime;
+            if (temps >= tempsFaute)
+            {
+                bande.enabled = false;
+                temps = 0f;
+                faute = false;
+            }
+        }
+    }
+
+    public void SetSymbole(Sprite sprite)
     {
-        type = t;
-        image.sprite = dico[t];
+        image.sprite = sprite;
+    }
+
+    public void SetSuivant()
+    {
+        suivant = true;
+    }
+
+    public void Clic()
+    {
+        if (appuye)
+        {
+            return;
+        }
+        Symboles symboles = transform.parent.GetComponent<Symboles>();
+        if (suivant)
+        {
+            appuye = true;
+            bande.color = Color.green;
+            symboles.Verif();
+        }
+        else
+        {
+            faute = true;
+            temps = 0f;
+            symboles.Faute();
+        }
     }
 }
