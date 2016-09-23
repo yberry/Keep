@@ -60,6 +60,7 @@ public class Symbole : MonoBehaviour {
         {
             appuye = true;
             bande.color = Color.green;
+            suivant = false;
             symboles.Verif();
         }
         else
