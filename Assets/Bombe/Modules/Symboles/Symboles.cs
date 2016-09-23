@@ -58,6 +58,8 @@ public class Symboles : Module {
         { Type.SixEcrase, Type.Euro, Type.Inegal, Type.AE, Type.Trident, Type.NEnvers, Type.Omega },
     };
 
+    private List<int> ordre;
+
 	// Use this for initialization
 	void Start () {
         int col = Random.Range(0, nbColonnes);
@@ -74,6 +76,24 @@ public class Symboles : Module {
             symboles[i].SetSymbole(GetSprite(colonnes[col, num]));
             numPris.Add(num);
         }
+
+        ordre = new List<int>();
+
+        for (int i = 0; i < symboles.Length; i++)
+        {
+            int min = numPris[0];
+            int indexMin = 0;
+            for (int j = 0; j < numPris.Count; i++)
+            {
+                if (min > numPris[j] && !ordre.Contains(j))
+                {
+                    min = numPris[j];
+                    indexMin = j;
+                }
+            }
+            ordre.Add(indexMin);
+        }
+        SetSuivant();
 	}
 
     Sprite GetSprite(Type t)
@@ -101,7 +121,13 @@ public class Symboles : Module {
         }
         else
         {
-
+            SetSuivant();
         }
+    }
+
+    void SetSuivant()
+    {
+        symboles[ordre[0]].SetSuivant();
+        ordre.RemoveAt(0);
     }
 }

@@ -66,8 +66,10 @@ public class Symbole : MonoBehaviour {
         else
         {
             faute = true;
+            bande.color = Color.red;
             temps = 0f;
             symboles.Faute();
         }
+        bande.enabled = true;
     }
 }
