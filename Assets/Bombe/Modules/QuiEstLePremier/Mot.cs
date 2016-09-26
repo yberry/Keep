@@ -18,6 +18,18 @@ public class Mot : MonoBehaviour {
 	
 	}
 
+    public void Restart()
+    {
+        mot.text = "";
+        aCliquer = false;
+    }
+
+    public void Show(string texte, bool clic)
+    {
+        mot.text = texte;
+        aCliquer = clic;
+    }
+
     public void Clic()
     {
         QuiEstLePremier qui = transform.parent.GetComponent<QuiEstLePremier>();

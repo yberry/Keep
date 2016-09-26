@@ -5,33 +5,11 @@ public class Symboles : Module {
 
     public enum Type
     {
-        QBarre,
-        Triforce,
-        Lambda,
-        Cicatrice,
-        Vaisseau,
-        X,
-        Cenvers,
-        Euro,
-        Disney,
-        EtoileBlanche,
-        Interro,
-        Copyright,
-        Couilles,
-        KMiroir,
-        RPasFini,
-        SixEcrase,
-        Paragraphe,
-        BDansT,
-        Smiley,
-        Trident,
-        Cendroit,
-        TroisAntennes,
-        EtoileNoire,
-        Inegal,
-        AE,
-        NEnvers,
-        Omega
+        QBarre, Triforce, Lambda, Cicatrice, Vaisseau, X,
+        Cenvers, Euro, Disney, EtoileBlanche, Interro,
+        Copyright, Couilles, KMiroir, RPasFini, SixEcrase,
+        Paragraphe, BDansT, Smiley, Trident, Cendroit,
+        TroisAntennes, EtoileNoire, Inegal, AE, NEnvers, Omega
     }
 
     public Symbole[] symboles;
