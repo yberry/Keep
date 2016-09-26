@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 public class FilVertical : MonoBehaviour {
 
-    private static Color[] couleursDispo =
+    private static readonly Color[] couleursDispo =
     {
         Color.blue,
         Color.red,

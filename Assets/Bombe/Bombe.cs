@@ -88,11 +88,6 @@ public class Bombe : MonoBehaviour {
 
 
 	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
 
     void SetSerial()
     {

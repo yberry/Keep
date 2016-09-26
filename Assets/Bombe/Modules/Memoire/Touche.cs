@@ -15,23 +15,23 @@ public class Touche : MonoBehaviour
             if (value >= 1 && value <= 4)
             {
                 chiffre = value;
-                affichageChiffre.text = chiffre.ToString();
+                affichageChiffre.GetComponentInChildren<Text>().text = chiffre.ToString();
             }
         }
     }
 
     private bool cible = false;
 
-    public Text affichageChiffre;
+    public Button affichageChiffre;
 
     void Start()
     {
-
+        affichageChiffre.onClick.AddListener(Clic);
     }
 
     public void Restart()
     {
-        affichageChiffre.text = "";
+        affichageChiffre.GetComponentInChildren<Text>().text = "";
         cible = false;
     }
 
@@ -40,7 +40,7 @@ public class Touche : MonoBehaviour
         cible = true;
     }
 
-    public void Clic()
+    void Clic()
     {
         Memoire memoire = transform.parent.GetComponent<Memoire>();
         if (cible)

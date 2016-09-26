@@ -3,7 +3,7 @@ using System.Collections;
 
 public class FilHorizontal : MonoBehaviour {
 
-    private static Color[] couleurs =
+    private static readonly Color[] couleurs =
     {
         Color.white,
         Color.black,

@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 public class QuiEstLePremier : Module {
 
-    private static string[][] titresPossibles = new string[6][]
+    private static readonly string[][] titresPossibles = new string[6][]
     {
         new string[1] { "UR" },
         new string[3] { "FIRST", "OKAY", "C" },
@@ -14,7 +14,7 @@ public class QuiEstLePremier : Module {
         new string[9] { "DISPLAY", "SAYS", "NO", "LEAD", "HOLD ON", "YOU ARE", "THERE", "SEE", "CEE" }
     };
 
-    /*private static string[] motsPossibles =
+    /*private static readonly string[] motsPossibles =
     {
         "READY", "FIRST", "NO", "BLANK", "NOTHING", "YES", "WHAT",
         "UHHH", "LEFT", "RIGHT", "MIDDLE", "OKAY", "WAIT", "PRESS",
@@ -22,7 +22,7 @@ public class QuiEstLePremier : Module {
         "UH UH", "WHAT?", "DONE", "NEXT", "HOLD", "SURE", "LIKE"
     };*/
 
-    private static Dictionary<string, List<string>> motsSuivants = new Dictionary<string, List<string>>
+    private static readonly Dictionary<string, List<string>> motsSuivants = new Dictionary<string, List<string>>
     {
         { "READY", new List<string>() { "YES", "OKAY", "WHAT", "MIDDLE", "LEFT", "PRESS", "RIGHT", "BLANK", "READY", "NO", "FIRST", "UHHH", "NOTHING", "WAIT"} },
         { "FIRST", new List<string>() { "LEFT", "OKAY", "YES", "MIDDLE", "NO", "RIGHT", "NOTHING", "UHHH", "WAIT", "READY", "BLANK", "WHAT", "PRESS", "FIRST"} },

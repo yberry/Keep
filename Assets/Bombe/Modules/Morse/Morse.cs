@@ -5,53 +5,47 @@ using System.Collections.Generic;
 
 public class Morse : Module {
 
-    enum M
+    private static readonly Dictionary<char, bool[]> alpha = new Dictionary<char, bool[]>()
     {
-        Court,
-        Long
-    }
-
-    private static Dictionary<char, M[]> alpha = new Dictionary<char, M[]>()
-    {
-        { 'a', new M[2] { M.Court, M.Long } },
-        { 'b', new M[4] { M.Long, M.Court, M.Court, M.Court } },
-        { 'c', new M[4] { M.Long, M.Court, M.Long, M.Court } },
-        { 'd', new M[3] { M.Long, M.Court, M.Court } },
-        { 'e', new M[1] { M.Court } },
-        { 'f', new M[4] { M.Court, M.Court, M.Long, M.Court } },
-        { 'g', new M[3] { M.Long, M.Long, M.Court } },
-        { 'h', new M[4] { M.Court, M.Court, M.Court, M.Court } },
-        { 'i', new M[2] { M.Court, M.Court } },
-        { 'j', new M[4] { M.Court, M.Long, M.Long, M.Long } },
-        { 'k', new M[3] { M.Long, M.Court, M.Long } },
-        { 'l', new M[4] { M.Court, M.Long, M.Court, M.Court } },
-        { 'm', new M[2] { M.Long, M.Long } },
-        { 'n', new M[2] { M.Long, M.Court } },
-        { 'o', new M[3] { M.Long, M.Long, M.Long } },
-        { 'p', new M[4] { M.Court, M.Long, M.Long, M.Court } },
-        { 'q', new M[4] { M.Long, M.Long, M.Court, M.Long } },
-        { 'r', new M[3] { M.Court, M.Long, M.Court } },
-        { 's', new M[3] { M.Court, M.Court, M.Court } },
-        { 't', new M[1] { M.Long } },
-        { 'u', new M[3] { M.Court, M.Court, M.Long } },
-        { 'v', new M[4] { M.Court, M.Court, M.Court, M.Long } },
-        { 'w', new M[3] { M.Court, M.Long, M.Long } },
-        { 'x', new M[4] { M.Long, M.Court, M.Court, M.Long } },
-        { 'y', new M[4] { M.Long, M.Court, M.Long, M.Long } },
-        { 'z', new M[4] { M.Long, M.Long, M.Court, M.Court } },
-        { '1', new M[5] { M.Court, M.Long, M.Long, M.Long, M.Long } },
-        { '2', new M[5] { M.Court, M.Court, M.Long, M.Long, M.Long } },
-        { '3', new M[5] { M.Court, M.Court, M.Court, M.Long, M.Long } },
-        { '4', new M[5] { M.Court, M.Court, M.Court, M.Court, M.Long } },
-        { '5', new M[5] { M.Court, M.Court, M.Court, M.Court, M.Court } },
-        { '6', new M[5] { M.Long, M.Court, M.Court, M.Court, M.Court } },
-        { '7', new M[5] { M.Long, M.Long, M.Court, M.Court, M.Court } },
-        { '8', new M[5] { M.Long, M.Long, M.Long, M.Court, M.Court } },
-        { '9', new M[5] { M.Long, M.Long, M.Long, M.Long, M.Court } },
-        { '0', new M[5] { M.Long, M.Long, M.Long, M.Long, M.Long } }
+        { 'a', new bool[2] { true, false } },
+        { 'b', new bool[4] { false, true, true, true } },
+        { 'c', new bool[4] { false, true, false, true } },
+        { 'd', new bool[3] { false, true, true } },
+        { 'e', new bool[1] { true } },
+        { 'f', new bool[4] { true, true, false, true } },
+        { 'g', new bool[3] { false, false, true } },
+        { 'h', new bool[4] { true, true, true, true } },
+        { 'i', new bool[2] { true, true } },
+        { 'j', new bool[4] { true, false, false, false } },
+        { 'k', new bool[3] { false, true, false } },
+        { 'l', new bool[4] { true, false, true, true } },
+        { 'm', new bool[2] { false, false } },
+        { 'n', new bool[2] { false, true } },
+        { 'o', new bool[3] { false, false, false } },
+        { 'p', new bool[4] { true, false, false, true } },
+        { 'q', new bool[4] { false, false, true, false } },
+        { 'r', new bool[3] { true, false, true } },
+        { 's', new bool[3] { true, true, true } },
+        { 't', new bool[1] { false } },
+        { 'u', new bool[3] { true, true, false } },
+        { 'v', new bool[4] { true, true, true, false } },
+        { 'w', new bool[3] { true, false, false } },
+        { 'x', new bool[4] { false, true, true, false } },
+        { 'y', new bool[4] { false, true, false, false } },
+        { 'z', new bool[4] { false, false, true, true } },
+        { '1', new bool[5] { true, false, false, false, false } },
+        { '2', new bool[5] { true, true, false, false, false } },
+        { '3', new bool[5] { true, true, true, false, false } },
+        { '4', new bool[5] { true, true, true, true, false } },
+        { '5', new bool[5] { true, true, true, true, true } },
+        { '6', new bool[5] { false, true, true, true, true } },
+        { '7', new bool[5] { false, false, true, true, true } },
+        { '8', new bool[5] { false, false, false, true, true } },
+        { '9', new bool[5] { false, false, false, false, true } },
+        { '0', new bool[5] { false, false, false, false, false } }
     };
 
-    private static Dictionary<string, float> corresp = new Dictionary<string, float>()
+    private static readonly Dictionary<string, float> corresp = new Dictionary<string, float>()
     {
         { "shell", 3.505f },
         { "halls", 3.515f },
@@ -78,6 +72,7 @@ public class Morse : Module {
 
     public Light signal;
     public Slider freqSlider;
+    public Button TX;
 
 	// Use this for initialization
 	void Start () {
@@ -88,6 +83,8 @@ public class Morse : Module {
 
         mot = mots[Random.Range(0, mots.Length)];
         freq = corresp[mot];
+
+        TX.onClick.AddListener(Verif);
         
         while (true)
         {
@@ -107,17 +104,29 @@ public class Morse : Module {
 
     IEnumerator LireLettre(char c)
     {
-        foreach (M bip in alpha[c])
+        foreach (bool court in alpha[c])
         {
-            StartCoroutine(LireSignal(bip));
+            StartCoroutine(LireSignal(court));
             yield return new WaitForSeconds(tempsPoint);
         }
     }
 
-    IEnumerator LireSignal(M bip)
+    IEnumerator LireSignal(bool court)
     {
         signal.enabled = true;
-        yield return new WaitForSeconds(tempsPoint * (bip == M.Court ? 1f : 3f));
+        yield return new WaitForSeconds(tempsPoint * (court ? 1f : 3f));
         signal.enabled = false;
+    }
+
+    void Verif()
+    {
+        if (freqSlider.value == freq)
+        {
+            Resolu();
+        }
+        else
+        {
+            Faute();
+        }
     }
 }

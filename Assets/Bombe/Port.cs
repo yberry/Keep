@@ -34,11 +34,6 @@ public class Port : MonoBehaviour {
         }
         pris.Add(nom);
 	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
 
     public static void Reset()
     {

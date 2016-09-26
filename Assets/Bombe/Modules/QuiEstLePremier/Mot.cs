@@ -1,36 +1,30 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
-using System.Collections;
 
 public class Mot : MonoBehaviour {
 
     private bool aCliquer = false;
 
-    public Text mot;
+    public Button mot;
 
 	// Use this for initialization
 	void Start () {
-	
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
+        mot.onClick.AddListener(Clic);
 	}
 
     public void Restart()
     {
-        mot.text = "";
+        mot.GetComponentInChildren<Text>().text = "";
         aCliquer = false;
     }
 
     public void Show(string texte, bool clic)
     {
-        mot.text = texte;
+        mot.GetComponentInChildren<Text>().text = texte;
         aCliquer = clic;
     }
 
-    public void Clic()
+    void Clic()
     {
         QuiEstLePremier qui = transform.parent.GetComponent<QuiEstLePremier>();
         if (aCliquer)

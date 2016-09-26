@@ -4,7 +4,7 @@ using UnityEngine.UI;
 public class Bouton : Module {
 
     #region Config bouton
-    private static Color[] couleurs =
+    private static readonly Color[] couleurs =
     {
         Color.yellow,
         Color.white,
@@ -13,7 +13,7 @@ public class Bouton : Module {
     };
     private Color couleur;
 
-    private static string[] textes =
+    private static readonly string[] textes =
     {
         "DETONATE",
         "PRESS",

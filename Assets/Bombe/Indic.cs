@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 public class Indic : MonoBehaviour {
 
-    private static string[] ind =
+    private static readonly string[] ind =
     {
         "SND",
         "CLR",
