@@ -34,6 +34,8 @@ public class Memoire : Module
     // Use this for initialization
     void Start()
     {
+        chiffres = new List<int>();
+        positions = new List<int>();
         Restart();
     }
 

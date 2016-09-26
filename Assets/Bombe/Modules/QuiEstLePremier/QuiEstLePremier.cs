@@ -122,7 +122,7 @@ public class QuiEstLePremier : Module {
         j = 0;
         foreach (string mot in motsMis.Keys)
         {
-            mots[j].Show(mot, motsMis[mot] == min);
+            mots[j].Show(mot, motsMis[mot] == indexMin);
             j++;
         }
     }
