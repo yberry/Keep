@@ -71,37 +71,53 @@ public class Morse : Module {
         { "beats", 3.600f },
     };
 
+    private const float tempsPoint = 0.5f;
+
     private string mot;
-    private M[][] clignotements;
+    private float freq;
 
     public Light signal;
-    public Slider freq;
+    public Slider freqSlider;
 
 	// Use this for initialization
 	void Start () {
+        signal.enabled = false;
+
         string[] mots = new string[corresp.Keys.Count];
         corresp.Keys.CopyTo(mots, 0);
 
         mot = mots[Random.Range(0, mots.Length)];
-        clignotements = new M[mot.Length][];
-        for (int i = 0; i < mot.Length; i++)
+        freq = corresp[mot];
+        
+        while (true)
         {
-            clignotements[i] = alpha[mot[i]];
+            StartCoroutine(LireMot(mot));
         }
 	}
 	
-	IEnumerator LireMot()
+	IEnumerator LireMot(string m)
     {
-
+        foreach (char c in m)
+        {
+            StartCoroutine(LireLettre(c));
+            yield return new WaitForSeconds(3 * tempsPoint);
+        }
+        yield return new WaitForSeconds(4 * tempsPoint);
     }
 
-    IEnumerator LireLettre()
+    IEnumerator LireLettre(char c)
     {
-
+        foreach (M bip in alpha[c])
+        {
+            StartCoroutine(LireSignal(bip));
+            yield return new WaitForSeconds(tempsPoint);
+        }
     }
 
-    IEnumerator LireSignal()
+    IEnumerator LireSignal(M bip)
     {
-
+        signal.enabled = true;
+        yield return new WaitForSeconds(tempsPoint * (bip == M.Court ? 1f : 3f));
+        signal.enabled = false;
     }
 }
