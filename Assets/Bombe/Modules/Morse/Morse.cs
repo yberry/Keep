@@ -91,13 +91,13 @@ public class Morse : Module {
         
         while (true)
         {
-            StartCoroutine(LireMot(mot));
+            StartCoroutine(LireMot());
         }
 	}
 	
-	IEnumerator LireMot(string m)
+	IEnumerator LireMot()
     {
-        foreach (char c in m)
+        foreach (char c in mot)
         {
             StartCoroutine(LireLettre(c));
             yield return new WaitForSeconds(3 * tempsPoint);
