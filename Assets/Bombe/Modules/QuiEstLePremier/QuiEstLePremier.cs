@@ -105,24 +105,20 @@ public class QuiEstLePremier : Module {
             }
         }
 
-        int indexMin = 0;
         int min = motsLigne.Count;
 
-        int j = 0;
         foreach (int index in motsMis.Values)
         {
             if (min > index)
             {
                 min = index;
-                indexMin = j;
             }
-            j++;
         }
 
-        j = 0;
+        int j = 0;
         foreach (string mot in motsMis.Keys)
         {
-            mots[j].Show(mot, motsMis[mot] == indexMin);
+            mots[j].Show(mot, motsMis[mot] == min);
             j++;
         }
     }

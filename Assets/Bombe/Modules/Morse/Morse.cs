@@ -85,11 +85,8 @@ public class Morse : Module {
         freq = corresp[mot];
 
         TX.onClick.AddListener(Verif);
-        
-        while (true)
-        {
-            StartCoroutine(LireMot());
-        }
+
+        StartCoroutine(LireMot());
 	}
 	
 	IEnumerator LireMot()
@@ -100,6 +97,7 @@ public class Morse : Module {
             yield return new WaitForSeconds(3 * tempsPoint);
         }
         yield return new WaitForSeconds(4 * tempsPoint);
+        StartCoroutine(LireMot());
     }
 
     IEnumerator LireLettre(char c)
