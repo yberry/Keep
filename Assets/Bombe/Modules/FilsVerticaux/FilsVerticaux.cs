@@ -12,12 +12,14 @@ public class FilsVerticaux : Module {
     {
         get
         {
-            bool complet = true;
             foreach (FilVertical fil in fils)
             {
-                complet &= fil.Complet;
+                if (!fil.Complet)
+                {
+                    return false;
+                }
             }
-            return complet;
+            return true;
         }
     }
 
