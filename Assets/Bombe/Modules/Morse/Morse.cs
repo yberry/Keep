@@ -88,7 +88,6 @@ public class Morse : Module {
         int rand = Random.Range(0, motsPossibles.Length);
         mot = motsPossibles[rand];
         freq = freqPossibles[rand];
-        Debug.Log(mot);
 
         Affiche();
         gauche.onClick.AddListener(Gauche);
@@ -137,6 +136,7 @@ public class Morse : Module {
         {
             current = freqPossibles.Length - 1;
         }
+        Affiche();
     }
 
     void Verif()
