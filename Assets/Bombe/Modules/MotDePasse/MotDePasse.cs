@@ -29,12 +29,13 @@ public class MotDePasse : Module {
 	// Use this for initialization
 	void Start () {
         mot = motsPossibles[Random.Range(0, motsPossibles.Length)];
-        Debug.Log(mot);
+
         do
         {
             Restart();
         }
         while (CheckMulitple());
+
         for (int i = 0; i < lettres.Length; i++)
         {
             lettres[i].SetLettres(choixLettres[i].ToArray());
@@ -58,8 +59,7 @@ public class MotDePasse : Module {
 
             for (int j = 0; j < choixParLettre; j++)
             {
-                Debug.Log(j);
-                if (pasObli > 0 && Random.Range(0, 3) > 0)
+                if (pasObli > 0 && Random.Range(0, 5) > 0)
                 {
                     int rand = Random.Range(0, alph.Length);
                     while (choixLettres[i].Contains(alph[rand]))

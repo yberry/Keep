@@ -39,8 +39,41 @@ public class Bombe : MonoBehaviour {
             return false;
         }
     }
+    [Header("Numéro de série")]
     [Tooltip("Affichage du numéro de série")]
     public Text textSerie;
+    #endregion
+
+    #region Prefabs
+    [Header("Préfabs de modules")]
+    [Tooltip("Préfab de fils horizontaux")]
+    public FilsHorizontaux filsHorizontaux;
+    [Tooltip("Préfab de bouton")]
+    public Bouton bouton;
+    [Tooltip("Préfab de symboles")]
+    public Symboles symboles;
+    [Tooltip("Préfab de simon")]
+    public Simon simon;
+    [Tooltip("Préfab de qui est le premier")]
+    public QuiEstLePremier quiEstLePremier;
+    [Tooltip("Préfab de memoire")]
+    public Memoire memoire;
+    [Tooltip("Préfab de morse")]
+    public Morse morse;
+    [Tooltip("Préfab de fils verticaux")]
+    public FilsVerticaux filsVerticaux;
+    [Tooltip("Préfab de séquences de fils")]
+    public SequencesFils sequencesFils;
+    [Tooltip("Préfab de labyrinthe")]
+    public Labyrinthe labyrinthe;
+    [Tooltip("Préfab de mot de passe")]
+    public MotDePasse motDePasse;
+    [Tooltip("Préfab de question")]
+    public Question question;
+    [Tooltip("Préfab de condensateur")]
+    public Condensateur condensateur;
+    [Tooltip("Préfab de knob")]
+    public Knob knob;
     #endregion
 
     #region Carres

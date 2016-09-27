@@ -45,45 +45,54 @@ public class Morse : Module {
         { '0', new bool[5] { false, false, false, false, false } }
     };
 
-    private static readonly Dictionary<string, float> corresp = new Dictionary<string, float>()
+    private static readonly string[] motsPossibles =
     {
-        { "shell", 3.505f },
-        { "halls", 3.515f },
-        { "slick", 3.522f },
-        { "trick", 3.532f },
-        { "boxes", 3.535f },
-        { "leaks", 3.542f },
-        { "strobe", 3.545f },
-        { "bistro", 3.552f },
-        { "flick", 3.555f },
-        { "bombs", 3.565f },
-        { "break", 3.572f },
-        { "brick", 3.575f },
-        { "steak", 3.582f },
-        { "sting", 3.592f },
-        { "vector", 3.595f },
-        { "beats", 3.600f },
+        "shell", "halls", "slick", "trick",
+        "boxes", "leaks", "strobe", "bistro",
+        "flick", "bombs", "break", "brick",
+        "steak", "sting", "vector", "beats"
     };
 
-    private const float tempsPoint = 0.5f;
+    private static readonly float[] freqPossibles =
+    {
+        3.505f, 3.515f, 3.522f, 3.532f,
+        3.535f, 3.542f, 3.545f, 3.552f,
+        3.555f, 3.565f, 3.572f, 3.575f,
+        3.582f, 3.592f, 3.595f, 3.600f
+    };
+
+    private int current = 0;
+    private float currentFreq
+    {
+        get
+        {
+            return freqPossibles[current];
+        }
+    }
+
+    private const float tempsPoint = 0.3f;
 
     private string mot;
     private float freq;
 
     public Light signal;
-    public Slider freqSlider;
+    public Text affichageFreq;
+    public Button gauche;
+    public Button droite;
     public Button TX;
 
 	// Use this for initialization
 	void Start () {
         signal.enabled = false;
 
-        string[] mots = new string[corresp.Keys.Count];
-        corresp.Keys.CopyTo(mots, 0);
+        int rand = Random.Range(0, motsPossibles.Length);
+        mot = motsPossibles[rand];
+        freq = freqPossibles[rand];
+        Debug.Log(mot);
 
-        mot = mots[Random.Range(0, mots.Length)];
-        freq = corresp[mot];
-
+        Affiche();
+        gauche.onClick.AddListener(Gauche);
+        droite.onClick.AddListener(Droite);
         TX.onClick.AddListener(Verif);
 
         StartCoroutine(LireMot());
@@ -93,32 +102,46 @@ public class Morse : Module {
     {
         foreach (char c in mot)
         {
-            StartCoroutine(LireLettre(c));
+            foreach (bool court in alpha[c])
+            {
+                signal.enabled = true;
+                yield return new WaitForSeconds(tempsPoint * (court ? 1f : 3f));
+                signal.enabled = false;
+                yield return new WaitForSeconds(tempsPoint);
+            }
             yield return new WaitForSeconds(3 * tempsPoint);
         }
         yield return new WaitForSeconds(4 * tempsPoint);
         StartCoroutine(LireMot());
     }
 
-    IEnumerator LireLettre(char c)
+    void Affiche()
     {
-        foreach (bool court in alpha[c])
-        {
-            StartCoroutine(LireSignal(court));
-            yield return new WaitForSeconds(tempsPoint);
-        }
+        affichageFreq.text = currentFreq + " MHz";
     }
 
-    IEnumerator LireSignal(bool court)
+    void Gauche()
     {
-        signal.enabled = true;
-        yield return new WaitForSeconds(tempsPoint * (court ? 1f : 3f));
-        signal.enabled = false;
+        current--;
+        if (current < 0)
+        {
+            current = 0;
+        }
+        Affiche();
+    }
+
+    void Droite()
+    {
+        current++;
+        if (current >= freqPossibles.Length)
+        {
+            current = freqPossibles.Length - 1;
+        }
     }
 
     void Verif()
     {
-        if (freqSlider.value == freq)
+        if (currentFreq == freq)
         {
             Resolu();
         }
