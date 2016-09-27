@@ -29,7 +29,14 @@ public class MotDePasse : Module {
 	// Use this for initialization
 	void Start () {
         mot = motsPossibles[Random.Range(0, motsPossibles.Length)];
-        Restart();
+        while (CheckMulitple())
+        {
+            Restart();
+        }
+        for (int i = 0; i < lettres.Length; i++)
+        {
+            lettres[i].SetLettres(choixLettres[i].ToArray());
+        }
         submit.onClick.AddListener(Verif);
 	}
 
@@ -71,11 +78,6 @@ public class MotDePasse : Module {
                     j--;
                 }
             }
-        }
-
-        while (CheckMulitple())
-        {
-            Restart();
         }
     }
 
