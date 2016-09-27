@@ -29,6 +29,7 @@ public class Lettre : MonoBehaviour
     public void SetLettres(char[] l)
     {
         lettres = l;
+        Affiche();
     }
 
     void Affiche()

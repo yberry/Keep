@@ -30,10 +30,11 @@ public class MotDePasse : Module {
 	void Start () {
         mot = motsPossibles[Random.Range(0, motsPossibles.Length)];
         Debug.Log(mot);
-        while (CheckMulitple())
+        do
         {
             Restart();
         }
+        while (CheckMulitple());
         for (int i = 0; i < lettres.Length; i++)
         {
             lettres[i].SetLettres(choixLettres[i].ToArray());
@@ -47,7 +48,7 @@ public class MotDePasse : Module {
 
         for (int i = 0; i < mot.Length; i++)
         {
-            choixLettres[i] = new List<char>(choixParLettre);
+            choixLettres[i] = new List<char>();
             string alph = alpha;
             bool obli = false;
             int pasObli = choixParLettre - 1;
@@ -57,6 +58,7 @@ public class MotDePasse : Module {
 
             for (int j = 0; j < choixParLettre; j++)
             {
+                Debug.Log(j);
                 if (pasObli > 0 && Random.Range(0, 3) > 0)
                 {
                     int rand = Random.Range(0, alph.Length);
@@ -64,14 +66,14 @@ public class MotDePasse : Module {
                     {
                         rand = Random.Range(0, alph.Length);
                     }
-                    choixLettres[i][j] = alph[rand];
+                    choixLettres[i].Add(alph[rand]);
                     alph.Remove(rand, 1);
 
                     pasObli--;
                 }
                 else if (!obli)
                 {
-                    choixLettres[i][j] = mot[i];
+                    choixLettres[i].Add(mot[i]);
                     obli = true;
                 }
                 else
