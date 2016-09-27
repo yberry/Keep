@@ -29,6 +29,7 @@ public class MotDePasse : Module {
 	// Use this for initialization
 	void Start () {
         mot = motsPossibles[Random.Range(0, motsPossibles.Length)];
+        Debug.Log(mot);
         while (CheckMulitple())
         {
             Restart();
