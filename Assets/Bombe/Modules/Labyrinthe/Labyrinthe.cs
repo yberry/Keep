@@ -20,22 +20,25 @@ public class Labyrinthe : Module {
     // Use this for initialization
     void Start () {
 
-        laby = Laby.RandomLaby();
+        laby = Laby.RandomLaby;
 
-        int tx = Random.Range(0, nbColonnes);
-        int ty = Random.Range(0, nbLignes);
+        int tx = Random.Range(0, nbLignes);
+        int ty = Random.Range(0, nbColonnes);
         triangle = new Vector2(tx, ty);
 
-        int cx = Random.Range(0, nbColonnes);
-        int cy = Random.Range(0, nbLignes);
+        int cx = Random.Range(0, nbLignes);
+        int cy = Random.Range(0, nbColonnes);
         while (cx == tx && ty == cy)
         {
-            cx = Random.Range(0, nbColonnes);
-            cy = Random.Range(0, nbLignes);
+            cx = Random.Range(0, nbLignes);
+            cy = Random.Range(0, nbColonnes);
         }
-        carre = new Vector2(tx, ty);
+        carre = new Vector2(cx, cy);
 
-
+        flecheHaut.onClick.AddListener(Haut);
+        flecheGauche.onClick.AddListener(Gauche);
+        flecheBas.onClick.AddListener(Bas);
+        flecheDroite.onClick.AddListener(Droite);
     }
 
     void Haut()
