@@ -3,13 +3,19 @@ using System.Collections.Generic;
 
 public class FilVertical : MonoBehaviour {
 
-    private static readonly Color[] couleursDispo =
+    private static Color[] couleursDispo
     {
-        Color.blue,
-        Color.red,
-        Color.white,
-        Color.yellow
-    };
+        get
+        {
+            return new Color[]
+            {
+                Color.blue,
+                Color.red,
+                Color.white,
+                Color.yellow
+            };
+        }
+    }
 
     private List<Color> couleurs;
     public Light LED;

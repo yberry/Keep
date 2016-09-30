@@ -26,15 +26,21 @@ public class Symboles : Module {
     private const int nbColonnes = 6;
     private const int nbSymboles = 7;
 
-    private static Type[,] colonnes = new Type[nbColonnes, nbSymboles]
+    private static Type[,] colonnes
     {
-        { Type.QBarre, Type.Triforce, Type.Lambda, Type.Cicatrice, Type.Vaisseau, Type.X, Type.Cenvers },
-        { Type.Euro, Type.QBarre, Type.Cenvers, Type.Disney, Type.EtoileBlanche, Type.X, Type.Interro },
-        { Type.Copyright, Type.Couilles, Type.Disney, Type.KMiroir, Type.RPasFini, Type.Lambda, Type.EtoileBlanche },
-        { Type.SixEcrase, Type.Paragraphe, Type.BDansT, Type.Vaisseau, Type.KMiroir, Type.Interro, Type.Smiley },
-        { Type.Trident, Type.Smiley, Type.BDansT, Type.Cendroit, Type.Paragraphe, Type.TroisAntennes, Type.EtoileNoire },
-        { Type.SixEcrase, Type.Euro, Type.Inegal, Type.AE, Type.Trident, Type.NEnvers, Type.Omega },
-    };
+        get
+        {
+            return new Type[,]
+            {
+                { Type.QBarre, Type.Triforce, Type.Lambda, Type.Cicatrice, Type.Vaisseau, Type.X, Type.Cenvers },
+                { Type.Euro, Type.QBarre, Type.Cenvers, Type.Disney, Type.EtoileBlanche, Type.X, Type.Interro },
+                { Type.Copyright, Type.Couilles, Type.Disney, Type.KMiroir, Type.RPasFini, Type.Lambda, Type.EtoileBlanche },
+                { Type.SixEcrase, Type.Paragraphe, Type.BDansT, Type.Vaisseau, Type.KMiroir, Type.Interro, Type.Smiley },
+                { Type.Trident, Type.Smiley, Type.BDansT, Type.Cendroit, Type.Paragraphe, Type.TroisAntennes, Type.EtoileNoire },
+                { Type.SixEcrase, Type.Euro, Type.Inegal, Type.AE, Type.Trident, Type.NEnvers, Type.Omega },
+            };
+        }
+    }
 
     private List<int> ordre;
 

@@ -4,22 +4,34 @@ using UnityEngine.UI;
 public class Bouton : Module {
 
     #region Config bouton
-    private static readonly Color[] couleurs =
+    private static Color[] couleurs
     {
-        Color.yellow,
-        Color.white,
-        Color.red,
-        Color.blue
-    };
+        get
+        {
+            return new Color[]
+            {
+                Color.yellow,
+                Color.white,
+                Color.red,
+                Color.blue
+            };
+        }
+    }
     private Color couleur;
 
-    private static readonly string[] textes =
+    private static string[] textes
     {
-        "DETONATE",
-        "PRESS",
-        "ABORT",
-        "HOLD"
-    };
+        get
+        {
+            return new string[]
+            {
+                "DETONATE",
+                "PRESS",
+                "ABORT",
+                "HOLD"
+            };
+        }
+    }
     private string texte;
 
     private bool aMaintenir;

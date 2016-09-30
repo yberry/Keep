@@ -1,16 +1,21 @@
 ﻿using UnityEngine;
-using System.Collections;
 
 public class FilHorizontal : MonoBehaviour {
 
-    private static readonly Color[] couleurs =
+    private static Color[] couleurs
     {
-        Color.white,
-        Color.black,
-        Color.blue,
-        Color.yellow,
-        Color.red
-    };
+        get
+        {
+            return new Color[]
+            {
+                Color.white,
+                Color.black,
+                Color.blue,
+                Color.yellow,
+                Color.red
+            };
+        }
+    }
     private Color couleur;
     public Color Couleur
     {

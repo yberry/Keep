@@ -24,7 +24,7 @@ public class Laby
 
         private static readonly Laby[] labys =
     {
-        new Laby(new Place[6, 6] {
+        new Laby(new Place[,] {
             {
                 new Place(false, false, true, true),
                 new Place(false, true, false, true),

@@ -3,20 +3,26 @@ using System.Collections.Generic;
 
 public class Indic : MonoBehaviour {
 
-    private static readonly string[] ind =
+    private static string[] ind
     {
-        "SND",
-        "CLR",
-        "CAR",
-        "IND",
-        "FRQ",
-        "SIG",
-        "NSA",
-        "MSA",
-        "TRN",
-        "BOB",
-        "FRK"
-    };
+        get
+        {
+            return new string[]
+            {
+                "SND",
+                "CLR",
+                "CAR",
+                "IND",
+                "FRQ",
+                "SIG",
+                "NSA",
+                "MSA",
+                "TRN",
+                "BOB",
+                "FRK"
+            };
+        }
+    }
 
     private static List<string> pris;
 
