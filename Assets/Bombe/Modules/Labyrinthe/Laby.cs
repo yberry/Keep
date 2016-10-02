@@ -22,61 +22,64 @@ public class Laby
         public static Place mursDroite { get { return new Place(false, false, false, true); } }
     }
 
-        private static readonly Laby[] labys =
+    private static Laby[] labys
     {
-        new Laby(new Place[,] {
-            {
-                new Place(false, false, true, true),
-                new Place(false, true, false, true),
-                new Place(false, true, true, false),
-                new Place(false, false, true, true),
-                new Place(false, true, false, true),
-                new Place(false, true, false, false)
-            },
-            {
-                new Place(true, false, true, false),
-                new Place(false, false, true, true),
-                new Place(true, true, false, false),
-                new Place(true, false, false, true),
-                new Place(false, true, false, true),
-                new Place(false, true, true, false)
-            },
-            {
-                new Place(false, false, false, false),
-                new Place(false, false, false, false),
-                new Place(false, false, false, false),
-                new Place(false, false, false, false),
-                new Place(false, false, false, false),
-                new Place(false, false, false, false)
-            },
-            {
-                new Place(false, false, false, false),
-                new Place(false, false, false, false),
-                new Place(false, false, false, false),
-                new Place(false, false, false, false),
-                new Place(false, false, false, false),
-                new Place(false, false, false, false)
-            },
-            {
-                new Place(false, false, false, false),
-                new Place(false, false, false, false),
-                new Place(false, false, false, false),
-                new Place(false, false, false, false),
-                new Place(false, false, false, false),
-                new Place(false, false, false, false)
-            },
-            {
-                new Place(false, false, false, false),
-                new Place(false, false, false, false),
-                new Place(false, false, false, false),
-                new Place(false, false, false, false),
-                new Place(false, false, false, false),
-                new Place(false, false, false, false)
-            }
-        }),
-
-
-    };
+        get
+        {
+            return new Laby[] {
+                new Laby(new Place[,] {
+                    {
+                        new Place(false, false, true, true),
+                        new Place(false, true, false, true),
+                        new Place(false, true, true, false),
+                        new Place(false, false, true, true),
+                        new Place(false, true, false, true),
+                        new Place(false, true, false, false)
+                    },
+                    {
+                        new Place(true, false, true, false),
+                        new Place(false, false, true, true),
+                        new Place(true, true, false, false),
+                        new Place(true, false, false, true),
+                        new Place(false, true, false, true),
+                        new Place(false, true, true, false)
+                    },
+                    {
+                        new Place(false, false, false, false),
+                        new Place(false, false, false, false),
+                        new Place(false, false, false, false),
+                        new Place(false, false, false, false),
+                        new Place(false, false, false, false),
+                        new Place(false, false, false, false)
+                    },
+                    {
+                        new Place(false, false, false, false),
+                        new Place(false, false, false, false),
+                        new Place(false, false, false, false),
+                        new Place(false, false, false, false),
+                        new Place(false, false, false, false),
+                        new Place(false, false, false, false)
+                    },
+                    {
+                        new Place(false, false, false, false),
+                        new Place(false, false, false, false),
+                        new Place(false, false, false, false),
+                        new Place(false, false, false, false),
+                        new Place(false, false, false, false),
+                        new Place(false, false, false, false)
+                    },
+                    {
+                        new Place(false, false, false, false),
+                        new Place(false, false, false, false),
+                        new Place(false, false, false, false),
+                        new Place(false, false, false, false),
+                        new Place(false, false, false, false),
+                        new Place(false, false, false, false)
+                    }
+                })
+            };
+        }
+    }
 
     public static Laby RandomLaby
     {
