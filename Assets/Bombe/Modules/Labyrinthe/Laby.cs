@@ -20,6 +20,18 @@ public class Laby
         public static Place mursGauche { get { return new Place(false, true, false, false); } }
         public static Place mursBas { get { return new Place(false, false, true, false); } }
         public static Place mursDroite { get { return new Place(false, false, false, true); } }
+
+        public static Place mursHautGauche { get { return new Place(true, true, false, false); } }
+        public static Place mursHautBas { get { return new Place(true, false, true, false); } }
+        public static Place mursHautDroite { get { return new Place(true, false, false, true); } }
+        public static Place mursGaucheBas { get { return new Place(false, true, true, false); } }
+        public static Place mursGaucheDroite { get { return new Place(false, true, false, true); } }
+        public static Place mursBasDroite { get { return new Place(false, false, true, true); } }
+
+        public static Place mursHautGaucheBas { get { return new Place(true, true, true, false); } }
+        public static Place mursHautGaucheDroite { get { return new Place(true, true, false, true); } }
+        public static Place mursHautBasDroite { get { return new Place(true, false, true, true); } }
+        public static Place mursGaucheBasDroite { get { return new Place(false, true, true, true); } }
     }
 
     private static Laby[] labys
