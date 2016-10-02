@@ -2,6 +2,14 @@
 
 public class Laby
 {
+    public enum Dir
+    {
+        Haut,
+        Gauche,
+        Bas,
+        Droite
+    }
+
     public struct Place
     {
         public bool murHaut;
@@ -78,46 +86,46 @@ public class Laby
                 new Laby(new Place[,] {
                     { mursHautGaucheBas, mursHautBas, mursHautBas, mursHautBas, mursHaut, mursHautDroite },
                     { mursHautGauche, mursHautBas, mursHautBas, mursHaut, mursBasDroite, mursGaucheBasDroite },
-                    { mursGaucheDroite, mursGaucheBas, mursHautDroite, mursHautGauche, mursHautBas, mursDroite },
-                    { mursGaucheDroite, mursHautGaucheBas, mursBas, mursBasDroite, mursHautGaucheBas, mursDroite },
-                    { mursGauche, mursHautBas, mursHautDroite, mursHautGauche, mursHautBasDroite, mursGaucheDroite },
-                    { mursGaucheBas, mursHautBasDroite, mursGaucheBas, mursBasDroite, mursHautGaucheBas, mursBasDroite }
+                    { mursGauche, mursHautDroite, mursHautGaucheBas, mursBasDroite, mursHautGauche, mursHautDroite },
+                    { mursGaucheDroite, mursGaucheBas, mursHautBas, mursHautDroite, mursGaucheBasDroite, mursGaucheDroite },
+                    { mursGaucheDroite, mursHautGauche, mursHautBas, mursBas, mursHautBasDroite, mursGaucheDroite },
+                    { mursGaucheBasDroite, mursGaucheBas, mursHautBas, mursHautBas, mursHautBas, mursBasDroite }
                 }),
 
                 new Laby(new Place[,] {
-                    { mursHautGauche, mursHautBas, mursHautDroite, mursHautGauche, mursHautBas, mursHautBasDroite },
-                    { mursGaucheDroite, mursHautGauche, mursBasDroite, mursGaucheBas, mursHautBas, mursHautDroite },
-                    { mursGaucheDroite, mursGaucheBas, mursHautDroite, mursHautGauche, mursHautBas, mursDroite },
-                    { mursGaucheDroite, mursHautGaucheBas, mursBas, mursBasDroite, mursHautGaucheBas, mursDroite },
-                    { mursGauche, mursHautBas, mursHautDroite, mursHautGauche, mursHautBasDroite, mursGaucheDroite },
-                    { mursGaucheBas, mursHautBasDroite, mursGaucheBas, mursBasDroite, mursHautGaucheBas, mursBasDroite }
+                    { mursHautGaucheDroite, mursHautGauche, mursHautDroite, mursHautGaucheBas, mursHaut, mursHautDroite },
+                    { mursGaucheDroite, mursGaucheDroite, mursGaucheDroite, mursHautGauche, mursBasDroite, mursGaucheDroite },
+                    { mursGauche, mursBasDroite, mursGaucheBasDroite, mursGaucheDroite, mursHautGauche, mursBasDroite },
+                    { mursGaucheBas, mursHautDroite, mursHautGauche, mursDroite, mursGaucheDroite, mursHautGaucheDroite },
+                    { mursHautGauche, mursBasDroite, mursGaucheBasDroite, mursGaucheDroite, mursGaucheBas, mursDroite },
+                    { mursGaucheBas, mursHautBas, mursHautBas, mursBasDroite, mursHautGaucheBas, mursBasDroite }
                 }),
 
                 new Laby(new Place[,] {
-                    { mursHautGauche, mursHautBas, mursHautDroite, mursHautGauche, mursHautBas, mursHautBasDroite },
-                    { mursGaucheDroite, mursHautGauche, mursBasDroite, mursGaucheBas, mursHautBas, mursHautDroite },
-                    { mursGaucheDroite, mursGaucheBas, mursHautDroite, mursHautGauche, mursHautBas, mursDroite },
-                    { mursGaucheDroite, mursHautGaucheBas, mursBas, mursBasDroite, mursHautGaucheBas, mursDroite },
-                    { mursGauche, mursHautBas, mursHautDroite, mursHautGauche, mursHautBasDroite, mursGaucheDroite },
-                    { mursGaucheBas, mursHautBasDroite, mursGaucheBas, mursBasDroite, mursHautGaucheBas, mursBasDroite }
+                    { mursHautGauche, mursHautBas, mursHautBas, mursHautDroite, mursHautGauche, mursHautDroite },
+                    { mursGaucheDroite, mursHautGauche, mursHautBasDroite, mursGaucheBas, mursBasDroite, mursGaucheDroite },
+                    { mursGaucheBas, mursBasDroite, mursHautGauche, mursHautBasDroite, mursHautGauche, mursBasDroite },
+                    { mursHautGauche, mursHautDroite, mursGauche, mursHautBas, mursBasDroite, mursHautGaucheDroite },
+                    { mursGaucheDroite, mursGaucheBasDroite, mursGaucheBas, mursHautBas, mursHautDroite, mursGaucheDroite },
+                    { mursGaucheBas, mursHautBas, mursHautBas, mursHautBas, mursBas, mursBasDroite }
                 }),
 
                 new Laby(new Place[,] {
-                    { mursHautGauche, mursHautBas, mursHautDroite, mursHautGauche, mursHautBas, mursHautBasDroite },
-                    { mursGaucheDroite, mursHautGauche, mursBasDroite, mursGaucheBas, mursHautBas, mursHautDroite },
-                    { mursGaucheDroite, mursGaucheBas, mursHautDroite, mursHautGauche, mursHautBas, mursDroite },
-                    { mursGaucheDroite, mursHautGaucheBas, mursBas, mursBasDroite, mursHautGaucheBas, mursDroite },
-                    { mursGauche, mursHautBas, mursHautDroite, mursHautGauche, mursHautBasDroite, mursGaucheDroite },
-                    { mursGaucheBas, mursHautBasDroite, mursGaucheBas, mursBasDroite, mursHautGaucheBas, mursBasDroite }
+                    { mursHautGaucheDroite, mursHautGauche, mursHautBas, mursHautDroite, mursHautGauche, mursHautDroite },
+                    { mursGauche, mursBas, mursHautBasDroite, mursGaucheBas, mursBasDroite, mursGaucheDroite },
+                    { mursGaucheDroite, mursHautGauche, mursHautBas, mursHautBas, mursHautDroite, mursGaucheDroite },
+                    { mursGaucheDroite, mursGaucheBas, mursHautDroite, mursHautGaucheBas, mursBas, mursBasDroite },
+                    { mursGaucheDroite, mursHautGaucheDroite, mursGaucheBas, mursHautBas, mursHautBas, mursHautBasDroite },
+                    { mursGaucheBas, mursBas, mursHautBas, mursHautBas, mursHautBas, mursHautBasDroite }
                 }),
 
                 new Laby(new Place[,] {
-                    { mursHautGauche, mursHautBas, mursHautDroite, mursHautGauche, mursHautBas, mursHautBasDroite },
-                    { mursGaucheDroite, mursHautGauche, mursBasDroite, mursGaucheBas, mursHautBas, mursHautDroite },
-                    { mursGaucheDroite, mursGaucheBas, mursHautDroite, mursHautGauche, mursHautBas, mursDroite },
-                    { mursGaucheDroite, mursHautGaucheBas, mursBas, mursBasDroite, mursHautGaucheBas, mursDroite },
-                    { mursGauche, mursHautBas, mursHautDroite, mursHautGauche, mursHautBasDroite, mursGaucheDroite },
-                    { mursGaucheBas, mursHautBasDroite, mursGaucheBas, mursBasDroite, mursHautGaucheBas, mursBasDroite }
+                    { mursHautGaucheDroite, mursHautGauche, mursHautBas, mursHautBas, mursHaut, mursHautDroite },
+                    { mursGaucheDroite, mursGaucheDroite, mursHautGauche, mursHautBasDroite, mursGaucheDroite, mursGaucheDroite },
+                    { mursGauche, mursBas, mursBasDroite, mursHautGauche, mursBasDroite, mursGaucheDroite },
+                    { mursGaucheDroite, mursGaucheDroite, mursHautGauche, mursBasDroite, mursHautGaucheBas, mursDroite },
+                    { mursGaucheDroite, mursGaucheDroite, mursGaucheDroite, mursHautGauche, mursHautDroite, mursGaucheBasDroite },
+                    { mursGaucheBas, mursBasDroite, mursGaucheBas, mursBasDroite, mursGaucheBas, mursHautBasDroite }
                 })
             };
         }
@@ -138,5 +146,28 @@ public class Laby
     public Laby(Place[,] pl)
     {
         places = pl;
+    }
+
+    public bool HasMur(Vector2 pos, Dir dir)
+    {
+        Place pl = places[(int)pos.x, (int)pos.y];
+
+        switch (dir)
+        {
+            case Dir.Haut:
+                return pl.murHaut;
+
+            case Dir.Gauche:
+                return pl.murGauche;
+
+            case Dir.Bas:
+                return pl.murBas;
+
+            case Dir.Droite:
+                return pl.murDroite;
+
+            default:
+                return false;
+        }
     }
 }

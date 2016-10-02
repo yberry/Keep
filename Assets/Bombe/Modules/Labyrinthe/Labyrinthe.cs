@@ -43,22 +43,81 @@ public class Labyrinthe : Module {
 
     void Haut()
     {
+        if (carre.x == 0)
+        {
+            return;
+        }
 
+        if (laby.HasMur(carre, Laby.Dir.Haut))
+        {
+            Faute();
+        }
+        else
+        {
+            carre.x--;
+            Verif();
+        }
     }
 
     void Gauche()
     {
+        if (carre.y == 0)
+        {
+            return;
+        }
 
+        if (laby.HasMur(carre, Laby.Dir.Gauche))
+        {
+            Faute();
+        }
+        else
+        {
+            carre.y--;
+            Verif();
+        }
     }
 
     void Bas()
     {
+        if (carre.x == nbLignes - 1)
+        {
+            return;
+        }
 
+        if (laby.HasMur(carre, Laby.Dir.Bas))
+        {
+            Faute();
+        }
+        else
+        {
+            carre.x++;
+            Verif();
+        }
     }
 
     void Droite()
     {
+        if (carre.y == nbColonnes - 1)
+        {
+            return;
+        }
 
+        if (laby.HasMur(carre, Laby.Dir.Droite))
+        {
+            Faute();
+        }
+        else
+        {
+            carre.y++;
+            Verif();
+        }
     }
 
+    void Verif()
+    {
+        if (carre == triangle)
+        {
+            Resolu();
+        }
+    }
 }
