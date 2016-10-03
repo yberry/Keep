@@ -58,7 +58,7 @@ public class FilsVerticaux : Module {
         {
             foreach (FilVertical fil in fils)
             {
-                fil.Reset();
+                fil.Restart();
             }
         }
     }

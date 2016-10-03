@@ -27,16 +27,16 @@ public class FilVertical : MonoBehaviour {
     {
         get
         {
-            return !aCouper || (aCouper && estCoupe);
+            return !aCouper || estCoupe;
         }
     }
 
 	// Use this for initialization
 	void Start () {
-        Reset();
+        Restart();
 	}
 
-    public void Reset()
+    public void Restart()
     {
         int nbCouleurs = Random.Range(1, 3);
         couleurs = new List<Color>();

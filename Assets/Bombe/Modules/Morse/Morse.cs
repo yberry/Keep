@@ -103,6 +103,8 @@ public class Morse : Module {
 	// Use this for initialization
 	void Start () {
         signal.enabled = false;
+
+        slider.wholeNumbers = false;
         slider.maxValue = freqPossibles[freqPossibles.Length - 1];
         slider.minValue = freqPossibles[0];
 
