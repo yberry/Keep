@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using System.Collections;
 
 public abstract class Module : Carre {
 
@@ -12,8 +13,6 @@ public abstract class Module : Carre {
     }
 
     private const float tempsFaute = 0.5f;
-    private float temps = 0f;
-    private bool faute = false;
 
     [Header("Paramètres module")]
     [Tooltip("Lumière d'indication")]
@@ -22,21 +21,6 @@ public abstract class Module : Carre {
 	// Use this for initialization
 	void Start () {
         lumiere.enabled = false;
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	    if (faute)
-        {
-            temps += Time.deltaTime;
-            if (temps >= tempsFaute)
-            {
-                lumiere.color = Color.green;
-                lumiere.enabled = desamorce;
-                temps = 0f;
-                faute = false;
-            }
-        }
 	}
 
     public void Resolu()
@@ -50,9 +34,15 @@ public abstract class Module : Carre {
     public override void Faute()
     {
         base.Faute();
-        temps = 0f;
-        faute = true;
+        StartCoroutine(TempsFaute());
+    }
+
+    IEnumerator TempsFaute()
+    {
         lumiere.color = Color.red;
         lumiere.enabled = true;
+        yield return new WaitForSeconds(tempsFaute);
+        lumiere.color = Color.green;
+        lumiere.enabled = desamorce;
     }
 }

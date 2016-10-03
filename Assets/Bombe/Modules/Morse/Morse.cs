@@ -94,6 +94,7 @@ public class Morse : Module {
     private float freq;
 
     public Light signal;
+    public Slider slider;
     public Text affichageFreq;
     public Button gauche;
     public Button droite;
@@ -102,6 +103,8 @@ public class Morse : Module {
 	// Use this for initialization
 	void Start () {
         signal.enabled = false;
+        slider.maxValue = freqPossibles[freqPossibles.Length - 1];
+        slider.minValue = freqPossibles[0];
 
         int rand = Random.Range(0, motsPossibles.Length);
         mot = motsPossibles[rand];
@@ -126,15 +129,16 @@ public class Morse : Module {
                 signal.enabled = false;
                 yield return new WaitForSeconds(tempsPoint);
             }
-            yield return new WaitForSeconds(3 * tempsPoint);
+            yield return new WaitForSeconds(2f * tempsPoint);
         }
-        yield return new WaitForSeconds(4 * tempsPoint);
+        yield return new WaitForSeconds(4f * tempsPoint);
         StartCoroutine(LireMot());
     }
 
     void Affiche()
     {
         affichageFreq.text = currentFreq + " MHz";
+        slider.value = currentFreq;
     }
 
     void Gauche()
