@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
-using System.Collections.Generic;
+using System.Collections;
 
 public class Symbole : MonoBehaviour {
 
@@ -15,8 +15,6 @@ public class Symbole : MonoBehaviour {
         }
     }
     private const float tempsFaute = 0.5f;
-    private float temps = 0f;
-    private bool faute = false;
 
     public Light bande;
     public Image image;
@@ -25,19 +23,6 @@ public class Symbole : MonoBehaviour {
 	void Start () {
         bande.enabled = false;
 	}
-
-    void Update() {
-        if (faute)
-        {
-            temps += Time.deltaTime;
-            if (temps >= tempsFaute)
-            {
-                bande.enabled = false;
-                temps = 0f;
-                faute = false;
-            }
-        }
-    }
 
     public void SetSymbole(Sprite sprite)
     {
@@ -62,14 +47,20 @@ public class Symbole : MonoBehaviour {
             bande.color = Color.green;
             suivant = false;
             symboles.Verif();
+            bande.enabled = true;
         }
         else
         {
-            faute = true;
-            bande.color = Color.red;
-            temps = 0f;
             symboles.Faute();
+            StartCoroutine(TempsFaute());
         }
+    }
+
+    IEnumerator TempsFaute()
+    {
+        bande.color = Color.red;
         bande.enabled = true;
+        yield return new WaitForSeconds(tempsFaute);
+        bande.enabled = false;
     }
 }
