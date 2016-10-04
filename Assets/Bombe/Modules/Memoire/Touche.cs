@@ -42,7 +42,7 @@ public class Touche : MonoBehaviour
 
     void Clic()
     {
-        Memoire memoire = transform.parent.GetComponent<Memoire>();
+        Memoire memoire = GetComponentInParent<Memoire>();
         if (cible)
         {
             memoire.Verif();

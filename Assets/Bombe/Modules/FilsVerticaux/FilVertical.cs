@@ -102,7 +102,7 @@ public class FilVertical : MonoBehaviour {
         }
 
         estCoupe = true;
-        FilsVerticaux filsVert = transform.parent.GetComponent<FilsVerticaux>();
+        FilsVerticaux filsVert = GetComponentInParent<FilsVerticaux>();
         if (aCouper)
         {
             filsVert.Verif();

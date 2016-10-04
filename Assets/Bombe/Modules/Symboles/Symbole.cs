@@ -40,7 +40,7 @@ public class Symbole : MonoBehaviour {
         {
             return;
         }
-        Symboles symboles = transform.parent.GetComponent<Symboles>();
+        Symboles symboles = GetComponentInParent<Symboles>();
         if (suivant)
         {
             appuye = true;

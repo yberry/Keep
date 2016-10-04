@@ -26,7 +26,7 @@ public class Mot : MonoBehaviour {
 
     void Clic()
     {
-        QuiEstLePremier qui = transform.parent.GetComponent<QuiEstLePremier>();
+        QuiEstLePremier qui = GetComponentInParent<QuiEstLePremier>();
         if (aCliquer)
         {
             qui.Verif();

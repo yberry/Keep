@@ -68,6 +68,8 @@ public class Bombe : MonoBehaviour {
     public Labyrinthe labyrinthe;
     [Tooltip("Préfab de mot de passe")]
     public MotDePasse motDePasse;
+
+    [Header("Préfabs de needy")]
     [Tooltip("Préfab de question")]
     public Question question;
     [Tooltip("Préfab de condensateur")]

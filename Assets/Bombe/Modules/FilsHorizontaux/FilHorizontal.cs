@@ -52,7 +52,7 @@ public class FilHorizontal : MonoBehaviour {
         }
 
         estCoupe = true;
-        FilsHorizontaux fils = transform.parent.GetComponent<FilsHorizontaux>();
+        FilsHorizontaux fils = GetComponentInParent<FilsHorizontaux>();
         if (aCouper)
         {
             fils.Resolu();
