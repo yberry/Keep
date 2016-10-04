@@ -21,13 +21,6 @@ public class Timer : Carre {
 
     private bool hardcore;
     private int erreurs;
-    public int Erreurs
-    {
-        get
-        {
-            return erreurs;
-        }
-    }
 
     public bool defile = false;
     public Text affichageTemps;
@@ -98,13 +91,5 @@ public class Timer : Carre {
     public void Erreur()
     {
         erreurs++;
-        if (hardcore)
-        {
-            Bombe.Get.Mort();
-        }
-        else if (erreurs == 3)
-        {
-            Bombe.Get.Mort();
-        }
     }
 }

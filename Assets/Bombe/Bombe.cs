@@ -85,8 +85,15 @@ public class Bombe : MonoBehaviour {
     #endregion
 
     #region Fautes
-    private int erreurs = 0;
     private bool hardcore = false;
+    private int erreurs = 0;
+    public int Erreurs
+    {
+        get
+        {
+            return erreurs;
+        }
+    }
     #endregion
 
     #region Peripheriques
@@ -190,6 +197,27 @@ public class Bombe : MonoBehaviour {
         if (defused)
         {
             Defused();
+        }
+    }
+
+    public void Erreur()
+    {
+        erreurs++;
+        if (hardcore || erreurs >= 3)
+        {
+            Mort();
+        }
+        else
+        {
+            timer.Erreur();
+            foreach (Module module in modules)
+            {
+                if (module is Simon)
+                {
+                    Simon simon = module as Simon;
+                    simon.CheckReponse();
+                }
+            }
         }
     }
 
