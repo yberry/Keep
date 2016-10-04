@@ -107,6 +107,7 @@ public class Morse : Module {
         slider.wholeNumbers = false;
         slider.maxValue = freqPossibles[freqPossibles.Length - 1];
         slider.minValue = freqPossibles[0];
+        slider.interactable = false;
 
         int rand = Random.Range(0, motsPossibles.Length);
         mot = motsPossibles[rand];
