@@ -21,6 +21,13 @@ public class Timer : Carre {
 
     private bool hardcore;
     private int erreurs;
+    public int Erreurs
+    {
+        get
+        {
+            return erreurs;
+        }
+    }
 
     public bool defile = false;
     public Text affichageTemps;
