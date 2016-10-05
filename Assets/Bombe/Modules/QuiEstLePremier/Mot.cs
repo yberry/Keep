@@ -1,16 +1,18 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 
+[RequireComponent(typeof(Button))]
 public class Mot : MonoBehaviour {
 
     private bool aCliquer = false;
 
     private QuiEstLePremier qui;
 
-    public Button mot;
+    private Button mot;
 
 	// Use this for initialization
 	void Start () {
+        mot = GetComponent<Button>();
         mot.onClick.AddListener(Clic);
 	}
 

@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 
+[RequireComponent(typeof(Button))]
 public class Touche : MonoBehaviour
 {
     private int chiffre;
@@ -24,10 +25,11 @@ public class Touche : MonoBehaviour
 
     private bool cible = false;
 
-    public Button affichageChiffre;
+    private Button affichageChiffre;
 
     void Start()
     {
+        affichageChiffre.GetComponent<Button>();
         affichageChiffre.onClick.AddListener(Clic);
     }
 

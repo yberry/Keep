@@ -73,12 +73,18 @@ public class QuiEstLePremier : Module {
 
     public Text titre;
     public Mot[] mots;
+    public Light[] succes;
 
 	// Use this for initialization
 	void Start () {
         foreach (Mot mot in mots)
         {
             mot.SetModule(this);
+        }
+        foreach (Light light in succes)
+        {
+            light.color = Color.green;
+            light.enabled = false;
         }
         Restart();
 	}
@@ -138,14 +144,10 @@ public class QuiEstLePremier : Module {
             j++;
         }
     }
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
 
     public void Verif()
     {
+        succes[nbReussites].enabled = true;
         nbReussites++;
         if (nbReussites >= objReussites)
         {

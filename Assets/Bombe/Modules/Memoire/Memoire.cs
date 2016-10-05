@@ -5,6 +5,7 @@ using System.Collections.Generic;
 public class Memoire : Module
 {
     public Touche[] touches;
+    public Light[] succes;
 
     private int chiffre;
     private int Chiffre
@@ -39,6 +40,11 @@ public class Memoire : Module
         foreach (Touche touche in touches)
         {
             touche.SetModule(this);
+        }
+        foreach (Light light in succes)
+        {
+            light.color = Color.green;
+            light.enabled = false;
         }
         Restart();
     }
@@ -188,6 +194,7 @@ public class Memoire : Module
 
     public void Verif()
     {
+        succes[nbEtapes].enabled = true;
         nbEtapes++;
         if (nbEtapes >= objEtapes)
         {
@@ -202,6 +209,10 @@ public class Memoire : Module
     public override void Faute()
     {
         base.Faute();
+        foreach (Light light in succes)
+        {
+            light.enabled = false;
+        }
         nbEtapes = 0;
         chiffres.Clear();
         positions.Clear();
