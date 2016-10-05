@@ -20,6 +20,8 @@ public class Touche : MonoBehaviour
         }
     }
 
+    private Memoire memoire;
+
     private bool cible = false;
 
     public Button affichageChiffre;
@@ -27,6 +29,11 @@ public class Touche : MonoBehaviour
     void Start()
     {
         affichageChiffre.onClick.AddListener(Clic);
+    }
+
+    public void SetModule(Memoire m)
+    {
+        memoire = m;
     }
 
     public void Restart()
@@ -42,7 +49,6 @@ public class Touche : MonoBehaviour
 
     void Clic()
     {
-        Memoire memoire = GetComponentInParent<Memoire>();
         if (cible)
         {
             memoire.Verif();

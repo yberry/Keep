@@ -25,6 +25,8 @@ public class FilHorizontal : MonoBehaviour {
         }
     }
 
+    private FilsHorizontaux fils;
+
     private bool aCouper = false;
     private bool estCoupe = false;
 
@@ -34,10 +36,10 @@ public class FilHorizontal : MonoBehaviour {
         GetComponent<Renderer>().material.color = couleur;
 	}
 	
-	// Update is called once per frame
-	void Update () {
-	
-	}
+	public void SetModule(FilsHorizontaux f)
+    {
+        fils = f;
+    }
 
     public void Objectif()
     {
@@ -52,7 +54,7 @@ public class FilHorizontal : MonoBehaviour {
         }
 
         estCoupe = true;
-        FilsHorizontaux fils = GetComponentInParent<FilsHorizontaux>();
+
         if (aCouper)
         {
             fils.Resolu();

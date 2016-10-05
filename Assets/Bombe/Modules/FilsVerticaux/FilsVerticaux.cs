@@ -40,6 +40,7 @@ public class FilsVerticaux : Module {
         {
             if (plein > 0 && Random.Range(0, 2) == 0)
             {
+                prefabsFils[i].SetModule(this);
                 fils.Add(prefabsFils[i]);
                 plein--;
             }

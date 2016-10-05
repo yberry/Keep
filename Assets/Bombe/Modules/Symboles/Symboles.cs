@@ -57,6 +57,7 @@ public class Symboles : Module {
             {
                 num = Random.Range(0, nbSymboles);
             }
+            symboles[i].SetModule(this);
             symboles[i].SetSymbole(GetSprite(colonnes[col, num]));
             numPris.Add(num);
         }

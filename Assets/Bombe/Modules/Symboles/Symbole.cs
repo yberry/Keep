@@ -2,8 +2,12 @@
 using UnityEngine.UI;
 using System.Collections;
 
+[RequireComponent(typeof(Button))]
 public class Symbole : MonoBehaviour {
 
+    private Symboles symboles;
+
+    private Button bouton;
     private Symboles.Type type;
     private bool suivant = false;
     private bool appuye = false;
@@ -22,7 +26,14 @@ public class Symbole : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         bande.enabled = false;
+        bouton = GetComponent<Button>();
+        bouton.onClick.AddListener(Clic);
 	}
+
+    public void SetModule(Symboles s)
+    {
+        symboles = s;
+    }
 
     public void SetSymbole(Sprite sprite)
     {
@@ -34,20 +45,21 @@ public class Symbole : MonoBehaviour {
         suivant = true;
     }
 
-    public void Clic()
+    void Clic()
     {
         if (appuye)
         {
             return;
         }
-        Symboles symboles = GetComponentInParent<Symboles>();
+
         if (suivant)
         {
             appuye = true;
+            bouton.interactable = false;
             bande.color = Color.green;
             suivant = false;
-            symboles.Verif();
             bande.enabled = true;
+            symboles.Verif();
         }
         else
         {

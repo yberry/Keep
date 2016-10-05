@@ -5,12 +5,19 @@ public class Mot : MonoBehaviour {
 
     private bool aCliquer = false;
 
+    private QuiEstLePremier qui;
+
     public Button mot;
 
 	// Use this for initialization
 	void Start () {
         mot.onClick.AddListener(Clic);
 	}
+
+    public void SetModule(QuiEstLePremier q)
+    {
+        qui = q;
+    }
 
     public void Restart()
     {
@@ -26,7 +33,6 @@ public class Mot : MonoBehaviour {
 
     void Clic()
     {
-        QuiEstLePremier qui = GetComponentInParent<QuiEstLePremier>();
         if (aCliquer)
         {
             qui.Verif();

@@ -36,6 +36,10 @@ public class Memoire : Module
     {
         chiffres = new List<int>();
         positions = new List<int>();
+        foreach (Touche touche in touches)
+        {
+            touche.SetModule(this);
+        }
         Restart();
     }
 

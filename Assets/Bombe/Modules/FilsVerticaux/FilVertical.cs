@@ -21,6 +21,8 @@ public class FilVertical : MonoBehaviour {
     public Light LED;
     public GameObject etoile;
 
+    private FilsVerticaux fils;
+
     private bool aCouper = false;
     private bool estCoupe = false;
     public bool Complet
@@ -35,6 +37,11 @@ public class FilVertical : MonoBehaviour {
 	void Start () {
         Restart();
 	}
+
+    public void SetModule(FilsVerticaux f)
+    {
+        fils = f;
+    }
 
     public void Restart()
     {
@@ -102,14 +109,14 @@ public class FilVertical : MonoBehaviour {
         }
 
         estCoupe = true;
-        FilsVerticaux filsVert = GetComponentInParent<FilsVerticaux>();
+
         if (aCouper)
         {
-            filsVert.Verif();
+            fils.Verif();
         }
         else
         {
-            filsVert.Faute();
+            fils.Faute();
         }
     }
 }

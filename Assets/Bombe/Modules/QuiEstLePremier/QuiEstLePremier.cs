@@ -76,6 +76,10 @@ public class QuiEstLePremier : Module {
 
 	// Use this for initialization
 	void Start () {
+        foreach (Mot mot in mots)
+        {
+            mot.SetModule(this);
+        }
         Restart();
 	}
 
