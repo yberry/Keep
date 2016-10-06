@@ -34,6 +34,11 @@ public class Simon : Module {
     void Start () {
         nbCombo = Random.Range(3, 6);
 
+        rouge.SetModule(this);
+        bleu.SetModule(this);
+        vert.SetModule(this);
+        jaune.SetModule(this);
+
         flashs = new List<Color>();
         signaux = new List<Losange>();
         reponse = new List<Losange>();

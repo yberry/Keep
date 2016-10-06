@@ -123,19 +123,21 @@ public class Morse : Module {
 	
 	IEnumerator LireMot()
     {
-        foreach (char c in mot)
+        while (true)
         {
-            foreach (bool court in alpha[c])
+            foreach (char c in mot)
             {
-                signal.enabled = true;
-                yield return new WaitForSeconds(tempsPoint * (court ? 1f : 3f));
-                signal.enabled = false;
-                yield return new WaitForSeconds(tempsPoint);
+                foreach (bool court in alpha[c])
+                {
+                    signal.enabled = true;
+                    yield return new WaitForSeconds(tempsPoint * (court ? 1f : 3f));
+                    signal.enabled = false;
+                    yield return new WaitForSeconds(tempsPoint);
+                }
+                yield return new WaitForSeconds(2f * tempsPoint);
             }
-            yield return new WaitForSeconds(2f * tempsPoint);
+            yield return new WaitForSeconds(4f * tempsPoint);
         }
-        yield return new WaitForSeconds(4f * tempsPoint);
-        StartCoroutine(LireMot());
     }
 
     void Affiche()

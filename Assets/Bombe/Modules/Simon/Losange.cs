@@ -17,16 +17,15 @@ public class Losange : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        simon = GetComponentInParent<Simon>();
         lumiere.enabled = false;
         bouton = GetComponent<Button>();
         bouton.onClick.AddListener(Clic);
 	}
 	
-	// Update is called once per frame
-	void Update () {
-	
-	}
+	public void SetModule(Simon s)
+    {
+        simon = s;
+    }
 
     public IEnumerator Flash()
     {
