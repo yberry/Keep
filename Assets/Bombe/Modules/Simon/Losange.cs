@@ -8,8 +8,6 @@ public class Losange : MonoBehaviour {
     public const float tempsFlash = 0.6f;
 
     private Simon simon;
-
-    private Color couleur;
     private Button bouton;
 
     public Light lumiere;

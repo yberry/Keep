@@ -20,12 +20,12 @@ public class Simon : Module {
 
     private const float tempsBoucle = 1.5f;
     private const float tempsAttente = 3f;
+    private float tempsReponse = 0f;
+
+    private bool reponseRecue = false;
 
     private int nbCombo;
     private int nbEtapes = 0;
-
-    private bool reponseRecue = false;
-    private bool bipRecu = false;
 
     private List<Color> flashs;
     private List<Losange> signaux;
@@ -55,7 +55,16 @@ public class Simon : Module {
 
     void Update()
     {
-
+        if (reponseRecue)
+        {
+            tempsReponse += Time.deltaTime;
+            if (tempsReponse >= tempsAttente)
+            {
+                reponseRecue = false;
+                reponseJoueur.Clear();
+                StartCoroutine(SendSignaux());
+            }
+        }
     }
 
     void AddColor()
@@ -177,14 +186,15 @@ public class Simon : Module {
 
     public void Clic(Losange losange)
     {
-        bipRecu = true;
         reponseRecue = true;
+        tempsReponse = 0f;
 
         if (reponse[reponseJoueur.Count] == losange)
         {
             reponseJoueur.Add(losange);
             if (reponse.Count == reponseJoueur.Count)
             {
+                reponseRecue = false;
                 nbEtapes++;
                 Verif();
             }
