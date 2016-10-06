@@ -62,6 +62,7 @@ public class Simon : Module {
             {
                 reponseRecue = false;
                 reponseJoueur.Clear();
+                tempsReponse = 0f;
                 StartCoroutine(SendSignaux());
             }
         }
@@ -173,7 +174,7 @@ public class Simon : Module {
 
     IEnumerator SendSignaux()
     {
-        while (!reponseRecue)
+        while (true)
         {
             foreach (Losange losange in signaux)
             {
@@ -188,6 +189,7 @@ public class Simon : Module {
     {
         reponseRecue = true;
         tempsReponse = 0f;
+        StopCoroutine(SendSignaux());
 
         if (reponse[reponseJoueur.Count] == losange)
         {
