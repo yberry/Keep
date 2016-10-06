@@ -29,7 +29,7 @@ public class Touche : MonoBehaviour
 
     void Start()
     {
-        affichageChiffre.GetComponent<Button>();
+        affichageChiffre = GetComponent<Button>();
         affichageChiffre.onClick.AddListener(Clic);
     }
 
