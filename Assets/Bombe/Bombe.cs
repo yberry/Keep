@@ -45,6 +45,8 @@ public class Bombe : MonoBehaviour {
     #endregion
 
     #region Prefabs
+    [Tooltip("Préfab de timer")]
+    public Timer preTimer;
     [Header("Préfabs de modules")]
     [Tooltip("Préfab de fils horizontaux")]
     public FilsHorizontaux filsHorizontaux;
@@ -115,8 +117,9 @@ public class Bombe : MonoBehaviour {
     #endregion
 
     // Use this for initialization
-    void Start () {
-	    if (instance == null)
+    void Start()
+    {
+        if (instance == null)
         {
             instance = this;
         }
@@ -126,10 +129,12 @@ public class Bombe : MonoBehaviour {
         SetIndics();
         SetPorts();
         SetPiles();
-        timer = Timer.Get;
-
-
-	}
+        GameObject t = Instantiate(preTimer.gameObject) as GameObject;
+        timer = t.GetComponent<Timer>();
+        timer.transform.SetParent(transform);
+        timer.SetStart(600, false);
+        timer.defile = true;
+    }
 
     void SetSerial()
     {
@@ -138,6 +143,7 @@ public class Bombe : MonoBehaviour {
         {
             numSerie += RandomLetter(i == nbCharSerie - 1);
         }
+        textSerie.text = numSerie;
     }
 
     char RandomLetter(bool last)

@@ -22,9 +22,11 @@ public class Timer : Carre {
     private bool hardcore;
     private int erreurs;
 
+    private AudioSource source;
+
     public bool defile = false;
     public Text affichageTemps;
-    public AudioSource source;
+    
 
     // Use this for initialization
     void Start () {
@@ -34,6 +36,7 @@ public class Timer : Carre {
         }
         chiffres = "";
         erreurs = 0;
+        source = GetComponent<AudioSource>();
 	}
 	
 	// Update is called once per frame
