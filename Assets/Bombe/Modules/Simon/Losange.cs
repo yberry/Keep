@@ -36,6 +36,7 @@ public class Losange : MonoBehaviour {
 
     void Clic()
     {
-
+        StartCoroutine(Flash());
+        simon.Clic(this);
     }
 }

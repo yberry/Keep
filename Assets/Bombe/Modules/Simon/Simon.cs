@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using System.Collections;
 using System.Collections.Generic;
 
 public class Simon : Module {
@@ -17,8 +18,14 @@ public class Simon : Module {
         }
     }
 
+    private const float tempsBoucle = 1.5f;
+    private const float tempsAttente = 3f;
+
     private int nbCombo;
     private int nbEtapes = 0;
+
+    private bool reponseRecue = false;
+    private bool bipRecu = false;
 
     private List<Color> flashs;
     private List<Losange> signaux;
@@ -46,6 +53,11 @@ public class Simon : Module {
         AddColor();
 	}
 
+    void Update()
+    {
+
+    }
+
     void AddColor()
     {
         Color color = couleursDispo[Random.Range(0, couleursDispo.Length)];
@@ -68,6 +80,7 @@ public class Simon : Module {
             signaux.Add(jaune);
         }
         CheckReponse();
+        StartCoroutine(SendSignaux());
     }
 
     public void CheckReponse()
@@ -148,13 +161,43 @@ public class Simon : Module {
             }
         }
     }
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
 
-    public void Verif()
+    IEnumerator SendSignaux()
+    {
+        while (!reponseRecue)
+        {
+            foreach (Losange losange in signaux)
+            {
+                StartCoroutine(losange.Flash());
+                yield return new WaitForSeconds(Losange.tempsFlash);
+            }
+            yield return new WaitForSeconds(tempsBoucle);
+        }
+    }
+
+    public void Clic(Losange losange)
+    {
+        bipRecu = true;
+        reponseRecue = true;
+
+        if (reponse[reponseJoueur.Count] == losange)
+        {
+            reponseJoueur.Add(losange);
+            if (reponse.Count == reponseJoueur.Count)
+            {
+                nbEtapes++;
+                Verif();
+            }
+        }
+        else
+        {
+            Faute();
+            reponseJoueur.Clear();
+            CheckReponse();
+        }
+    }
+
+    void Verif()
     {
         if (nbEtapes == nbCombo)
         {
@@ -164,11 +207,5 @@ public class Simon : Module {
         {
             AddColor();
         }
-    }
-
-    public override void Faute()
-    {
-        base.Faute();
-        CheckReponse();
     }
 }
