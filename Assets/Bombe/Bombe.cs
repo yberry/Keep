@@ -199,14 +199,17 @@ public class Bombe : MonoBehaviour {
             {
                 case 0:
                     //nbHori++;
+                    i--;
                     break;
 
                 case 1:
                     //nbBouton++;
+                    i--;
                     break;
 
                 case 2:
                     //nbSymboles++;
+                    i--;
                     break;
 
                 case 3:
@@ -227,14 +230,17 @@ public class Bombe : MonoBehaviour {
 
                 case 7:
                     //nbVert++;
+                    i--;
                     break;
 
                 case 8:
                     //nbSeq++;
+                    i--;
                     break;
 
                 case 9:
                     //nbLaby++;
+                    i--;
                     break;
 
                 case 10:
