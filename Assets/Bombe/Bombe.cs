@@ -180,6 +180,135 @@ public class Bombe : MonoBehaviour {
     void SetModules()
     {
         int nbModules = PlayerPrefs.GetInt("modules");
+
+        int nbHori = 0;
+        int nbBouton = 0;
+        int nbSymboles = 0;
+        int nbSimon = 0;
+        int nbQui = 0;
+        int nbMemoire = 0;
+        int nbMorse = 0;
+        int nbVert = 0;
+        int nbSeq = 0;
+        int nbLaby = 0;
+        int nbMdp = 0;
+
+        for (int i = 0; i < nbModules; i++)
+        {
+            switch (Random.Range(0, 11))
+            {
+                case 0:
+                    //nbHori++;
+                    break;
+
+                case 1:
+                    //nbBouton++;
+                    break;
+
+                case 2:
+                    //nbSymboles++;
+                    break;
+
+                case 3:
+                    nbSimon++;
+                    break;
+
+                case 4:
+                    nbQui++;
+                    break;
+
+                case 5:
+                    nbMemoire++;
+                    break;
+
+                case 6:
+                    nbMorse++;
+                    break;
+
+                case 7:
+                    //nbVert++;
+                    break;
+
+                case 8:
+                    //nbSeq++;
+                    break;
+
+                case 9:
+                    //nbLaby++;
+                    break;
+
+                case 10:
+                    nbMdp++;
+                    break;
+            }
+        }
+
+        for (int i = 0; i < nbHori; i++)
+        {
+            GameObject p = Instantiate(filsHorizontaux.gameObject) as GameObject;
+            p.transform.SetParent(transform);
+            modules.Add(p.GetComponent<FilsHorizontaux>());
+        }
+        for (int i = 0; i < nbBouton; i++)
+        {
+            GameObject p = Instantiate(bouton.gameObject) as GameObject;
+            p.transform.SetParent(transform);
+            modules.Add(p.GetComponent<Bouton>());
+        }
+        for (int i = 0; i < nbSymboles; i++)
+        {
+            GameObject p = Instantiate(symboles.gameObject) as GameObject;
+            p.transform.SetParent(transform);
+            modules.Add(p.GetComponent<Symboles>());
+        }
+        for (int i = 0; i < nbSimon; i++)
+        {
+            GameObject p = Instantiate(simon.gameObject) as GameObject;
+            p.transform.SetParent(transform);
+            modules.Add(p.GetComponent<Simon>());
+        }
+        for (int i = 0; i < nbQui; i++)
+        {
+            GameObject p = Instantiate(quiEstLePremier.gameObject) as GameObject;
+            p.transform.SetParent(transform);
+            modules.Add(p.GetComponent<QuiEstLePremier>());
+        }
+        for (int i = 0; i < nbMemoire; i++)
+        {
+            GameObject p = Instantiate(memoire.gameObject) as GameObject;
+            p.transform.SetParent(transform);
+            modules.Add(p.GetComponent<Memoire>());
+        }
+        for (int i = 0; i < nbMorse; i++)
+        {
+            GameObject p = Instantiate(morse.gameObject) as GameObject;
+            p.transform.SetParent(transform);
+            modules.Add(p.GetComponent<Morse>());
+        }
+        for (int i = 0; i < nbVert; i++)
+        {
+            GameObject p = Instantiate(filsVerticaux.gameObject) as GameObject;
+            p.transform.SetParent(transform);
+            modules.Add(p.GetComponent<FilsVerticaux>());
+        }
+        for (int i = 0; i < nbSeq; i++)
+        {
+            GameObject p = Instantiate(sequencesFils.gameObject) as GameObject;
+            p.transform.SetParent(transform);
+            modules.Add(p.GetComponent<SequencesFils>());
+        }
+        for (int i = 0; i < nbLaby; i++)
+        {
+            GameObject p = Instantiate(labyrinthe.gameObject) as GameObject;
+            p.transform.SetParent(transform);
+            modules.Add(p.GetComponent<Labyrinthe>());
+        }
+        for (int i = 0; i < nbMdp; i++)
+        {
+            GameObject p = Instantiate(motDePasse.gameObject) as GameObject;
+            p.transform.SetParent(transform);
+            modules.Add(p.GetComponent<MotDePasse>());
+        }
     }
 
     public bool HasLightIndic(string ind)
