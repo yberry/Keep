@@ -21,13 +21,13 @@ public class Lettre : MonoBehaviour
 
     void Start()
     {
-        affichage = GetComponent<Text>();
         flecheHaut.onClick.AddListener(Haut);
         flecheBas.onClick.AddListener(Bas);
     }
 
     public void SetLettres(char[] l)
     {
+        affichage = GetComponent<Text>();
         lettres = l;
         Affiche();
     }
