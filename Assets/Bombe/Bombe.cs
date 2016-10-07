@@ -129,11 +129,10 @@ public class Bombe : MonoBehaviour {
         SetIndics();
         SetPorts();
         SetPiles();
-        GameObject t = Instantiate(preTimer.gameObject) as GameObject;
-        timer = t.GetComponent<Timer>();
-        timer.transform.SetParent(transform);
-        timer.SetStart(600, false);
-        timer.defile = true;
+
+        hardcore = PlayerPrefs.GetInt("hardcore") == 1;
+        SetTimer();
+        SetModules();
     }
 
     void SetSerial()
@@ -167,6 +166,20 @@ public class Bombe : MonoBehaviour {
     void SetPiles()
     {
         piles = new List<Pile>();
+    }
+
+    void SetTimer()
+    {
+        GameObject t = Instantiate(preTimer.gameObject) as GameObject;
+        timer = t.GetComponent<Timer>();
+        timer.transform.SetParent(transform);
+        timer.SetStart(PlayerPrefs.GetInt("time"), hardcore);
+        timer.defile = true;
+    }
+
+    void SetModules()
+    {
+        int nbModules = PlayerPrefs.GetInt("modules");
     }
 
     public bool HasLightIndic(string ind)
@@ -227,7 +240,7 @@ public class Bombe : MonoBehaviour {
         }
     }
 
-    public void Defused()
+    void Defused()
     {
         timer.defile = false;
     }
