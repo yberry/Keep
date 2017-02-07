@@ -9,14 +9,7 @@ public class Pile : MonoBehaviour {
         D
     }
 
-    private int nbPiles;
-    public int NbPiles
-    {
-        get
-        {
-            return nbPiles;
-        }
-    }
+    public int nbPiles { get; private set; }
 
     private Type type;
 

@@ -1,18 +1,12 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using System.Collections.Generic;
+using System.Linq;
 
 public class Bombe : MonoBehaviour {
 
     #region Bombe
-    private static Bombe instance;
-    public static Bombe Get
-    {
-        get
-        {
-            return instance;
-        }
-    }
+    public static Bombe instance { get; private set; }
     #endregion
 
     #region NumSerie
@@ -29,14 +23,7 @@ public class Bombe : MonoBehaviour {
     {
         get
         {
-            foreach (char c in numSerie)
-            {
-                if ("AEIOUY".IndexOf(c) >= 0)
-                {
-                    return true;
-                }
-            }
-            return false;
+            return numSerie.Any(c => "AEIOUY".IndexOf(c) >= 0);
         }
     }
     [Header("Numéro de série")]
@@ -88,14 +75,7 @@ public class Bombe : MonoBehaviour {
 
     #region Fautes
     private bool hardcore = false;
-    private int erreurs = 0;
-    public int Erreurs
-    {
-        get
-        {
-            return erreurs;
-        }
-    }
+    public int erreurs { get; private set; }
     #endregion
 
     #region Peripheriques
@@ -106,12 +86,7 @@ public class Bombe : MonoBehaviour {
     {
         get
         {
-            int nb = 0;
-            foreach (Pile pile in piles)
-            {
-                nb += pile.NbPiles;
-            }
-            return nb;
+            return piles.Sum(p => p.nbPiles);
         }
     }
     #endregion
@@ -123,6 +98,7 @@ public class Bombe : MonoBehaviour {
         {
             instance = this;
         }
+        erreurs = 0;
         carres = new List<Carre>();
         modules = new List<Module>();
         SetSerial();
@@ -147,7 +123,7 @@ public class Bombe : MonoBehaviour {
 
     char RandomLetter(bool last)
     {
-        string alpha = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+        const string alpha = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
         return alpha[Random.Range(last ? 26 : 0, alpha.Length)];
     }
 
@@ -170,9 +146,7 @@ public class Bombe : MonoBehaviour {
 
     void SetTimer()
     {
-        GameObject t = Instantiate(preTimer.gameObject) as GameObject;
-        timer = t.GetComponent<Timer>();
-        timer.transform.SetParent(transform);
+        timer = Instantiate(preTimer, transform);
         timer.SetStart(PlayerPrefs.GetInt("time"), hardcore);
         timer.defile = true;
     }
@@ -251,104 +225,74 @@ public class Bombe : MonoBehaviour {
 
         for (int i = 0; i < nbHori; i++)
         {
-            GameObject p = Instantiate(filsHorizontaux.gameObject) as GameObject;
-            p.transform.SetParent(transform);
-            modules.Add(p.GetComponent<FilsHorizontaux>());
+            FilsHorizontaux p = Instantiate(filsHorizontaux, transform);
+            modules.Add(p);
         }
         for (int i = 0; i < nbBouton; i++)
         {
-            GameObject p = Instantiate(bouton.gameObject) as GameObject;
-            p.transform.SetParent(transform);
-            modules.Add(p.GetComponent<Bouton>());
+            Bouton p = Instantiate(bouton, transform);
+            modules.Add(p);
         }
         for (int i = 0; i < nbSymboles; i++)
         {
-            GameObject p = Instantiate(symboles.gameObject) as GameObject;
-            p.transform.SetParent(transform);
-            modules.Add(p.GetComponent<Symboles>());
+            Symboles p = Instantiate(symboles, transform);
+            modules.Add(p);
         }
         for (int i = 0; i < nbSimon; i++)
         {
-            GameObject p = Instantiate(simon.gameObject) as GameObject;
-            p.transform.SetParent(transform);
-            modules.Add(p.GetComponent<Simon>());
+            Simon p = Instantiate(simon, transform);
+            modules.Add(p);
         }
         for (int i = 0; i < nbQui; i++)
         {
-            GameObject p = Instantiate(quiEstLePremier.gameObject) as GameObject;
-            p.transform.SetParent(transform);
-            modules.Add(p.GetComponent<QuiEstLePremier>());
+            QuiEstLePremier p = Instantiate(quiEstLePremier, transform);
+            modules.Add(p);
         }
         for (int i = 0; i < nbMemoire; i++)
         {
-            GameObject p = Instantiate(memoire.gameObject) as GameObject;
-            p.transform.SetParent(transform);
-            modules.Add(p.GetComponent<Memoire>());
+            Memoire p = Instantiate(memoire, transform);
+            modules.Add(p);
         }
         for (int i = 0; i < nbMorse; i++)
         {
-            GameObject p = Instantiate(morse.gameObject) as GameObject;
-            p.transform.SetParent(transform);
-            modules.Add(p.GetComponent<Morse>());
+            Morse p = Instantiate(morse, transform);
+            modules.Add(p);
         }
         for (int i = 0; i < nbVert; i++)
         {
-            GameObject p = Instantiate(filsVerticaux.gameObject) as GameObject;
-            p.transform.SetParent(transform);
-            modules.Add(p.GetComponent<FilsVerticaux>());
+            FilsVerticaux p = Instantiate(filsVerticaux, transform);
+            modules.Add(p);
         }
         for (int i = 0; i < nbSeq; i++)
         {
-            GameObject p = Instantiate(sequencesFils.gameObject) as GameObject;
-            p.transform.SetParent(transform);
-            modules.Add(p.GetComponent<SequencesFils>());
+            SequencesFils p = Instantiate(sequencesFils, transform);
+            modules.Add(p);
         }
         for (int i = 0; i < nbLaby; i++)
         {
-            GameObject p = Instantiate(labyrinthe.gameObject) as GameObject;
-            p.transform.SetParent(transform);
-            modules.Add(p.GetComponent<Labyrinthe>());
+            Labyrinthe p = Instantiate(labyrinthe, transform);
+            modules.Add(p);
         }
         for (int i = 0; i < nbMdp; i++)
         {
-            GameObject p = Instantiate(motDePasse.gameObject) as GameObject;
-            p.transform.SetParent(transform);
-            modules.Add(p.GetComponent<MotDePasse>());
+            MotDePasse p = Instantiate(motDePasse, transform);
+            modules.Add(p);
         }
     }
 
     public bool HasLightIndic(string ind)
     {
-        foreach (Indic indic in indicateurs)
-        {
-            if (indic.Mention == ind && indic.lumiere.enabled)
-            {
-                return true;
-            }
-        }
-        return false;
+        return indicateurs.Any(i => i.mention == ind && i.lumiere.enabled);
     }
 
-    public bool HasPort(Port.Type p)
+    public bool HasPort(Port.Type t)
     {
-        foreach (Port port in ports)
-        {
-            if (port.Nom == p)
-            {
-                return true;
-            }
-        }
-        return false;
+        return ports.Any(p => p.nom == t);
     }
 
     public void Verif()
     {
-        bool defused = true;
-        foreach (Module module in modules)
-        {
-            defused &= module.Desamorce;
-        }
-        if (defused)
+        if (modules.All(m => m.desamorce))
         {
             Defused();
         }

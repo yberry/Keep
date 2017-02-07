@@ -3,19 +3,13 @@ using System.Collections.Generic;
 
 public class FilVertical : MonoBehaviour {
 
-    private static Color[] couleursDispo
+    private static readonly Color[] couleursDispo = new Color[]
     {
-        get
-        {
-            return new Color[]
-            {
-                Color.blue,
-                Color.red,
-                Color.white,
-                Color.yellow
-            };
-        }
-    }
+        Color.blue,
+        Color.red,
+        Color.white,
+        Color.yellow
+    };
 
     private List<Color> couleurs;
     public Light LED;
@@ -75,17 +69,17 @@ public class FilVertical : MonoBehaviour {
 
         else if (b && ((e && r && !l) || (l && !r)))
         {
-            aCouper = Bombe.Get.HasPort(Port.Type.Parallele);
+            aCouper = Bombe.instance.HasPort(Port.Type.Parallele);
         }
 
         else if (!e && ((r && (b || !l)) || (!r && b && !l)))
         {
-            aCouper = Bombe.Get.numPair;
+            aCouper = Bombe.instance.numPair;
         }
 
         else if (!b && l && (r || e))
         {
-            aCouper = Bombe.Get.NbPiles >= 2;
+            aCouper = Bombe.instance.NbPiles >= 2;
         }
 
         else

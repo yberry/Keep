@@ -10,14 +10,8 @@ public class Symbole : MonoBehaviour {
     private Button bouton;
     private Symboles.Type type;
     private bool suivant = false;
-    private bool appuye = false;
-    public bool Appuye
-    {
-        get
-        {
-            return appuye;
-        }
-    }
+    public bool appuye { get; private set; }
+
     private const float tempsFaute = 0.5f;
 
     public Light bande;
@@ -25,6 +19,7 @@ public class Symbole : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+        appuye = false;
         bande.enabled = false;
         bouton = GetComponent<Button>();
         bouton.onClick.AddListener(Clic);

@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
+using System.Linq;
 
 public class FilsHorizontaux : Module {
 
@@ -56,7 +57,7 @@ public class FilsHorizontaux : Module {
                 {
                     fils[1].Objectif();
                 }
-                else if (fils[nbFils - 1].Couleur == Color.white)
+                else if (fils[nbFils - 1].couleur == Color.white)
                 {
                     fils[nbFils - 1].Objectif();
                 }
@@ -64,7 +65,7 @@ public class FilsHorizontaux : Module {
                 {
                     for (int i = nbFils - 1; i >= 0; i--)
                     {
-                        if (fils[i].Couleur == Color.blue)
+                        if (fils[i].couleur == Color.blue)
                         {
                             fils[i].Objectif();
                             return;
@@ -78,18 +79,18 @@ public class FilsHorizontaux : Module {
                 return;
 
             case 4:
-                if (NbCouleurs(Color.red) > 1 && !Bombe.Get.numPair)
+                if (NbCouleurs(Color.red) > 1 && !Bombe.instance.numPair)
                 {
                     for (int i = nbFils - 1; i >= 0; i--)
                     {
-                        if (fils[i].Couleur == Color.red)
+                        if (fils[i].couleur == Color.red)
                         {
                             fils[i].Objectif();
                             return;
                         }
                     }
                 }
-                else if (fils[nbFils - 1].Couleur == Color.yellow && NbCouleurs(Color.red) == 0)
+                else if (fils[nbFils - 1].couleur == Color.yellow && NbCouleurs(Color.red) == 0)
                 {
                     fils[0].Objectif();
                 }
@@ -108,7 +109,7 @@ public class FilsHorizontaux : Module {
                 return;
 
             case 5:
-                if (fils[nbFils - 1].Couleur == Color.black && !Bombe.Get.numPair)
+                if (fils[nbFils - 1].couleur == Color.black && !Bombe.instance.numPair)
                 {
                     fils[3].Objectif();
                 }
@@ -127,7 +128,7 @@ public class FilsHorizontaux : Module {
                 return;
 
             case 6:
-                if (NbCouleurs(Color.yellow) == 0 && !Bombe.Get.numPair)
+                if (NbCouleurs(Color.yellow) == 0 && !Bombe.instance.numPair)
                 {
                     fils[2].Objectif();
                 }
@@ -149,14 +150,6 @@ public class FilsHorizontaux : Module {
 
     int NbCouleurs(Color c)
     {
-        int nb = 0;
-        foreach (FilHorizontal fil in fils)
-        {
-            if (fil.Couleur == c)
-            {
-                nb++;
-            }
-        }
-        return nb;
+        return fils.Count(f => f.couleur == c);
     }
 }

@@ -13,16 +13,9 @@ public class Port : MonoBehaviour {
         Stereo_RCA
     }
 
-    private static List<Type> pris;
+    private static List<Type> pris = new List<Type>();
 
-    private Type nom;
-    public Type Nom
-    {
-        get
-        {
-            return nom;
-        }
-    }
+    public Type nom { get; private set; }
 
 	// Use this for initialization
 	void Start () {

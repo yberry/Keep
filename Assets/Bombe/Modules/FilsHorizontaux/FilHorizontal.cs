@@ -2,28 +2,15 @@
 
 public class FilHorizontal : MonoBehaviour {
 
-    private static Color[] couleurs
+    private static readonly Color[] couleurs = new Color[]
     {
-        get
-        {
-            return new Color[]
-            {
-                Color.white,
-                Color.black,
-                Color.blue,
-                Color.yellow,
-                Color.red
-            };
-        }
-    }
-    private Color couleur;
-    public Color Couleur
-    {
-        get
-        {
-            return couleur;
-        }
-    }
+        Color.white,
+        Color.black,
+        Color.blue,
+        Color.yellow,
+        Color.red
+    };
+    public Color couleur { get; private set; }
 
     private FilsHorizontaux fils;
 

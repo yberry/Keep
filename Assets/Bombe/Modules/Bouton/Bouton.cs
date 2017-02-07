@@ -4,34 +4,22 @@ using UnityEngine.UI;
 public class Bouton : Module {
 
     #region Config bouton
-    private static Color[] couleurs
+    private static readonly Color[] couleurs = new Color[]
     {
-        get
-        {
-            return new Color[]
-            {
-                Color.yellow,
-                Color.white,
-                Color.red,
-                Color.blue
-            };
-        }
-    }
+        Color.yellow,
+        Color.white,
+        Color.red,
+        Color.blue
+    };
     private Color couleur;
 
-    private static string[] textes
+    private static readonly string[] textes = new string[]
     {
-        get
-        {
-            return new string[]
-            {
-                "DETONATE",
-                "PRESS",
-                "ABORT",
-                "HOLD"
-            };
-        }
-    }
+        "DETONATE",
+        "PRESS",
+        "ABORT",
+        "HOLD"
+    };
     private string texte;
 
     private bool aMaintenir;
@@ -89,15 +77,15 @@ public class Bouton : Module {
         {
             aMaintenir = true;
         }
-        else if (Bombe.Get.NbPiles > 1 && texte == "DETONATE")
+        else if (Bombe.instance.NbPiles > 1 && texte == "DETONATE")
         {
             aMaintenir = false;
         }
-        else if (couleur == Color.white && Bombe.Get.HasLightIndic("CAR"))
+        else if (couleur == Color.white && Bombe.instance.HasLightIndic("CAR"))
         {
             aMaintenir = true;
         }
-        else if (Bombe.Get.NbPiles > 2 && Bombe.Get.HasLightIndic("FRK"))
+        else if (Bombe.instance.NbPiles > 2 && Bombe.instance.HasLightIndic("FRK"))
         {
             aMaintenir = false;
         }
@@ -126,7 +114,7 @@ public class Bouton : Module {
         {
             if (aMaintenir)
             {
-                if (Timer.Get.HasNb(chiffre))
+                if (Timer.instance.HasNb(chiffre))
                 {
                     Resolu();
                 }

@@ -4,22 +4,16 @@ using System.Collections.Generic;
 
 public class MotDePasse : Module {
 
-    private static string[] motsPossibles
+    private static readonly string[] motsPossibles = new string[]
     {
-        get
-        {
-            return new string[]
-            {
-                "ABOUT", "AFTER", "AGAIN", "BELOW", "COULD",
-                "EVERY", "FIRST", "FOUND", "GREAT", "HOUSE",
-                "LARGE", "LEARN", "NEVER", "OTHER", "PLACE",
-                "PLANT", "POINT", "RIGHT", "SMALL", "SOUND",
-                "SPELL", "STILL", "STUDY", "THEIR", "THERE",
-                "THESE", "THING", "THINK", "THREE", "WATER",
-                "WHERE", "WHICH", "WORLD", "WOULD", "WRITE"
-            };
-        }
-    }
+        "ABOUT", "AFTER", "AGAIN", "BELOW", "COULD",
+        "EVERY", "FIRST", "FOUND", "GREAT", "HOUSE",
+        "LARGE", "LEARN", "NEVER", "OTHER", "PLACE",
+        "PLANT", "POINT", "RIGHT", "SMALL", "SOUND",
+        "SPELL", "STILL", "STUDY", "THEIR", "THERE",
+        "THESE", "THING", "THINK", "THREE", "WATER",
+        "WHERE", "WHICH", "WORLD", "WOULD", "WRITE"
+    };
 
     private const string alpha = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
     private const int choixParLettre = 6;

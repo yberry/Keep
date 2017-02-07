@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
+using System.Linq;
 
 public class FilsVerticaux : Module {
 
@@ -12,14 +13,7 @@ public class FilsVerticaux : Module {
     {
         get
         {
-            foreach (FilVertical fil in fils)
-            {
-                if (!fil.Complet)
-                {
-                    return false;
-                }
-            }
-            return true;
+            return fils.All(f => f.Complet);
         }
     }
 
@@ -57,10 +51,7 @@ public class FilsVerticaux : Module {
 
         while (Complet)
         {
-            foreach (FilVertical fil in fils)
-            {
-                fil.Restart();
-            }
+            fils.ForEach(f => f.Restart());
         }
     }
 

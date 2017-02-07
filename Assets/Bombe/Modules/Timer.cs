@@ -5,14 +5,7 @@ using UnityEngine.UI;
 public class Timer : Carre {
 
     #region Timer
-    private static Timer instance;
-    public static Timer Get
-    {
-        get
-        {
-            return instance;
-        }
-    }
+    public static Timer instance { get; private set; }
     #endregion
 
     private float tempsDepart;
@@ -46,7 +39,7 @@ public class Timer : Carre {
             temps -= Time.deltaTime * (1f + erreurs / 4f);
             if (temps <= 0f)
             {
-                Bombe.Get.Mort();
+                Bombe.instance.Mort();
             }
         }
         SetChiffres();

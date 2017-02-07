@@ -3,14 +3,7 @@ using System.Collections;
 
 public abstract class Module : Carre {
 
-    private bool desamorce = false;
-    public bool Desamorce
-    {
-        get
-        {
-            return desamorce;
-        }
-    }
+    public bool desamorce { get; private set; }
 
     private const float tempsFaute = 0.5f;
 
@@ -20,6 +13,7 @@ public abstract class Module : Carre {
 
 	// Use this for initialization
 	void Start () {
+        desamorce = false;
         lumiere.enabled = false;
 	}
 
@@ -28,7 +22,7 @@ public abstract class Module : Carre {
         desamorce = true;
         lumiere.color = Color.green;
         lumiere.enabled = true;
-        Bombe.Get.Verif();
+        Bombe.instance.Verif();
     }
 
     public override void Faute()
