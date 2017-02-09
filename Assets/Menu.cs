@@ -6,6 +6,8 @@ public class Menu : MonoBehaviour {
 
     public InputField time;
     public InputField modules;
+    public Toggle hardcore;
+    public Toggle needy;
 
 	// Use this for initialization
 	void Start () {
@@ -21,53 +23,18 @@ public class Menu : MonoBehaviour {
     void CheckTime(string t)
     {
         int intT = int.Parse(t);
-        if (intT < 60)
-        {
-            time.text = "60";
-            PlayerPrefs.SetInt("time", 60);
-        }
-        else if (intT > 600)
-        {
-            time.text = "600";
-            PlayerPrefs.SetInt("time", 600);
-        }
-        else
-        {
-            PlayerPrefs.SetInt("time", intT);
-        }
+        time.text = Mathf.Clamp(intT, 60, 600).ToString();
     }
 
     void CheckModules(string m)
     {
         int intM = int.Parse(m);
-        if (intM < 3)
-        {
-            time.text = "3";
-            PlayerPrefs.SetInt("modules", 3);
-        }
-        else if (intM > 11)
-        {
-            time.text = "11";
-            PlayerPrefs.SetInt("modules", 11);
-        }
-        else
-        {
-            PlayerPrefs.SetInt("modules", intM);
-        }
-    }
-
-    public void CheckHardcore(bool h)
-    {
-        PlayerPrefs.SetInt("hardcore", h ? 1 : 0);
-    }
-
-    public void CheckNeedy(bool n)
-    {
-        PlayerPrefs.SetInt("needy", n ? 1 : 0);
+        modules.text = Mathf.Clamp(intM, 3, 11).ToString();
     }
 
     public void GO()
     {
+        GameManager.instance.SetProps(int.Parse(time.text), int.Parse(modules.text), hardcore.isOn, needy.isOn);
         SceneManager.LoadScene("Bombe");
     }
 

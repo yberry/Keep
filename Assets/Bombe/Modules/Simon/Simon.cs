@@ -4,19 +4,13 @@ using System.Collections.Generic;
 
 public class Simon : Module {
 
-    private static Color[] couleursDispo
+    private static Color[] couleursDispo = new Color[]
     {
-        get
-        {
-            return new Color[]
-            {
-                Color.red,
-                Color.blue,
-                Color.green,
-                Color.yellow
-            };
-        }
-    }
+        Color.red,
+        Color.blue,
+        Color.green,
+        Color.yellow
+    };
 
     private const float tempsBoucle = 1.5f;
     private const float tempsAttente = 3f;
@@ -96,8 +90,8 @@ public class Simon : Module {
     public void CheckReponse()
     {
         reponse.Clear();
-        bool voyelle = Bombe.Get.voyelle;
-        int fautes = Bombe.Get.Erreurs;
+        bool voyelle = Bombe.instance.voyelle;
+        int fautes = Bombe.instance.erreurs;
 
         foreach (Color color in flashs)
         {

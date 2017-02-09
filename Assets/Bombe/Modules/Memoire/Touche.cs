@@ -40,6 +40,7 @@ public class Touche : MonoBehaviour
 
     public void Restart()
     {
+        affichageChiffre = GetComponent<Button>();
         affichageChiffre.GetComponentInChildren<Text>().text = "";
         cible = false;
     }

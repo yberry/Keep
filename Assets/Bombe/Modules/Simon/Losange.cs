@@ -8,7 +8,6 @@ public class Losange : MonoBehaviour {
     public const float tempsFlash = 0.6f;
 
     private Simon simon;
-    private Button bouton;
 
     public Light lumiere;
     
@@ -16,8 +15,7 @@ public class Losange : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         lumiere.enabled = false;
-        bouton = GetComponent<Button>();
-        bouton.onClick.AddListener(Clic);
+        GetComponent<Button>().onClick.AddListener(Clic);
 	}
 	
 	public void SetModule(Simon s)

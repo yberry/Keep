@@ -106,7 +106,7 @@ public class Bombe : MonoBehaviour {
         SetPorts();
         SetPiles();
 
-        hardcore = PlayerPrefs.GetInt("hardcore") == 1;
+        hardcore = GameManager.instance.hardcore;
         SetTimer();
         SetModules();
     }
@@ -147,136 +147,43 @@ public class Bombe : MonoBehaviour {
     void SetTimer()
     {
         timer = Instantiate(preTimer, transform);
-        timer.SetStart(PlayerPrefs.GetInt("time"), hardcore);
+        timer.SetStart(GameManager.instance.time, hardcore);
         timer.defile = true;
     }
 
     void SetModules()
     {
-        int nbModules = PlayerPrefs.GetInt("modules");
+        int nbModules = GameManager.instance.modules;
 
-        int nbHori = 0;
-        int nbBouton = 0;
-        int nbSymboles = 0;
-        int nbSimon = 0;
-        int nbQui = 0;
-        int nbMemoire = 0;
-        int nbMorse = 0;
-        int nbVert = 0;
-        int nbSeq = 0;
-        int nbLaby = 0;
-        int nbMdp = 0;
+        Dictionary<Module, int> dico = new Dictionary<Module, int>()
+        {
+            //{ filsHorizontaux, 0 },
+            //{ bouton, 0 },
+            //{ symboles, 0 },
+            { simon, 0 },
+            { quiEstLePremier, 0 },
+            { memoire, 0 },
+            { morse, 0 },
+            //{ filsVerticaux, 0 },
+            //{ sequencesFils, 0 },
+            //{ labyrinthe, 0 },
+            { motDePasse, 0 }
+        };
 
         for (int i = 0; i < nbModules; i++)
         {
-            switch (Random.Range(0, 11))
+            int rand = Random.Range(0, dico.Count);
+
+            Module module = dico.ElementAt(rand).Key;
+            dico[module]++;
+        }
+
+        foreach (var pair in dico)
+        {
+            for (int i = 0; i < pair.Value; i++)
             {
-                case 0:
-                    //nbHori++;
-                    i--;
-                    break;
-
-                case 1:
-                    //nbBouton++;
-                    i--;
-                    break;
-
-                case 2:
-                    //nbSymboles++;
-                    i--;
-                    break;
-
-                case 3:
-                    nbSimon++;
-                    break;
-
-                case 4:
-                    nbQui++;
-                    break;
-
-                case 5:
-                    nbMemoire++;
-                    break;
-
-                case 6:
-                    nbMorse++;
-                    break;
-
-                case 7:
-                    //nbVert++;
-                    i--;
-                    break;
-
-                case 8:
-                    //nbSeq++;
-                    i--;
-                    break;
-
-                case 9:
-                    //nbLaby++;
-                    i--;
-                    break;
-
-                case 10:
-                    nbMdp++;
-                    break;
+                modules.Add(Instantiate(pair.Key, transform));
             }
-        }
-
-        for (int i = 0; i < nbHori; i++)
-        {
-            FilsHorizontaux p = Instantiate(filsHorizontaux, transform);
-            modules.Add(p);
-        }
-        for (int i = 0; i < nbBouton; i++)
-        {
-            Bouton p = Instantiate(bouton, transform);
-            modules.Add(p);
-        }
-        for (int i = 0; i < nbSymboles; i++)
-        {
-            Symboles p = Instantiate(symboles, transform);
-            modules.Add(p);
-        }
-        for (int i = 0; i < nbSimon; i++)
-        {
-            Simon p = Instantiate(simon, transform);
-            modules.Add(p);
-        }
-        for (int i = 0; i < nbQui; i++)
-        {
-            QuiEstLePremier p = Instantiate(quiEstLePremier, transform);
-            modules.Add(p);
-        }
-        for (int i = 0; i < nbMemoire; i++)
-        {
-            Memoire p = Instantiate(memoire, transform);
-            modules.Add(p);
-        }
-        for (int i = 0; i < nbMorse; i++)
-        {
-            Morse p = Instantiate(morse, transform);
-            modules.Add(p);
-        }
-        for (int i = 0; i < nbVert; i++)
-        {
-            FilsVerticaux p = Instantiate(filsVerticaux, transform);
-            modules.Add(p);
-        }
-        for (int i = 0; i < nbSeq; i++)
-        {
-            SequencesFils p = Instantiate(sequencesFils, transform);
-            modules.Add(p);
-        }
-        for (int i = 0; i < nbLaby; i++)
-        {
-            Labyrinthe p = Instantiate(labyrinthe, transform);
-            modules.Add(p);
-        }
-        for (int i = 0; i < nbMdp; i++)
-        {
-            MotDePasse p = Instantiate(motDePasse, transform);
-            modules.Add(p);
         }
     }
 
