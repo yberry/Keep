@@ -23,6 +23,7 @@ public class Mot : MonoBehaviour {
 
     public void Restart()
     {
+        mot = GetComponent<Button>();
         mot.GetComponentInChildren<Text>().text = "";
         aCliquer = false;
     }

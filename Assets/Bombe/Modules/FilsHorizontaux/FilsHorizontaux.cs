@@ -9,16 +9,11 @@ public class FilsHorizontaux : Module {
     private int nbFils;
     private List<FilHorizontal> fils;
 
-	// Use this for initialization
-	void Start () {
+	void Start ()
+    {
         nbFils = Random.Range(3, 7);
         RemplirListe();
         DefinirObjectif();
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
 	}
 
     void RemplirListe()

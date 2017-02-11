@@ -33,7 +33,7 @@ public class FilHorizontal : MonoBehaviour {
         aCouper = true;
     }
 
-    public void Coupe()
+    void OnMouseDown()
     {
         if (estCoupe)
         {

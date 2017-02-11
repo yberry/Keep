@@ -157,7 +157,7 @@ public class Bombe : MonoBehaviour {
 
         Dictionary<Module, int> dico = new Dictionary<Module, int>()
         {
-            //{ filsHorizontaux, 0 },
+            { filsHorizontaux, 0 },
             //{ bouton, 0 },
             //{ symboles, 0 },
             { simon, 0 },
