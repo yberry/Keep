@@ -164,10 +164,17 @@ public class Bombe : MonoBehaviour {
             { quiEstLePremier, 0 },
             { memoire, 0 },
             { morse, 0 },
-            //{ filsVerticaux, 0 },
+            { filsVerticaux, 0 },
             //{ sequencesFils, 0 },
             //{ labyrinthe, 0 },
             { motDePasse, 0 }
+        };
+
+        Dictionary<Needy, int> needy = new Dictionary<Needy, int>()
+        {
+            { question, 0 },
+            { condensateur, 0 },
+            { knob, 0 }
         };
 
         for (int i = 0; i < nbModules; i++)
@@ -182,7 +189,17 @@ public class Bombe : MonoBehaviour {
         {
             for (int i = 0; i < pair.Value; i++)
             {
-                modules.Add(Instantiate(pair.Key, transform));
+                Module module = Instantiate(pair.Key, transform);
+                modules.Add(module);
+                carres.Add(module);
+            }
+        }
+
+        foreach (var pair in needy)
+        {
+            for (int i = 0; i < pair.Value; i++)
+            {
+                carres.Add(Instantiate(pair.Key, transform));
             }
         }
     }
@@ -215,13 +232,9 @@ public class Bombe : MonoBehaviour {
         else
         {
             timer.Erreur();
-            foreach (Module module in modules)
+            foreach (Simon simon in modules)
             {
-                if (module is Simon)
-                {
-                    Simon simon = module as Simon;
-                    simon.CheckReponse();
-                }
+                simon.CheckReponse();
             }
         }
     }
