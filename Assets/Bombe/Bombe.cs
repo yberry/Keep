@@ -16,7 +16,7 @@ public class Bombe : MonoBehaviour {
     {
         get
         {
-            return numSerie[nbCharSerie - 1] % 2 == 0;
+            return (numSerie[nbCharSerie - 1] & 1) == 0;
         }
     }
     public bool voyelle
@@ -67,6 +67,29 @@ public class Bombe : MonoBehaviour {
     public Knob knob;
     #endregion
 
+    #region Places
+    [Header("Places")]
+    [Tooltip("Places pour carrés")]
+    public Transform[] places;
+    private bool[] placesPrises;
+    private Transform randomPlace
+    {
+        get
+        {
+            int i;
+
+            do
+            {
+                i = Random.Range(0, places.Length);
+            }
+            while (placesPrises[i]);
+
+            placesPrises[i] = true;
+            return places[i];
+        }
+    }
+    #endregion
+
     #region Carres
     private Timer timer;
     private List<Carre> carres;
@@ -98,6 +121,12 @@ public class Bombe : MonoBehaviour {
         {
             instance = this;
         }
+        else
+        {
+            Destroy(gameObject);
+            return;
+        }
+
         erreurs = 0;
         carres = new List<Carre>();
         modules = new List<Module>();
@@ -105,6 +134,8 @@ public class Bombe : MonoBehaviour {
         SetIndics();
         SetPorts();
         SetPiles();
+
+        placesPrises = Enumerable.Repeat(false, places.Length).ToArray();
 
         hardcore = GameManager.instance.hardcore;
         SetTimer();
@@ -146,9 +177,12 @@ public class Bombe : MonoBehaviour {
 
     void SetTimer()
     {
-        timer = Instantiate(preTimer, transform);
+        Transform place = randomPlace;
+        timer = Instantiate(preTimer, place.position, place.rotation, transform);
         timer.SetStart(GameManager.instance.time, hardcore);
         timer.defile = true;
+        carres.Add(timer);
+        Destroy(place.gameObject);
     }
 
     void SetModules()
@@ -185,21 +219,25 @@ public class Bombe : MonoBehaviour {
             dico[module]++;
         }
 
-        foreach (var pair in dico)
+        foreach (KeyValuePair<Module, int> pair in dico)
         {
             for (int i = 0; i < pair.Value; i++)
             {
-                Module module = Instantiate(pair.Key, transform);
+                Transform place = randomPlace;
+                Module module = Instantiate(pair.Key, place.position, place.rotation, transform);
                 modules.Add(module);
                 carres.Add(module);
+                Destroy(place.gameObject);
             }
         }
 
-        foreach (var pair in needy)
+        foreach (KeyValuePair<Needy, int> pair in needy)
         {
             for (int i = 0; i < pair.Value; i++)
             {
-                carres.Add(Instantiate(pair.Key, transform));
+                Transform place = randomPlace;
+                carres.Add(Instantiate(pair.Key, place.position, place.rotation, transform));
+                Destroy(place.gameObject);
             }
         }
     }

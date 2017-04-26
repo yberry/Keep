@@ -9,14 +9,4 @@ public class SequencesFils : Module {
         { Color.blue, new List<string>() { "B", "AC", "B", "A", "B", "BC", "C", "AC", "A" } },
         { Color.black, new List<string>() { "ABC", "AC", "B", "AC", "B", "BC", "AB", "C", "C" } }
     };
-
-	// Use this for initialization
-	void Start () {
-	
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
 }

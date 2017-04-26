@@ -58,11 +58,14 @@ public class Memoire : Module
         foreach (Touche touche in touches)
         {
             touche.Restart();
-            int ch = Random.Range(1, 5);
-            while (chiffresPris.Contains(ch))
+            int ch;
+
+            do
             {
                 ch = Random.Range(1, 5);
             }
+            while (chiffresPris.Contains(ch));
+
             chiffresPris.Add(ch);
             touche.Chiffre = ch;
         }

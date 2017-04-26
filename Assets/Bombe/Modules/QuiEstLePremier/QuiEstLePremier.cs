@@ -73,18 +73,16 @@ public class QuiEstLePremier : Module {
     void Restart()
     {
         numCle = Random.Range(0, mots.Length);
-        int indice = Random.Range(0, titresPossibles[numCle].Length);
-        titre.text = titresPossibles[numCle][indice];
+
+        titre.text = titresPossibles[numCle].RandomItem();
         foreach (Mot mot in mots)
         {
             mot.Restart();
         }
 
-        //string motCle = motsPossibles[Random.Range(0, motsPossibles.Length)];
-
         string[] motsCle = new string[motsSuivants.Keys.Count];
         motsSuivants.Keys.CopyTo(motsCle, 0);
-        string motCle = motsCle[Random.Range(0, motsCle.Length)];
+        string motCle = motsCle.RandomItem();
 
         Dictionary<string, int> motsMis = new Dictionary<string, int>();
 
@@ -95,11 +93,14 @@ public class QuiEstLePremier : Module {
         {
             if (i != numCle)
             {
-                int index = Random.Range(0, motsLigne.Count);
-                while (index == indexCle || motsMis.ContainsValue(index))
+                int index;
+
+                do
                 {
                     index = Random.Range(0, motsLigne.Count);
                 }
+                while (index == indexCle || motsMis.ContainsValue(index));
+
                 motsMis.Add(motsLigne[index], index);
             }
             else

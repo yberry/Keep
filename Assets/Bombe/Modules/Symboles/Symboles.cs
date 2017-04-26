@@ -47,11 +47,14 @@ public class Symboles : Module {
 
         for (int i = 0; i < symboles.Length; i++)
         {
-            int num = Random.Range(0, nbSymboles);
-            while (numPris.Contains(num))
+            int num;
+
+            do
             {
                 num = Random.Range(0, nbSymboles);
             }
+            while (numPris.Contains(num));
+
             symboles[i].SetModule(this);
             symboles[i].SetSymbole(GetSprite(colonnes[col, num]));
             numPris.Add(num);

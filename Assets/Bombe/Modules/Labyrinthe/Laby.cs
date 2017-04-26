@@ -130,7 +130,7 @@ public class Laby
     {
         get
         {
-            return labys[Random.Range(0, labys.Length)];
+            return labys.RandomItem();
         }        
     }
 

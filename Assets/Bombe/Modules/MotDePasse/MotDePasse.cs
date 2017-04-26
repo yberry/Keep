@@ -27,7 +27,7 @@ public class MotDePasse : Module {
 
 	// Use this for initialization
 	void Start () {
-        mot = motsPossibles[Random.Range(0, motsPossibles.Length)];
+        mot = motsPossibles.RandomItem();
 
         do
         {
@@ -60,11 +60,13 @@ public class MotDePasse : Module {
             {
                 if (pasObli > 0 && Random.Range(0, 5) > 0)
                 {
-                    int rand = Random.Range(0, alph.Length);
-                    while (choixLettres[i].Contains(alph[rand]))
+                    int rand;
+                    do
                     {
                         rand = Random.Range(0, alph.Length);
                     }
+                    while (choixLettres[i].Contains(alph[rand]));
+
                     choixLettres[i].Add(alph[rand]);
                     alph.Remove(rand, 1);
 

@@ -25,13 +25,15 @@ public class Labyrinthe : Module {
         int ty = Random.Range(0, nbColonnes);
         triangle = new Vector2(tx, ty);
 
-        int cx = Random.Range(0, nbLignes);
-        int cy = Random.Range(0, nbColonnes);
-        while (cx == tx && ty == cy)
+        int cx, cy;
+
+        do
         {
             cx = Random.Range(0, nbLignes);
             cy = Random.Range(0, nbColonnes);
         }
+        while (cx == tx && ty == cy);
+
         carre = new Vector2(cx, cy);
 
         flecheHaut.onClick.AddListener(Haut);

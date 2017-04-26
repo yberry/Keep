@@ -19,7 +19,7 @@ public class FilHorizontal : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        couleur = couleurs[Random.Range(0, couleurs.Length)];
+        couleur = couleurs.RandomItem();
         GetComponent<Renderer>().material.color = couleur;
 	}
 	

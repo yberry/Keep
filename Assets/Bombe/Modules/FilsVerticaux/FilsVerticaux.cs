@@ -1,6 +1,5 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
-using System.Linq;
 
 public class FilsVerticaux : Module {
 
@@ -13,7 +12,7 @@ public class FilsVerticaux : Module {
     {
         get
         {
-            return fils.All(f => f.Complet);
+            return fils.TrueForAll(f => f.Complet);
         }
     }
 

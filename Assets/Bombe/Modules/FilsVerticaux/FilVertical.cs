@@ -43,11 +43,14 @@ public class FilVertical : MonoBehaviour {
         couleurs = new List<Color>();
         for (int i = 0; i < nbCouleurs; i++)
         {
-            int rand = Random.Range(0, couleursDispo.Length);
-            while (couleurs.Contains(couleursDispo[rand]))
+            int rand;
+
+            do
             {
                 rand = Random.Range(0, couleursDispo.Length);
             }
+            while (couleurs.Contains(couleursDispo[rand]));
+
             couleurs.Add(couleursDispo[rand]);
         }
         LED.enabled = Random.Range(0, 2) == 0;

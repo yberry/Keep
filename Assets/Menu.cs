@@ -9,13 +9,8 @@ public class Menu : MonoBehaviour {
     public Toggle hardcore;
     public Toggle needy;
 
-	// Use this for initialization
-	void Start () {
-        PlayerPrefs.SetInt("time", 60);
-        PlayerPrefs.SetInt("modules", 3);
-        PlayerPrefs.SetInt("hardcore", 0);
-        PlayerPrefs.SetInt("needy", 0);
-
+	void Start ()
+    {
         time.onEndEdit.AddListener(CheckTime);
         modules.onEndEdit.AddListener(CheckModules);
 	}

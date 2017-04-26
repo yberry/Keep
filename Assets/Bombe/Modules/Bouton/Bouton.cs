@@ -36,8 +36,8 @@ public class Bouton : Module {
 
     // Use this for initialization
     void Start () {
-        couleur = couleurs[Random.Range(0, couleurs.Length)];
-        texte = textes[Random.Range(0, textes.Length)];
+        couleur = couleurs.RandomItem();
+        texte = textes.RandomItem();
         bouton.GetComponent<Renderer>().material.color = couleur;
         affichage.text = texte;
         SetObjectif();
@@ -53,7 +53,7 @@ public class Bouton : Module {
             temps += Time.deltaTime;
             if (temps >= tempsActivation)
             {
-                bande.color = couleurs[Random.Range(0, couleurs.Length)];
+                bande.color = couleurs.RandomItem();
                 if (bande.color == Color.blue)
                 {
                     chiffre = '4';
@@ -112,16 +112,9 @@ public class Bouton : Module {
     {
         if (bande.enabled)
         {
-            if (aMaintenir)
+            if (aMaintenir && Timer.instance.HasNb(chiffre))
             {
-                if (Timer.instance.HasNb(chiffre))
-                {
-                    Resolu();
-                }
-                else
-                {
-                    Faute();
-                }
+                Resolu();
             }
             else
             {

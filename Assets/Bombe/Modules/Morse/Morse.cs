@@ -2,6 +2,7 @@
 using UnityEngine.UI;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 
 public class Morse : Module {
 
@@ -45,20 +46,24 @@ public class Morse : Module {
         { '0', "-----" }
     };
 
-    private static readonly string[] motsPossibles = new string[]
+    private static readonly Dictionary<string, float> motsFreqs = new Dictionary<string, float>()
     {
-        "shell", "halls", "slick", "trick",
-        "boxes", "leaks", "strobe", "bistro",
-        "flick", "bombs", "break", "brick",
-        "steak", "sting", "vector", "beats"
-    };
-
-    private static readonly float[] freqPossibles = new float[]
-    {
-        3.505f, 3.515f, 3.522f, 3.532f,
-        3.535f, 3.542f, 3.545f, 3.552f,
-        3.555f, 3.565f, 3.572f, 3.575f,
-        3.582f, 3.592f, 3.595f, 3.600f
+        { "shell", 3.505f },
+        { "halls", 3.515f },
+        { "slick", 3.522f },
+        { "trick", 3.532f },
+        { "boxes", 3.535f },
+        { "leaks", 3.542f },
+        { "strobe", 3.545f },
+        { "bistro", 3.552f },
+        { "flick", 3.555f },
+        { "bombs", 3.565f },
+        { "break", 3.572f },
+        { "brick", 3.575f },
+        { "steak", 3.582f },
+        { "sting", 3.592f },
+        { "vector", 3.595f },
+        { "beats", 3.600f }
     };
 
     private int current = 0;
@@ -66,7 +71,7 @@ public class Morse : Module {
     {
         get
         {
-            return freqPossibles[current];
+            return motsFreqs.ElementAt(current).Value;
         }
     }
 
@@ -82,25 +87,27 @@ public class Morse : Module {
     public Button droite;
     public Button TX;
 
+    private Coroutine lecture;
+
 	// Use this for initialization
 	void Start () {
         signal.enabled = false;
 
         slider.wholeNumbers = false;
-        slider.maxValue = freqPossibles[freqPossibles.Length - 1];
-        slider.minValue = freqPossibles[0];
+        slider.maxValue = motsFreqs.Values.Max();
+        slider.minValue = motsFreqs.Values.Min();
         slider.interactable = false;
 
-        int rand = Random.Range(0, motsPossibles.Length);
-        mot = motsPossibles[rand];
-        freq = freqPossibles[rand];
+        KeyValuePair<string, float> pair = motsFreqs.RandomItem();
+        mot = pair.Key;
+        freq = pair.Value;
 
         Affiche();
         gauche.onClick.AddListener(Gauche);
         droite.onClick.AddListener(Droite);
         TX.onClick.AddListener(Verif);
 
-        StartCoroutine(LireMot());
+        lecture = StartCoroutine(LireMot());
 	}
 	
 	IEnumerator LireMot()
@@ -124,19 +131,20 @@ public class Morse : Module {
 
     void Affiche()
     {
-        affichageFreq.text = currentFreq + " MHz";
-        slider.value = currentFreq;
+        float cur = currentFreq;
+        affichageFreq.text = cur.ToString() + " MHz";
+        slider.value = cur;
     }
 
     void Gauche()
     {
-        current = Mathf.Clamp(current - 1, 0, freqPossibles.Length - 1);
+        current = Mathf.Clamp(current - 1, 0, motsFreqs.Count - 1);
         Affiche();
     }
 
     void Droite()
     {
-        current = Mathf.Clamp(current + 1, 0, freqPossibles.Length - 1);
+        current = Mathf.Clamp(current + 1, 0, motsFreqs.Count - 1);
         Affiche();
     }
 
@@ -150,5 +158,10 @@ public class Morse : Module {
         {
             Faute();
         }
+    }
+
+    void OnDestroy()
+    {
+        StopCoroutine(lecture);
     }
 }

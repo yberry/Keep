@@ -64,7 +64,7 @@ public class Simon : Module {
 
     void AddColor()
     {
-        Color color = couleursDispo[Random.Range(0, couleursDispo.Length)];
+        Color color = couleursDispo.RandomItem();
         flashs.Add(color);
 
         if (color == Color.red)

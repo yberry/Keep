@@ -58,14 +58,7 @@ public class FilsHorizontaux : Module {
                 }
                 else if (NbCouleurs(Color.blue) > 1)
                 {
-                    for (int i = nbFils - 1; i >= 0; i--)
-                    {
-                        if (fils[i].couleur == Color.blue)
-                        {
-                            fils[i].Objectif();
-                            return;
-                        }
-                    }
+                    fils.Last(f => f.couleur == Color.blue).Objectif();
                 }
                 else
                 {
@@ -76,14 +69,7 @@ public class FilsHorizontaux : Module {
             case 4:
                 if (NbCouleurs(Color.red) > 1 && !Bombe.instance.numPair)
                 {
-                    for (int i = nbFils - 1; i >= 0; i--)
-                    {
-                        if (fils[i].couleur == Color.red)
-                        {
-                            fils[i].Objectif();
-                            return;
-                        }
-                    }
+                    fils.Last(f => f.couleur == Color.red).Objectif();
                 }
                 else if (fils[nbFils - 1].couleur == Color.yellow && NbCouleurs(Color.red) == 0)
                 {
