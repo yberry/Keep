@@ -172,7 +172,7 @@ public class Simon : Module {
         {
             foreach (Losange losange in signaux)
             {
-                StartCoroutine(losange.Flash());
+                losange.Flash();
                 yield return new WaitForSeconds(Losange.tempsFlash);
             }
             yield return new WaitForSeconds(tempsBoucle);
@@ -184,6 +184,8 @@ public class Simon : Module {
         reponseRecue = true;
         tempsReponse = 0f;
         StopCoroutine(SendSignaux());
+
+        StopAllOthers(losange);
 
         if (reponse[reponseJoueur.Count] == losange)
         {
@@ -201,6 +203,12 @@ public class Simon : Module {
             reponseJoueur.Clear();
             CheckReponse();
         }
+    }
+
+    void StopAllOthers(Losange losange)
+    {
+        Losange[] losanges = new Losange[] { vert, bleu, rouge, jaune };
+
     }
 
     void Verif()

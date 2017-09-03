@@ -1,6 +1,5 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
-using System.Collections;
 
 [RequireComponent(typeof(Button))]
 public class Losange : MonoBehaviour {
@@ -8,6 +7,7 @@ public class Losange : MonoBehaviour {
     public const float tempsFlash = 0.6f;
 
     private Simon simon;
+    private float temps = 0f;
 
     public Light lumiere;
     
@@ -17,22 +17,38 @@ public class Losange : MonoBehaviour {
         lumiere.enabled = false;
         GetComponent<Button>().onClick.AddListener(Clic);
 	}
+
+    void Update()
+    {
+        if (lumiere.enabled)
+        {
+            temps += Time.deltaTime;
+            if (temps >= tempsFlash)
+            {
+                Stop();
+            }
+        }
+    }
+
+    public void Flash()
+    {
+        lumiere.enabled = true;
+    }
+
+    public void Stop()
+    {
+        temps = 0f;
+        lumiere.enabled = false;
+    }
 	
 	public void SetModule(Simon s)
     {
         simon = s;
     }
 
-    public IEnumerator Flash()
-    {
-        lumiere.enabled = true;
-        yield return new WaitForSeconds(tempsFlash);
-        lumiere.enabled = false;
-    }
-
     void Clic()
     {
-        StartCoroutine(Flash());
+        Flash();
         simon.Clic(this);
     }
 }

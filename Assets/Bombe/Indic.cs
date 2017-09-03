@@ -26,11 +26,12 @@ public class Indic : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        mention = ind[Random.Range(0, ind.Length)];
-        while (pris.Contains(mention))
+        do
         {
-            mention = ind[Random.Range(0, ind.Length)];
+            mention = ind.RandomItem();
         }
+        while (pris.Contains(mention));
+
         lumiere.enabled = Random.Range(0, 2) == 0;
         pris.Add(mention);
 	}

@@ -12,6 +12,7 @@ public abstract class Needy : Carre {
 
 	void Start ()
     {
+        temps = tempsDepart;
         compteur.gameObject.SetActive(false);
 	}
 	
@@ -20,13 +21,19 @@ public abstract class Needy : Carre {
 	    if (active)
         {
             temps -= Time.deltaTime;
-            if (temps <= 0)
+            if (temps <= 0f)
             {
                 Ecoule();
             }
         }
+        UpdateNeedy();
         AfficheTemps();
 	}
+
+    protected virtual void UpdateNeedy()
+    {
+        // A compléter si besoin
+    }
 
     void AfficheTemps()
     {

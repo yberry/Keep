@@ -23,7 +23,7 @@ public class Bombe : MonoBehaviour {
     {
         get
         {
-            return numSerie.Any(c => "AEIOUY".IndexOf(c) >= 0);
+            return "AEIOUY".Any(c => numSerie.Contains(c));
         }
     }
     [Header("Numéro de série")]

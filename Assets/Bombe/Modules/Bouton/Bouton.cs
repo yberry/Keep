@@ -73,19 +73,21 @@ public class Bouton : Module {
 
     void SetObjectif()
     {
+        Bombe bombe = Bombe.instance;
+
         if (couleur == Color.blue && texte == "ABORT")
         {
             aMaintenir = true;
         }
-        else if (Bombe.instance.NbPiles > 1 && texte == "DETONATE")
+        else if (bombe.NbPiles > 1 && texte == "DETONATE")
         {
             aMaintenir = false;
         }
-        else if (couleur == Color.white && Bombe.instance.HasLightIndic("CAR"))
+        else if (couleur == Color.white && bombe.HasLightIndic("CAR"))
         {
             aMaintenir = true;
         }
-        else if (Bombe.instance.NbPiles > 2 && Bombe.instance.HasLightIndic("FRK"))
+        else if (bombe.NbPiles > 2 && bombe.HasLightIndic("FRK"))
         {
             aMaintenir = false;
         }

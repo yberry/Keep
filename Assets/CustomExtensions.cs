@@ -9,10 +9,17 @@ public static class CustomExtensions {
         int count = source.Count();
         if (count == 0)
         {
-            throw new System.ArgumentOutOfRangeException("Source", "Random in empty source");
+            return default(T);
         }
 
         int random = Random.Range(0, count);
         return source.ElementAt(random);
+    }
+
+    public static T GetOrAddComponent<T>(this GameObject gameObject) where T : Component
+    {
+        T component = gameObject.GetComponent<T>();
+
+        return component == null ? gameObject.AddComponent<T>() : component;
     }
 }

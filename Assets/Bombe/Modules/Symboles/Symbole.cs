@@ -8,7 +8,6 @@ public class Symbole : MonoBehaviour {
     private Symboles symboles;
 
     private Button bouton;
-    private Symboles.Type type;
     private bool suivant = false;
     public bool appuye { get; private set; }
 

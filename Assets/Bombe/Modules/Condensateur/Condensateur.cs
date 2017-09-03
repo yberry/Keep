@@ -1,6 +1,5 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
-using System.Collections;
 
 public class Condensateur : Needy {
 
@@ -11,5 +10,28 @@ public class Condensateur : Needy {
     protected override void Ecoule()
     {
         Faute();
+    }
+
+    public void Appuye()
+    {
+        active = false;
+    }
+
+    public void Relache()
+    {
+        active = true;
+    }
+
+    protected override void UpdateNeedy()
+    {
+        if (!active)
+        {
+            temps += 2f * Time.deltaTime;
+            if (temps > tempsDepart)
+            {
+                temps = tempsDepart;
+            }
+        }
+        jauge.fillAmount = 1f - temps / tempsDepart;
     }
 }
