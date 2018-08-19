@@ -5,12 +5,39 @@ using UnityEngine.UI;
 public class Lettre : MonoBehaviour
 {
     private char[] lettres;
-    private int index = 0;
+    private int currentIndex = 0;
+
+    private int CurrentIndex
+    {
+        get
+        {
+            return currentIndex;
+        }
+
+        set
+        {
+            if (value < 0)
+            {
+                currentIndex = lettres.Length - 1;
+            }
+            else if (value >= lettres.Length)
+            {
+                currentIndex = 0;
+            }
+            else
+            {
+                currentIndex = value;
+            }
+
+            Affiche();
+        }
+    }
+
     public char CurrentLettre
     {
         get
         {
-            return lettres[index];
+            return lettres[currentIndex];
         }
     }
 
@@ -39,19 +66,11 @@ public class Lettre : MonoBehaviour
 
     void Haut()
     {
-        if (--index < 0)
-        {
-            index = lettres.Length - 1;
-        }
-        Affiche();
+        --CurrentIndex;
     }
 
     void Bas()
     {
-        if (++index >= lettres.Length)
-        {
-            index = 0;
-        }
-        Affiche();
+        ++CurrentIndex;
     }
 }

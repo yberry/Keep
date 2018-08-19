@@ -16,6 +16,7 @@ public class Laby
         public bool murGauche;
         public bool murBas;
         public bool murDroite;
+
         public Place(bool haut, bool gauche, bool bas, bool droite)
         {
             murHaut = haut;
@@ -23,24 +24,32 @@ public class Laby
             murBas = bas;
             murDroite = droite;
         }
+
+        public Place(int bin)
+        {
+            murHaut = (bin & 0x1000) != 0;
+            murGauche = (bin & 0x0100) != 0;
+            murBas = (bin & 0x0010) != 0;
+            murDroite = (bin & 0x0001) != 0;
+        }
     }
 
-    private static Place mursHaut { get { return new Place(true, false, false, false); } }
-    private static Place mursGauche { get { return new Place(false, true, false, false); } }
-    private static Place mursBas { get { return new Place(false, false, true, false); } }
-    private static Place mursDroite { get { return new Place(false, false, false, true); } }
+    private static Place mursHaut { get { return new Place(0x1000); } }
+    private static Place mursGauche { get { return new Place(0x0100); } }
+    private static Place mursBas { get { return new Place(0x0010); } }
+    private static Place mursDroite { get { return new Place(0x0001); } }
 
-    private static Place mursHautGauche { get { return new Place(true, true, false, false); } }
-    private static Place mursHautBas { get { return new Place(true, false, true, false); } }
-    private static Place mursHautDroite { get { return new Place(true, false, false, true); } }
-    private static Place mursGaucheBas { get { return new Place(false, true, true, false); } }
-    private static Place mursGaucheDroite { get { return new Place(false, true, false, true); } }
-    private static Place mursBasDroite { get { return new Place(false, false, true, true); } }
+    private static Place mursHautGauche { get { return new Place(0x1100); } }
+    private static Place mursHautBas { get { return new Place(0x1010); } }
+    private static Place mursHautDroite { get { return new Place(0x1001); } }
+    private static Place mursGaucheBas { get { return new Place(0x0110); } }
+    private static Place mursGaucheDroite { get { return new Place(0x0101); } }
+    private static Place mursBasDroite { get { return new Place(0x0011); } }
 
-    private static Place mursHautGaucheBas { get { return new Place(true, true, true, false); } }
-    private static Place mursHautGaucheDroite { get { return new Place(true, true, false, true); } }
-    private static Place mursHautBasDroite { get { return new Place(true, false, true, true); } }
-    private static Place mursGaucheBasDroite { get { return new Place(false, true, true, true); } }
+    private static Place mursHautGaucheBas { get { return new Place(0x1110); } }
+    private static Place mursHautGaucheDroite { get { return new Place(0x1101); } }
+    private static Place mursHautBasDroite { get { return new Place(0x1011); } }
+    private static Place mursGaucheBasDroite { get { return new Place(0x0111); } }
 
     private static readonly Laby[] labys = new Laby[]
     {

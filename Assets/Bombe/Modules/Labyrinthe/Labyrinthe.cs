@@ -32,7 +32,7 @@ public class Labyrinthe : Module {
             cx = Random.Range(0, nbLignes);
             cy = Random.Range(0, nbColonnes);
         }
-        while (cx == tx && ty == cy);
+        while (cx == tx && cy == ty);
 
         carre = new Vector2(cx, cy);
 
@@ -55,7 +55,7 @@ public class Labyrinthe : Module {
         }
         else
         {
-            carre.x--;
+            --carre.x;
             Verif();
         }
     }
@@ -73,7 +73,7 @@ public class Labyrinthe : Module {
         }
         else
         {
-            carre.y--;
+            --carre.y;
             Verif();
         }
     }
@@ -91,7 +91,7 @@ public class Labyrinthe : Module {
         }
         else
         {
-            carre.x++;
+            ++carre.x;
             Verif();
         }
     }
@@ -109,7 +109,7 @@ public class Labyrinthe : Module {
         }
         else
         {
-            carre.y++;
+            ++carre.y;
             Verif();
         }
     }

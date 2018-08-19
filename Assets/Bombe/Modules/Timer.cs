@@ -41,8 +41,8 @@ public class Timer : Carre {
             {
                 Bombe.Instance.Mort();
             }
+            SetChiffres();
         }
-        SetChiffres();
 	}
 
     public void SetStart(int sec, bool hard)
@@ -50,6 +50,7 @@ public class Timer : Carre {
         tempsDepart = sec;
         temps = tempsDepart;
         hardcore = hard;
+        SetChiffres();
     }
 
     void SetChiffres()
