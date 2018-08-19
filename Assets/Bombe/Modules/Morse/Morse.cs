@@ -67,7 +67,20 @@ public class Morse : Module {
     };
 
     private int current = 0;
-    private float currentFreq
+    private int Current
+    {
+        get
+        {
+            return current;
+        }
+
+        set
+        {
+            current = Mathf.Clamp(value, 0, motsFreqs.Count - 1);
+            Affiche();
+        }
+    }
+    private float CurrentFreq
     {
         get
         {
@@ -78,7 +91,7 @@ public class Morse : Module {
     private const float tempsPoint = 0.3f;
 
     private string mot;
-    private float freq;
+    private int index;
 
     public Light signal;
     public Slider slider;
@@ -98,9 +111,8 @@ public class Morse : Module {
         slider.minValue = motsFreqs.Values.Min();
         slider.interactable = false;
 
-        KeyValuePair<string, float> pair = motsFreqs.RandomItem();
-        mot = pair.Key;
-        freq = pair.Value;
+        index = Random.Range(0, motsFreqs.Count);
+        mot = motsFreqs.ElementAt(index).Key;
 
         Affiche();
         gauche.onClick.AddListener(Gauche);
@@ -131,26 +143,24 @@ public class Morse : Module {
 
     void Affiche()
     {
-        float cur = currentFreq;
-        affichageFreq.text = cur.ToString() + " MHz";
+        float cur = CurrentFreq;
+        affichageFreq.text = cur.ToString("F4") + " MHz";
         slider.value = cur;
     }
 
     void Gauche()
     {
-        current = Mathf.Clamp(current - 1, 0, motsFreqs.Count - 1);
-        Affiche();
+        --Current;
     }
 
     void Droite()
     {
-        current = Mathf.Clamp(current + 1, 0, motsFreqs.Count - 1);
-        Affiche();
+        ++Current;
     }
 
     void Verif()
     {
-        if (currentFreq == freq)
+        if (current == index)
         {
             Resolu();
         }
@@ -160,8 +170,9 @@ public class Morse : Module {
         }
     }
 
-    void OnDestroy()
+    protected override void OnDestroy()
     {
+        base.OnDestroy();
         StopCoroutine(lecture);
     }
 }

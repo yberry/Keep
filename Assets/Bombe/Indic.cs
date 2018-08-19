@@ -20,7 +20,7 @@ public class Indic : MonoBehaviour {
 
     private static List<string> pris = new List<string>();
 
-    public string mention { get; private set; }
+    public string Mention { get; private set; }
 
     public Light lumiere;
 
@@ -28,12 +28,12 @@ public class Indic : MonoBehaviour {
 	void Start () {
         do
         {
-            mention = ind.RandomItem();
+            Mention = ind.RandomItem();
         }
-        while (pris.Contains(mention));
+        while (pris.Contains(Mention));
 
         lumiere.enabled = Random.Range(0, 2) == 0;
-        pris.Add(mention);
+        pris.Add(Mention);
 	}
 
     public static void Reset()

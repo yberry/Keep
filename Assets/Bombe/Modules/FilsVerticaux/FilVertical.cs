@@ -72,17 +72,17 @@ public class FilVertical : MonoBehaviour {
 
         else if (b && ((e && r && !l) || (l && !r)))
         {
-            aCouper = Bombe.instance.HasPort(Port.Type.Parallele);
+            aCouper = Bombe.Instance.HasPort(Port.Type.Parallele);
         }
 
         else if (!e && ((r && (b || !l)) || (!r && b && !l)))
         {
-            aCouper = Bombe.instance.numPair;
+            aCouper = Bombe.Instance.NumPair;
         }
 
         else if (!b && l && (r || e))
         {
-            aCouper = Bombe.instance.NbPiles >= 2;
+            aCouper = Bombe.Instance.NbPiles >= 2;
         }
 
         else

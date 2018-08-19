@@ -90,8 +90,8 @@ public class Simon : Module {
     public void CheckReponse()
     {
         reponse.Clear();
-        bool voyelle = Bombe.instance.voyelle;
-        int fautes = Bombe.instance.erreurs;
+        bool voyelle = Bombe.Instance.Voyelle;
+        int fautes = Bombe.Instance.Erreurs;
 
         foreach (Color color in flashs)
         {

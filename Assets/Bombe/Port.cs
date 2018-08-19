@@ -15,17 +15,17 @@ public class Port : MonoBehaviour {
 
     private static List<Type> pris = new List<Type>();
 
-    public Type nom { get; private set; }
+    public Type Nom { get; private set; }
 
 	// Use this for initialization
 	void Start () {
         System.Array values = System.Enum.GetValues(typeof(Type));
-        nom = (Type)values.GetValue(Random.Range(0, values.Length));
-        while (pris.Contains(nom))
+        Nom = (Type)values.GetValue(Random.Range(0, values.Length));
+        while (pris.Contains(Nom))
         {
-            nom = (Type)values.GetValue(Random.Range(0, values.Length));
+            Nom = (Type)values.GetValue(Random.Range(0, values.Length));
         }
-        pris.Add(nom);
+        pris.Add(Nom);
 	}
 
     public static void Reset()

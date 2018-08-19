@@ -93,7 +93,7 @@ public class Symboles : Module {
 
     public void Verif()
     {
-        if (symboles.All(s => s.appuye))
+        if (symboles.All(s => s.Appuye))
         {
             Resolu();
         }

@@ -1,21 +1,19 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class GameManager : MonoBehaviour {
 
-    public int time { get; private set; }
-    public int modules { get; private set; }
-    public bool hardcore { get; private set; }
-    public bool needy { get; private set; }
+    public int Time { get; private set; }
+    public int Modules { get; private set; }
+    public bool Hardcore { get; private set; }
+    public bool Needy { get; private set; }
 
-    public static GameManager instance { get; private set; }
+    public static GameManager Instance { get; private set; }
 
     void Start()
     {
-        if (instance == null)
+        if (Instance == null)
         {
-            instance = this;
+            Instance = this;
             DontDestroyOnLoad(gameObject);
         }
         else
@@ -26,9 +24,9 @@ public class GameManager : MonoBehaviour {
 
     public void SetProps(int t, int m, bool h, bool n)
     {
-        time = t;
-        modules = m;
-        hardcore = h;
-        needy = n;
+        Time = t;
+        Modules = m;
+        Hardcore = h;
+        Needy = n;
     }
 }

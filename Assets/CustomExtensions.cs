@@ -6,10 +6,15 @@ public static class CustomExtensions {
 
     public static T RandomItem<T>(this IEnumerable<T> source)
     {
+        if (source == null)
+        {
+            throw new System.ArgumentNullException();
+        }
+
         int count = source.Count();
         if (count == 0)
         {
-            return default(T);
+            throw new System.ArgumentException();
         }
 
         int random = Random.Range(0, count);
@@ -18,8 +23,15 @@ public static class CustomExtensions {
 
     public static T GetOrAddComponent<T>(this GameObject gameObject) where T : Component
     {
-        T component = gameObject.GetComponent<T>();
+        T comp = gameObject.GetComponent<T>();
 
-        return component == null ? gameObject.AddComponent<T>() : component;
+        return comp ?? gameObject.AddComponent<T>();
+    }
+
+    public static T GetOrAddComponent<T>(this Component component) where T : Component
+    {
+        T comp = component.GetComponent<T>();
+
+        return comp ?? component.gameObject.AddComponent<T>();
     }
 }

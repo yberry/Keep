@@ -37,7 +37,7 @@ public abstract class Needy : Carre {
 
     void AfficheTemps()
     {
-        compteur.text = Timer.Get2Chiffres((int)temps);
+        compteur.text = ((int)temps).ToString("D2");
     }
 
     protected virtual void Restart()

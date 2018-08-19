@@ -6,20 +6,21 @@ using System.Linq;
 public class Bombe : MonoBehaviour {
 
     #region Bombe
-    public static Bombe instance { get; private set; }
+    public static Bombe Instance { get; private set; }
     #endregion
 
     #region NumSerie
+    private const string charsSerie = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
     private const int nbCharSerie = 6;
     private string numSerie;
-    public bool numPair
+    public bool NumPair
     {
         get
         {
             return (numSerie[nbCharSerie - 1] & 1) == 0;
         }
     }
-    public bool voyelle
+    public bool Voyelle
     {
         get
         {
@@ -70,22 +71,18 @@ public class Bombe : MonoBehaviour {
     #region Places
     [Header("Places")]
     [Tooltip("Places pour carrés")]
-    public Transform[] places;
-    private bool[] placesPrises;
-    private Transform randomPlace
+    public List<Transform> places;
+    private Transform RandomPlace
     {
         get
         {
-            int i;
+            int index = Random.Range(0, places.Count);
 
-            do
-            {
-                i = Random.Range(0, places.Length);
-            }
-            while (placesPrises[i]);
+            Transform place = places[index];
 
-            placesPrises[i] = true;
-            return places[i];
+            places.RemoveAt(index);
+
+            return place;
         }
     }
     #endregion
@@ -98,7 +95,7 @@ public class Bombe : MonoBehaviour {
 
     #region Fautes
     private bool hardcore = false;
-    public int erreurs { get; private set; }
+    public int Erreurs { get; private set; }
     #endregion
 
     #region Peripheriques
@@ -109,7 +106,7 @@ public class Bombe : MonoBehaviour {
     {
         get
         {
-            return piles.Sum(p => p.nbPiles);
+            return piles.Sum(p => p.NbPiles);
         }
     }
     #endregion
@@ -117,9 +114,9 @@ public class Bombe : MonoBehaviour {
     // Use this for initialization
     void Start()
     {
-        if (instance == null)
+        if (Instance == null)
         {
-            instance = this;
+            Instance = this;
         }
         else
         {
@@ -127,7 +124,7 @@ public class Bombe : MonoBehaviour {
             return;
         }
 
-        erreurs = 0;
+        Erreurs = 0;
         carres = new List<Carre>();
         modules = new List<Module>();
         SetSerial();
@@ -135,27 +132,25 @@ public class Bombe : MonoBehaviour {
         SetPorts();
         SetPiles();
 
-        placesPrises = Enumerable.Repeat(false, places.Length).ToArray();
-
-        hardcore = GameManager.instance.hardcore;
+        hardcore = GameManager.Instance.Hardcore;
         SetTimer();
         SetModules();
     }
 
     void SetSerial()
     {
-        numSerie = "";
+        char[] tab = new char[nbCharSerie];
         for (int i = 0; i < nbCharSerie; i++)
         {
-            numSerie += RandomLetter(i == nbCharSerie - 1);
+            tab[i] = RandomLetter(i == nbCharSerie - 1);
         }
+        numSerie = new string(tab);
         textSerie.text = numSerie;
     }
 
-    char RandomLetter(bool last)
+    static char RandomLetter(bool last)
     {
-        const string alpha = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-        return alpha[Random.Range(last ? 26 : 0, alpha.Length)];
+        return charsSerie[Random.Range(last ? 26 : 0, 36)];
     }
 
     void SetPorts()
@@ -177,9 +172,9 @@ public class Bombe : MonoBehaviour {
 
     void SetTimer()
     {
-        Transform place = randomPlace;
+        Transform place = RandomPlace;
         timer = Instantiate(preTimer, place.position, place.rotation, transform);
-        timer.SetStart(GameManager.instance.time, hardcore);
+        timer.SetStart(GameManager.Instance.Time, hardcore);
         timer.defile = true;
         carres.Add(timer);
         Destroy(place.gameObject);
@@ -187,7 +182,7 @@ public class Bombe : MonoBehaviour {
 
     void SetModules()
     {
-        int nbModules = GameManager.instance.modules;
+        int nbModules = GameManager.Instance.Modules;
 
         Dictionary<Module, int> dico = new Dictionary<Module, int>()
         {
@@ -206,9 +201,9 @@ public class Bombe : MonoBehaviour {
 
         Dictionary<Needy, int> needy = new Dictionary<Needy, int>()
         {
-            { question, 0 },
-            { condensateur, 0 },
-            { knob, 0 }
+            //{ question, 0 },
+            //{ condensateur, 0 },
+            //{ knob, 0 }
         };
 
         for (int i = 0; i < nbModules; i++)
@@ -223,7 +218,7 @@ public class Bombe : MonoBehaviour {
         {
             for (int i = 0; i < pair.Value; i++)
             {
-                Transform place = randomPlace;
+                Transform place = RandomPlace;
                 Module module = Instantiate(pair.Key, place.position, place.rotation, transform);
                 modules.Add(module);
                 carres.Add(module);
@@ -235,7 +230,7 @@ public class Bombe : MonoBehaviour {
         {
             for (int i = 0; i < pair.Value; i++)
             {
-                Transform place = randomPlace;
+                Transform place = RandomPlace;
                 carres.Add(Instantiate(pair.Key, place.position, place.rotation, transform));
                 Destroy(place.gameObject);
             }
@@ -244,17 +239,17 @@ public class Bombe : MonoBehaviour {
 
     public bool HasLightIndic(string ind)
     {
-        return indicateurs.Any(i => i.mention == ind && i.lumiere.enabled);
+        return indicateurs.Any(i => i.Mention == ind && i.lumiere.enabled);
     }
 
     public bool HasPort(Port.Type t)
     {
-        return ports.Any(p => p.nom == t);
+        return ports.Any(p => p.Nom == t);
     }
 
     public void Verif()
     {
-        if (modules.All(m => m.desamorce))
+        if (modules.All(m => m.Desamorce))
         {
             Defused();
         }
@@ -262,17 +257,20 @@ public class Bombe : MonoBehaviour {
 
     public void Erreur()
     {
-        erreurs++;
-        if (hardcore || erreurs >= 3)
+        ++Erreurs;
+        if (hardcore || Erreurs >= 3)
         {
             Mort();
         }
         else
         {
             timer.Erreur();
-            foreach (Simon simon in modules)
+            foreach (Module module in modules)
             {
-                simon.CheckReponse();
+                if (module is Simon)
+                {
+                    (module as Simon).CheckReponse();
+                }
             }
         }
     }
@@ -284,7 +282,7 @@ public class Bombe : MonoBehaviour {
 
     public void Mort()
     {
-        instance = null;
+        Instance = null;
         Destroy(gameObject);
     }
 }

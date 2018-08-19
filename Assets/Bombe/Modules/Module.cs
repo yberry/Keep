@@ -3,7 +3,7 @@ using System.Collections;
 
 public abstract class Module : Carre {
 
-    public bool desamorce { get; private set; }
+    public bool Desamorce { get; private set; }
 
     private const float tempsFaute = 0.5f;
 
@@ -11,24 +11,30 @@ public abstract class Module : Carre {
     [Tooltip("Lumière d'indication")]
     public Light lumiere;
 
+    private Coroutine coroutineFaute;
+
 	// Use this for initialization
 	void Start () {
-        desamorce = false;
+        Desamorce = false;
         lumiere.enabled = false;
 	}
 
     public void Resolu()
     {
-        desamorce = true;
+        Desamorce = true;
         lumiere.color = Color.green;
         lumiere.enabled = true;
-        Bombe.instance.Verif();
+        Bombe.Instance.Verif();
     }
 
     public override void Faute()
     {
         base.Faute();
-        StartCoroutine(TempsFaute());
+        if (coroutineFaute != null)
+        {
+            StopCoroutine(coroutineFaute);
+        }
+        coroutineFaute = StartCoroutine(TempsFaute());
     }
 
     IEnumerator TempsFaute()
@@ -37,6 +43,14 @@ public abstract class Module : Carre {
         lumiere.enabled = true;
         yield return new WaitForSeconds(tempsFaute);
         lumiere.color = Color.green;
-        lumiere.enabled = desamorce;
+        lumiere.enabled = Desamorce;
+    }
+
+    protected virtual void OnDestroy()
+    {
+        if (coroutineFaute != null)
+        {
+            StopCoroutine(coroutineFaute);
+        }
     }
 }

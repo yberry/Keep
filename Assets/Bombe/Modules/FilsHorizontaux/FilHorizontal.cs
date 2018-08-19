@@ -10,7 +10,7 @@ public class FilHorizontal : MonoBehaviour {
         Color.yellow,
         Color.red
     };
-    public Color couleur { get; private set; }
+    public Color Couleur { get; private set; }
 
     private FilsHorizontaux fils;
 
@@ -19,8 +19,8 @@ public class FilHorizontal : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        couleur = couleurs.RandomItem();
-        GetComponent<Renderer>().material.color = couleur;
+        Couleur = couleurs.RandomItem();
+        GetComponent<Renderer>().material.color = Couleur;
 	}
 	
 	public void SetModule(FilsHorizontaux f)

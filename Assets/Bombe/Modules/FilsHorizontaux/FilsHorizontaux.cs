@@ -52,13 +52,13 @@ public class FilsHorizontaux : Module {
                 {
                     fils[1].Objectif();
                 }
-                else if (fils[nbFils - 1].couleur == Color.white)
+                else if (fils[nbFils - 1].Couleur == Color.white)
                 {
                     fils[nbFils - 1].Objectif();
                 }
                 else if (NbCouleurs(Color.blue) > 1)
                 {
-                    fils.Last(f => f.couleur == Color.blue).Objectif();
+                    fils.Last(f => f.Couleur == Color.blue).Objectif();
                 }
                 else
                 {
@@ -67,11 +67,11 @@ public class FilsHorizontaux : Module {
                 return;
 
             case 4:
-                if (NbCouleurs(Color.red) > 1 && !Bombe.instance.numPair)
+                if (NbCouleurs(Color.red) > 1 && !Bombe.Instance.NumPair)
                 {
-                    fils.Last(f => f.couleur == Color.red).Objectif();
+                    fils.Last(f => f.Couleur == Color.red).Objectif();
                 }
-                else if (fils[nbFils - 1].couleur == Color.yellow && NbCouleurs(Color.red) == 0)
+                else if (fils[nbFils - 1].Couleur == Color.yellow && NbCouleurs(Color.red) == 0)
                 {
                     fils[0].Objectif();
                 }
@@ -90,7 +90,7 @@ public class FilsHorizontaux : Module {
                 return;
 
             case 5:
-                if (fils[nbFils - 1].couleur == Color.black && !Bombe.instance.numPair)
+                if (fils[nbFils - 1].Couleur == Color.black && !Bombe.Instance.NumPair)
                 {
                     fils[3].Objectif();
                 }
@@ -109,7 +109,7 @@ public class FilsHorizontaux : Module {
                 return;
 
             case 6:
-                if (NbCouleurs(Color.yellow) == 0 && !Bombe.instance.numPair)
+                if (NbCouleurs(Color.yellow) == 0 && !Bombe.Instance.NumPair)
                 {
                     fils[2].Objectif();
                 }
@@ -131,6 +131,6 @@ public class FilsHorizontaux : Module {
 
     int NbCouleurs(Color c)
     {
-        return fils.Count(f => f.couleur == c);
+        return fils.Count(f => f.Couleur == c);
     }
 }

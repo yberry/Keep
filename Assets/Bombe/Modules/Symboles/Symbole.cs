@@ -9,7 +9,7 @@ public class Symbole : MonoBehaviour {
 
     private Button bouton;
     private bool suivant = false;
-    public bool appuye { get; private set; }
+    public bool Appuye { get; private set; }
 
     private const float tempsFaute = 0.5f;
 
@@ -18,7 +18,7 @@ public class Symbole : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        appuye = false;
+        Appuye = false;
         bande.enabled = false;
         bouton = GetComponent<Button>();
         bouton.onClick.AddListener(Clic);
@@ -41,14 +41,14 @@ public class Symbole : MonoBehaviour {
 
     void Clic()
     {
-        if (appuye)
+        if (Appuye)
         {
             return;
         }
 
         if (suivant)
         {
-            appuye = true;
+            Appuye = true;
             bouton.interactable = false;
             bande.color = Color.green;
             suivant = false;

@@ -5,7 +5,7 @@ using UnityEngine.UI;
 public class Timer : Carre {
 
     #region Timer
-    public static Timer instance { get; private set; }
+    public static Timer Instance { get; private set; }
     #endregion
 
     private float tempsDepart;
@@ -23,9 +23,9 @@ public class Timer : Carre {
 
     // Use this for initialization
     void Start () {
-        if (instance == null)
+        if (Instance == null)
         {
-            instance = this;
+            Instance = this;
         }
         chiffres = "";
         erreurs = 0;
@@ -39,7 +39,7 @@ public class Timer : Carre {
             temps -= Time.deltaTime * (1f + erreurs * 0.25f);
             if (temps <= 0f)
             {
-                Bombe.instance.Mort();
+                Bombe.Instance.Mort();
             }
         }
         SetChiffres();
@@ -54,33 +54,28 @@ public class Timer : Carre {
 
     void SetChiffres()
     {
-        int sec = (int)temps % 60;
-        int min = ((int)temps - sec) / 60;
-        if (min > 0)
+        if (temps < 60f)
         {
-            chiffres = Get2Chiffres(min) + ":" + Get2Chiffres(sec);
+            chiffres = temps.ToString("F2").PadLeft(5, '0');
         }
         else
         {
-            int dec = Mathf.FloorToInt(100f * (temps - (int)temps));
+            int sec = (int)temps % 60;
+            int min = ((int)temps - sec) / 60;
 
-            chiffres = Get2Chiffres(sec) + "." + Get2Chiffres(dec);
+            chiffres = min.ToString("D2") + ":" + sec.ToString("D2");
         }
-        affichageTemps.text = chiffres;
-    }
 
-    public static string Get2Chiffres(int t)
-    {
-        return (t < 10 ? "0" : "") + t.ToString();
+        affichageTemps.text = chiffres;
     }
 
     public bool HasNb(char nb)
     {
-        return chiffres.IndexOf(nb) >= 0;
+        return chiffres.IndexOf(nb) != -1;
     }
 
     public void Erreur()
     {
-        erreurs++;
+        ++erreurs;
     }
 }
