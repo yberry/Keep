@@ -5,12 +5,12 @@ using UnityEngine.UI;
 public class Lettre : MonoBehaviour
 {
     private char[] lettres;
-    private int current = 0;
-    public char currentLettre
+    private int index = 0;
+    public char CurrentLettre
     {
         get
         {
-            return lettres[current];
+            return lettres[index];
         }
     }
 
@@ -34,25 +34,23 @@ public class Lettre : MonoBehaviour
 
     void Affiche()
     {
-        affichage.text = currentLettre.ToString();
+        affichage.text = CurrentLettre.ToString();
     }
 
     void Haut()
     {
-        current--;
-        if (current < 0)
+        if (--index < 0)
         {
-            current = lettres.Length - 1;
+            index = lettres.Length - 1;
         }
         Affiche();
     }
 
     void Bas()
     {
-        current++;
-        if (current >= lettres.Length)
+        if (++index >= lettres.Length)
         {
-            current = 0;
+            index = 0;
         }
         Affiche();
     }

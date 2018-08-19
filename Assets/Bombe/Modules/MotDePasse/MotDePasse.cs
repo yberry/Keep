@@ -29,6 +29,8 @@ public class MotDePasse : Module {
 	void Start () {
         mot = motsPossibles.RandomItem();
 
+        choixLettres = new List<char>[mot.Length];
+
         do
         {
             Restart();
@@ -44,44 +46,22 @@ public class MotDePasse : Module {
 
     void Restart()
     {
-        choixLettres = new List<char>[mot.Length];
-
         for (int i = 0; i < mot.Length; i++)
         {
-            choixLettres[i] = new List<char>();
-            string alph = alpha;
-            bool obli = false;
-            int pasObli = choixParLettre - 1;
-
-            int index = alph.IndexOf(mot[i]);
-            alph.Remove(index, 1);
-
-            for (int j = 0; j < choixParLettre; j++)
+            choixLettres[i] = new List<char>(alpha);
+            
+            while (choixLettres[i].Count > choixParLettre)
             {
-                if (pasObli > 0 && Random.Range(0, 5) > 0)
+                int rand;
+                do
                 {
-                    int rand;
-                    do
-                    {
-                        rand = Random.Range(0, alph.Length);
-                    }
-                    while (choixLettres[i].Contains(alph[rand]));
-
-                    choixLettres[i].Add(alph[rand]);
-                    alph.Remove(rand, 1);
-
-                    pasObli--;
+                    rand = Random.Range(0, choixLettres[i].Count);
                 }
-                else if (!obli)
-                {
-                    choixLettres[i].Add(mot[i]);
-                    obli = true;
-                }
-                else
-                {
-                    j--;
-                }
+                while (choixLettres[i][rand] == mot[i]);
+                choixLettres[i].RemoveAt(rand);
             }
+
+            choixLettres[i].Shuffle();
         }
     }
 
@@ -93,11 +73,17 @@ public class MotDePasse : Module {
             {
                 continue;
             }
+
             bool contains = true;
             for (int i = 0; i < m.Length; i++)
             {
-                contains &= choixLettres[i].Contains(m[i]);
+                if (!choixLettres[i].Contains(m[i]))
+                {
+                    contains = false;
+                    break;
+                }
             }
+            
             if (contains)
             {
                 return true;
@@ -108,19 +94,15 @@ public class MotDePasse : Module {
 
     void Verif()
     {
-        bool verif = true;
         for (int i = 0; i < mot.Length; i++)
         {
-            verif &= lettres[i].currentLettre == mot[i];
+            if (lettres[i].CurrentLettre != mot[i])
+            {
+                Faute();
+                return;
+            }
         }
 
-        if (verif)
-        {
-            Resolu();
-        }
-        else
-        {
-            Faute();
-        }
+        Resolu();
     }
 }

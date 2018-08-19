@@ -6,11 +6,6 @@ public static class CustomExtensions {
 
     public static T RandomItem<T>(this IEnumerable<T> source)
     {
-        if (source == null)
-        {
-            throw new System.ArgumentNullException();
-        }
-
         int count = source.Count();
         if (count == 0)
         {
@@ -19,6 +14,18 @@ public static class CustomExtensions {
 
         int random = Random.Range(0, count);
         return source.ElementAt(random);
+    }
+
+    public static void Shuffle<T>(this IList<T> list)
+    {
+        int n = list.Count;
+        while (n-- > 1)
+        {
+            int k = Random.Range(0, n + 1);
+            T value = list[k];
+            list[k] = list[n];
+            list[n] = value;
+        }
     }
 
     public static T GetOrAddComponent<T>(this GameObject gameObject) where T : Component
