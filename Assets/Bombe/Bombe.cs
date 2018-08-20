@@ -188,7 +188,7 @@ public class Bombe : MonoBehaviour {
         {
             { filsHorizontaux, 0 },
             //{ bouton, 0 },
-            //{ symboles, 0 },
+            { symboles, 0 },
             { simon, 0 },
             { quiEstLePremier, 0 },
             { memoire, 0 },
