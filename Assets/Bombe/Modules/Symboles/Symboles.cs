@@ -13,7 +13,9 @@ public class Symboles : Module {
         TroisAntennes, EtoileNoire, Inegal, AE, NEnvers, Omega
     }
 
-    public Symbole[] symboles;
+    public int nb = 4;
+    public Canvas canvas;
+    public Symbole prefabSymbole;
 
     [System.Serializable]
     public struct Img
@@ -38,14 +40,18 @@ public class Symboles : Module {
     };
 
     private List<int> ordre;
+    private Symbole[] symboles;
 
-	// Use this for initialization
-	void Start () {
+    // Use this for initialization
+    void Start () {
+
+        symboles = new Symbole[nb];
+
         int col = Random.Range(0, nbColonnes);
 
         List<int> numPris = new List<int>();
 
-        for (int i = 0; i < symboles.Length; i++)
+        for (int i = 0; i < nb; i++)
         {
             int num;
 
@@ -55,6 +61,7 @@ public class Symboles : Module {
             }
             while (numPris.Contains(num));
 
+            symboles[i] = Instantiate(prefabSymbole, canvas.transform);
             symboles[i].SetModule(this);
             symboles[i].SetSymbole(GetSprite(colonnes[col, num]));
             numPris.Add(num);
@@ -62,7 +69,7 @@ public class Symboles : Module {
 
         ordre = new List<int>();
 
-        for (int i = 0; i < symboles.Length; i++)
+        for (int i = 0; i < nb; i++)
         {
             int min = numPris[0];
             int indexMin = 0;
