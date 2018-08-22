@@ -18,7 +18,7 @@ public class Menu : MonoBehaviour {
     void CheckTime(string t)
     {
         int intT = int.Parse(t);
-        time.text = Mathf.Clamp(intT, 60, 600).ToString();
+        time.text = Mathf.Clamp(intT, 30, 600).ToString();
     }
 
     void CheckModules(string m)

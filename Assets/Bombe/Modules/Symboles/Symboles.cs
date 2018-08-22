@@ -67,22 +67,9 @@ public class Symboles : Module {
             numPris.Add(num);
         }
 
-        ordre = new List<int>();
+        ordre = new List<int>(Enumerable.Range(0, nb));
+        ordre.Sort((x, y) => numPris[x].CompareTo(numPris[y]));
 
-        for (int i = 0; i < nb; i++)
-        {
-            int min = numPris[0];
-            int indexMin = 0;
-            for (int j = 0; j < numPris.Count; j++)
-            {
-                if (min > numPris[j] && !ordre.Contains(j))
-                {
-                    min = numPris[j];
-                    indexMin = j;
-                }
-            }
-            ordre.Add(indexMin);
-        }
         SetSuivant();
 	}
 

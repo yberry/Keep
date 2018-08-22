@@ -15,36 +15,41 @@ public class QuiEstLePremier : Module {
         new string[] { "DISPLAY", "SAYS", "NO", "LEAD", "HOLD ON", "YOU ARE", "THERE", "SEE", "CEE" }
     };
 
-    private static Dictionary<string, List<string>> motsSuivants = new Dictionary<string, List<string>>()
+    private static readonly string[] motsCle = new string[] {
+        "READY", "FIRST", "NO", "BLANK", "NOTHING", "YES", "WHAT", "UHHH", "LEFT", "RIGHT", "MIDDLE", "OKAY", "WAIT", "PRESS",
+        "YOU", "YOU ARE", "YOUR", "YOU'RE", "UR", "U", "UH HUH", "UH UH", "WHAT?", "DONE", "NEXT", "HOLD", "SURE", "LIKE"
+    };
+
+    private static readonly int[][] motsSuivants = new int[][]
     {
-        { "READY", new List<string>() { "YES", "OKAY", "WHAT", "MIDDLE", "LEFT", "PRESS", "RIGHT", "BLANK", "READY", "NO", "FIRST", "UHHH", "NOTHING", "WAIT"} },
-        { "FIRST", new List<string>() { "LEFT", "OKAY", "YES", "MIDDLE", "NO", "RIGHT", "NOTHING", "UHHH", "WAIT", "READY", "BLANK", "WHAT", "PRESS", "FIRST"} },
-        { "NO", new List<string>() { "BLANK", "UHHH", "WAIT", "FIRST", "WHAT", "READY", "RIGHT", "YES", "NOTHING", "LEFT", "PRESS", "OKAY", "NO", "MIDDLE"} },
-        { "BLANK", new List<string>() { "WAIT", "RIGHT", "OKAY", "MIDDLE", "BLANK", "PRESS", "READY", "NOTHING", "NO", "WHAT", "LEFT", "UHHH", "YES", "FIRST"} },
-        { "NOTHING", new List<string>() { "UHHH", "RIGHT", "OKAY", "MIDDLE", "YES", "BLANK", "NO", "PRESS", "LEFT", "WHAT", "WAIT", "FIRST", "NOTHING", "READY"} },
-        { "YES", new List<string>() { "OKAY", "RIGHT", "UHHH", "MIDDLE", "FIRST", "WHAT", "PRESS", "READY", "NOTHING", "YES", "LEFT", "BLANK", "NO", "WAIT"} },
-        { "WHAT", new List<string>() { "UHHH", "WHAT", "LEFT", "NOTHING", "READY", "BLANK", "MIDDLE", "NO", "OKAY", "FIRST", "WAIT", "YES", "PRESS", "RIGHT"} },
-        { "UHHH", new List<string>() { "READY", "NOTHING", "LEFT", "WHAT", "OKAY", "YES", "RIGHT", "NO", "PRESS", "BLANK", "UHHH", "MIDDLE", "WAIT", "FIRST"} },
-        { "LEFT", new List<string>() { "RIGHT", "LEFT", "FIRST", "NO", "MIDDLE", "YES", "BLANK", "WHAT", "UHHH", "WAIT", "PRESS", "READY", "OKAY", "NOTHING"} },
-        { "RIGHT", new List<string>() { "YES", "NOTHING", "READY", "PRESS", "NO", "WAIT", "WHAT", "RIGHT", "MIDDLE", "LEFT", "UHHH", "BLANK", "OKAY", "FIRST"} },
-        { "MIDDLE", new List<string>() { "BLANK", "READY", "OKAY", "WHAT", "NOTHING", "PRESS", "NO", "WAIT", "LEFT", "MIDDLE", "RIGHT", "FIRST", "UHHH", "YES"} },
-        { "OKAY", new List<string>() { "MIDDLE", "NO", "FIRST", "YES", "UHHH", "NOTHING", "WAIT", "OKAY", "LEFT", "READY", "BLANK", "PRESS", "WHAT", "RIGHT"} },
-        { "WAIT", new List<string>() { "UHHH", "NO", "BLANK", "OKAY", "YES", "LEFT", "FIRST", "PRESS", "WHAT", "WAIT", "NOTHING", "READY", "RIGHT", "MIDDLE"} },
-        { "PRESS", new List<string>() { "RIGHT", "MIDDLE", "YES", "READY", "PRESS", "OKAY", "NOTHING", "UHHH", "BLANK", "LEFT", "FIRST", "WHAT", "NO", "WAIT"} },
-        { "YOU", new List<string>() { "SURE", "YOU ARE", "YOUR", "YOU'RE", "NEXT", "UH HUH", "UR", "HOLD", "WHAT?", "YOU", "UH UH", "LIKE", "DONE", "U"} },
-        { "YOU ARE", new List<string>() { "YOUR", "NEXT", "LIKE", "UH HUH", "WHAT?", "DONE", "UH UH", "HOLD", "YOU", "U", "YOU'RE", "SURE", "UR", "YOU ARE"} },
-        { "YOUR", new List<string>() { "UH UH", "YOU ARE", "UH HUH", "YOUR", "NEXT", "UR", "SURE", "U", "YOU'RE", "YOU", "WHAT?", "HOLD", "LIKE", "DONE"} },
-        { "YOU'RE", new List<string>() { "YOU", "YOU'RE", "UR", "NEXT", "UH UH", "YOU ARE", "U", "YOUR", "WHAT?", "UH HUH", "SURE", "DONE", "LIKE", "HOLD"} },
-        { "UR", new List<string>() { "DONE", "U", "UR", "UH HUH", "WHAT?", "SURE", "YOUR", "HOLD", "YOU'RE", "LIKE", "NEXT", "UH UH", "YOU ARE", "YOU"} },
-        { "U", new List<string>() { "UH HUH", "SURE", "NEXT", "WHAT?", "YOU'RE", "UR", "UH UH", "DONE", "U", "YOU", "LIKE", "HOLD", "YOU ARE", "YOUR"} },
-        { "UH HUH", new List<string>() { "UH HUH", "YOUR", "YOU ARE", "YOU", "DONE", "HOLD", "UH UH", "NEXT", "SURE", "LIKE", "YOU'RE", "UR", "U", "WHAT?"} },
-        { "UH UH", new List<string>() { "UR", "U", "YOU ARE", "YOU'RE", "NEXT", "UH UH", "DONE", "YOU", "UH HUH", "LIKE", "YOUR", "SURE", "HOLD", "WHAT?"} },
-        { "WHAT?", new List<string>() { "YOU", "HOLD", "YOU'RE", "YOUR", "U", "DONE", "UH UH", "LIKE", "YOU ARE", "UH HUH", "UR", "NEXT", "WHAT?", "SURE"} },
-        { "DONE", new List<string>() { "SURE", "UH HUH", "NEXT", "WHAT?", "YOUR", "UR", "YOU'RE", "HOLD", "LIKE", "YOU", "U", "YOU ARE", "UH UH", "DONE"} },
-        { "NEXT", new List<string>() { "WHAT?", "UH HUH", "UH UH", "YOUR", "HOLD", "SURE", "NEXT", "LIKE", "DONE", "YOU ARE", "UR", "YOU'RE", "U", "YOU"} },
-        { "HOLD", new List<string>() { "YOU ARE", "U", "DONE", "UH UH", "YOU", "UR", "SURE", "WHAT?", "YOU'RE", "NEXT", "HOLD", "UH HUH", "YOUR", "LIKE"} },
-        { "SURE", new List<string>() { "YOU ARE", "DONE", "LIKE", "YOU'RE", "YOU", "HOLD", "UH HUH", "UR", "SURE", "U", "WHAT?", "NEXT", "YOUR", "UH UH"} },
-        { "LIKE", new List<string>() { "YOU'RE", "NEXT", "U", "UR", "HOLD", "DONE", "UH UH", "WHAT?", "UH HUH", "YOU", "LIKE", "SURE", "YOU ARE", "YOUR"} }
+        new int[] { 5, 11, 6, 10, 8, 13, 9, 3, 0, 2, 1, 7, 4, 12 },
+        new int[] { 8, 11, 5, 10, 2, 9, 4, 7, 12, 0, 3, 6, 13, 1 },
+        new int[] { 3, 7, 12, 1, 6, 0, 9, 5, 4, 8, 13, 11, 2, 10 },
+        new int[] { 12, 9, 11, 10, 3, 13, 0, 4, 2, 6, 8, 7, 5, 1 },
+        new int[] { 7, 9, 11, 10, 5, 3, 2, 13, 8, 6, 12, 1, 4, 0 },
+        new int[] { 11, 9, 7, 10, 1, 6, 13, 0, 4, 5, 8, 3, 2, 12 },
+        new int[] { 7, 6, 8, 4, 0, 3, 10, 2, 11, 1, 12, 5, 13, 9 },
+        new int[] { 0, 4, 8, 6, 11, 5, 9, 2, 13, 3, 7, 10, 12, 1 },
+        new int[] { 9, 8, 1, 2, 10, 5, 3, 6, 7, 12, 13, 0, 11, 4 },
+        new int[] { 5, 4, 0, 13, 2, 12, 6, 9, 10, 8, 7, 3, 11, 1 },
+        new int[] { 3, 0, 11, 6, 4, 13, 2, 12, 8, 10, 9, 1, 7, 5 },
+        new int[] { 10, 2, 1, 5, 7, 4, 12, 11, 8, 0, 3, 13, 6, 9 },
+        new int[] { 7, 2, 3, 11, 5, 8, 1, 13, 6, 12, 4, 0, 9, 10 },
+        new int[] { 9, 10, 5, 0, 13, 11, 4, 7, 3, 8, 1, 6, 2, 12 },
+        new int[] { 26, 15, 16, 17, 24, 20, 18, 25, 22, 14, 21, 27, 23, 19 },
+        new int[] { 16, 24, 27, 20, 22, 23, 21, 25, 14, 19, 17, 26, 18, 15 },
+        new int[] { 21, 15, 20, 16, 24, 18, 26, 19, 17, 14, 22, 25, 27, 23 },
+        new int[] { 14, 17, 18, 24, 21, 15, 19, 16, 22, 20, 26, 23, 27, 25 },
+        new int[] { 23, 19, 18, 20, 22, 26, 16, 25, 17, 27, 24, 21, 15, 14 },
+        new int[] { 20, 26, 24, 22, 17, 18, 21, 23, 19, 14, 27, 25, 15, 16 },
+        new int[] { 20, 16, 15, 14, 23, 25, 21, 24, 26, 27, 17, 18, 19, 22 },
+        new int[] { 18, 19, 15, 17, 24, 21, 23, 14, 20, 27, 16, 26, 25, 22 },
+        new int[] { 14, 25, 17, 16, 19, 23, 21, 27, 15, 20, 18, 24, 22, 26 },
+        new int[] { 26, 20, 24, 22, 16, 18, 17, 25, 27, 14, 19, 15, 21, 23 },
+        new int[] { 22, 20, 21, 16, 25, 26, 24, 27, 23, 15, 18, 17, 19, 14 },
+        new int[] { 15, 19, 23, 21, 14, 18, 26, 22, 17, 24, 25, 20, 16, 27 },
+        new int[] { 15, 23, 27, 17, 14, 25, 20, 18, 26, 19, 22, 24, 16, 21 },
+        new int[] { 17, 24, 19, 18, 25, 23, 21, 22, 20, 14, 27, 26, 15, 16 }
     };
 
     private const int objReussites = 3;
@@ -80,14 +85,14 @@ public class QuiEstLePremier : Module {
             mot.Restart();
         }
 
-        string[] motsCle = new string[motsSuivants.Keys.Count];
-        motsSuivants.Keys.CopyTo(motsCle, 0);
-        string motCle = motsCle.RandomItem();
+        int rand = Random.Range(0, motsCle.Length);
 
-        Dictionary<string, int> motsMis = new Dictionary<string, int>();
+        Dictionary<int, int> motsMis = new Dictionary<int, int>();
 
-        List<string> motsLigne = motsSuivants[motCle];
-        int indexCle = motsLigne.IndexOf(motCle);
+        List<int> motsLigne = new List<int>(motsSuivants[rand]);
+        int indexCle = motsLigne.IndexOf(rand);
+
+        int min = indexCle;
 
         for (int i = 0; i < mots.Length; i++)
         {
@@ -102,20 +107,21 @@ public class QuiEstLePremier : Module {
                 while (index == indexCle || motsMis.ContainsValue(index));
 
                 motsMis.Add(motsLigne[index], index);
+                if (min > index)
+                {
+                    min = index;
+                }
             }
             else
             {
-                motsMis.Add(motCle, indexCle);
+                motsMis.Add(rand, indexCle);
             }
         }
 
-        int min = motsMis.Values.Min();
-
         int j = 0;
-        foreach (string mot in motsMis.Keys)
+        foreach (KeyValuePair<int, int> pair in motsMis)
         {
-            mots[j].Show(mot, motsMis[mot] == min);
-            j++;
+            mots[j++].Show(motsCle[pair.Key], pair.Value == min);
         }
     }
 

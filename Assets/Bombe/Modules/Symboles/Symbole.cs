@@ -17,7 +17,7 @@ public class Symbole : MonoBehaviour {
     public Image image;
 
 	// Use this for initialization
-	void Start () {
+	void Awake () {
         Appuye = false;
         bande.enabled = false;
         bouton = GetComponent<Button>();
