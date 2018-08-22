@@ -190,7 +190,7 @@ public class Memoire : Module
         int i = 0;
         while (touches[i].Chiffre != ch)
         {
-            i++;
+            ++i;
         }
         return i;
     }
@@ -198,8 +198,8 @@ public class Memoire : Module
     public void Verif()
     {
         succes[nbEtapes].enabled = true;
-        nbEtapes++;
-        if (nbEtapes >= objEtapes)
+
+        if (++nbEtapes >= objEtapes)
         {
             Resolu();
         }

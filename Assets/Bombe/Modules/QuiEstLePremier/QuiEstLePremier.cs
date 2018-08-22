@@ -1,7 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using System.Collections.Generic;
-using System.Linq;
 
 public class QuiEstLePremier : Module {
 
@@ -87,10 +86,10 @@ public class QuiEstLePremier : Module {
 
         int rand = Random.Range(0, motsCle.Length);
 
-        Dictionary<int, int> motsMis = new Dictionary<int, int>();
+        Dictionary<int, int> indicesMis = new Dictionary<int, int>();
 
-        List<int> motsLigne = new List<int>(motsSuivants[rand]);
-        int indexCle = motsLigne.IndexOf(rand);
+        List<int> indicesLigne = new List<int>(motsSuivants[rand]);
+        int indexCle = indicesLigne.IndexOf(rand);
 
         int min = indexCle;
 
@@ -102,11 +101,11 @@ public class QuiEstLePremier : Module {
 
                 do
                 {
-                    index = Random.Range(0, motsLigne.Count);
+                    index = Random.Range(0, indicesLigne.Count);
                 }
-                while (index == indexCle || motsMis.ContainsValue(index));
+                while (index == indexCle || indicesMis.ContainsValue(index));
 
-                motsMis.Add(motsLigne[index], index);
+                indicesMis.Add(indicesLigne[index], index);
                 if (min > index)
                 {
                     min = index;
@@ -114,12 +113,12 @@ public class QuiEstLePremier : Module {
             }
             else
             {
-                motsMis.Add(rand, indexCle);
+                indicesMis.Add(rand, indexCle);
             }
         }
 
         int j = 0;
-        foreach (KeyValuePair<int, int> pair in motsMis)
+        foreach (KeyValuePair<int, int> pair in indicesMis)
         {
             mots[j++].Show(motsCle[pair.Key], pair.Value == min);
         }
@@ -128,8 +127,8 @@ public class QuiEstLePremier : Module {
     public void Verif()
     {
         succes[nbReussites].enabled = true;
-        nbReussites++;
-        if (nbReussites >= objReussites)
+
+        if (++nbReussites >= objReussites)
         {
             Resolu();
         }
