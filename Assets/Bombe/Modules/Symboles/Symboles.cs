@@ -73,7 +73,7 @@ public class Symboles : Module {
         {
             int min = numPris[0];
             int indexMin = 0;
-            for (int j = 0; j < numPris.Count; i++)
+            for (int j = 0; j < numPris.Count; j++)
             {
                 if (min > numPris[j] && !ordre.Contains(j))
                 {
