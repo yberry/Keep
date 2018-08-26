@@ -14,16 +14,12 @@ public class Knob : Needy {
     public Transform roulette;
     public Light[] lumieres;
 
-    private static readonly bool[][] combi = new bool[][]
+    private static readonly short[] combi = new short[]
     {
-        new bool[] { false, false, true, false, true, true, true, true, true, true, false, true },
-        new bool[] { true, false, true, false, true, false, false, true, true, false, true, true },
-        new bool[] { false, false, true, false, true, true, true, true, true, true, false, true },
-        new bool[] { false, false, true, false, true, true, true, true, true, true, false, true },
-        new bool[] { false, false, true, false, true, true, true, true, true, true, false, true },
-        new bool[] { false, false, true, false, true, true, true, true, true, true, false, true },
-        new bool[] { false, false, true, false, true, true, true, true, true, true, false, true },
-        new bool[] { false, false, true, false, true, true, true, true, true, true, false, true }
+        0x2fd, 0xa9b,
+        0x67d, 0xa91,
+        0x0a7, 0x086,
+        0xbfa, 0xb3a
     };
 
     Direction targetDirection;
@@ -33,16 +29,18 @@ public class Knob : Needy {
     {
         base.Restart();
 
-        int random = Random.Range(0, 4);
+        int random = Random.Range(0, 8);
 
-        targetDirection = (Direction)random;
+        targetDirection = (Direction)(random >> 1);
         currentDirection = Direction.Haut;
 
-        bool[] serie = combi[Random.Range(0, combi.Length)];
+        short serie = combi[random];
+        int and = 1 << (lumieres.Length - 1);
 
-        for (int i = 0; i < serie.Length; i++)
+        for (int i = 0; i < lumieres.Length; i++)
         {
-            lumieres[i].enabled = serie[i];
+            lumieres[i].enabled = (serie & and) != 0;
+            and >>= 1;
         }
     }
 

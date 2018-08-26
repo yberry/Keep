@@ -21,16 +21,16 @@ public class Labyrinthe : Module {
 
         laby = Laby.RandomLaby;
 
-        int tx = Random.Range(0, nbLignes);
-        int ty = Random.Range(0, nbColonnes);
+        int tx = Random.Range(0, nbColonnes);
+        int ty = Random.Range(0, nbLignes);
         triangle = new Vector2(tx, ty);
 
         int cx, cy;
 
         do
         {
-            cx = Random.Range(0, nbLignes);
-            cy = Random.Range(0, nbColonnes);
+            cx = Random.Range(0, nbColonnes);
+            cy = Random.Range(0, nbLignes);
         }
         while (cx == tx && cy == ty);
 
@@ -44,7 +44,7 @@ public class Labyrinthe : Module {
 
     void Haut()
     {
-        if (carre.x == 0)
+        if (carre.y == 0)
         {
             return;
         }
@@ -55,14 +55,14 @@ public class Labyrinthe : Module {
         }
         else
         {
-            --carre.x;
+            --carre.y;
             Verif();
         }
     }
 
     void Gauche()
     {
-        if (carre.y == 0)
+        if (carre.x == 0)
         {
             return;
         }
@@ -73,14 +73,14 @@ public class Labyrinthe : Module {
         }
         else
         {
-            --carre.y;
+            --carre.x;
             Verif();
         }
     }
 
     void Bas()
     {
-        if (carre.x == nbLignes - 1)
+        if (carre.y == nbLignes - 1)
         {
             return;
         }
@@ -91,14 +91,14 @@ public class Labyrinthe : Module {
         }
         else
         {
-            ++carre.x;
+            ++carre.y;
             Verif();
         }
     }
 
     void Droite()
     {
-        if (carre.y == nbColonnes - 1)
+        if (carre.x == nbColonnes - 1)
         {
             return;
         }
@@ -109,7 +109,7 @@ public class Labyrinthe : Module {
         }
         else
         {
-            ++carre.y;
+            ++carre.x;
             Verif();
         }
     }
