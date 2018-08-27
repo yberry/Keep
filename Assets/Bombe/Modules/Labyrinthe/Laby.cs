@@ -102,6 +102,14 @@ public class Laby
         }        
     }
 
+    public Vector2[] Circles
+    {
+        get
+        {
+            return new Vector2[] { rond1, rond2 };
+        }
+    }
+
     private byte[,] places;
     private Vector2 rond1;
     private Vector2 rond2;

@@ -1,14 +1,15 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using System.Collections.Generic;
+using System.Linq;
 
 public class SequencesFils : Module {
 
-    private static readonly Dictionary<Color, List<string>> tab = new Dictionary<Color, List<string>>()
+    private static readonly Dictionary<Color, List<int>> tab = new Dictionary<Color, List<int>>()
     {
-        { Color.red, new List<string>() { "C", "B", "A", "AC", "B", "AC", "ABC", "AB", "B" } },
-        { Color.blue, new List<string>() { "B", "AC", "B", "A", "B", "BC", "C", "AC", "A" } },
-        { Color.black, new List<string>() { "ABC", "AC", "B", "AC", "B", "BC", "AB", "C", "C" } }
+        { Color.red, new List<int>() { 4, 2, 1, 5, 2, 5, 7, 3, 2 } },
+        { Color.blue, new List<int>() { 2, 5, 2, 1, 2, 6, 4, 5, 1 } },
+        { Color.black, new List<int>() { 7, 5, 2, 5, 2, 6, 3, 4, 4 } }
     };
 
     private const int nbPanneaux = 4;
@@ -31,17 +32,73 @@ public class SequencesFils : Module {
         boutonHaut.onClick.AddListener(Haut);
         boutonBas.onClick.AddListener(Bas);
 
-        panneaux = new Panneau[nbPanneaux];
-        for (int i = 0; i < nbPanneaux; i++)
-        {
-            panneaux[i] = Instantiate(prefabPanneau);
-            panneaux[i].SetModule(this);
-        }
+        Restart();
     }
 
     void Restart()
     {
+        Dictionary<Color, int> nbColors = new Dictionary<Color, int>()
+        {
+            { Color.red, 0 },
+            { Color.blue, 0 },
+            { Color.black, 0 }
+        };
 
+        bool[] haveFil = Enumerable.Repeat(true, 3 * nbPanneaux).ToArray();
+        for (int i = 0; i < 3; i++)
+        {
+            haveFil[i] = false;
+        }
+
+        while (!CheckRepartition(haveFil))
+        {
+            haveFil.Shuffle();
+        }
+
+        List<Panneau.Fil?> fils = new List<Panneau.Fil?>(3 * nbPanneaux);
+        for (int i = 0; i < fils.Count; i++)
+        {
+            if (haveFil[i])
+            {
+                Color col = nbColors.Keys.RandomItem();
+                int tar = Random.Range(0, 3);
+
+                fils[i] = new Panneau.Fil
+                {
+                    color = col,
+                    target = tar,
+                    mustCut = (tab[col][nbColors[col]++] & (1 << tar)) != 0,
+                    isCut = false
+                };
+            }
+            else
+            {
+                fils[i] = null;
+            }
+        }
+
+        panneaux = new Panneau[nbPanneaux];
+        for (int i = 0; i < nbPanneaux; i++)
+        {
+            Panneau panneau = Instantiate(prefabPanneau);
+            panneau.SetModule(this);
+            panneau.SetLabels(i);
+            panneau.SetFils(fils.GetRange(3 * i, 3));
+            panneaux[i] = panneau;
+        }
+    }
+
+    bool CheckRepartition(IEnumerable<bool> rep)
+    {
+        for (int i = 0; i < nbPanneaux; i++)
+        {
+            if (rep.Skip(3 * i).Take(3).All(b => !b))
+            {
+                return false;
+            }
+        }
+
+        return true;
     }
 
     void Haut()

@@ -1,10 +1,19 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
-using System.Collections;
+using System.Collections.Generic;
 
 public class Panneau : MonoBehaviour {
 
+    public struct Fil
+    {
+        public Color color;
+        public int target;
+        public bool mustCut;
+        public bool isCut;
+    }
+
     private SequencesFils sequence;
+    private List<Fil> fils;
 
     public Text[] labelsFils;
 
@@ -12,7 +21,7 @@ public class Panneau : MonoBehaviour {
     {
         get
         {
-            return true;
+            return fils.TrueForAll(f => !f.mustCut || f.isCut);
         }
     }
 
@@ -28,5 +37,10 @@ public class Panneau : MonoBehaviour {
         {
             labelsFils[i].text = (start + i).ToString();
         }
+    }
+
+    public void SetFils(IList<Fil?> list)
+    {
+
     }
 }

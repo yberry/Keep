@@ -195,7 +195,7 @@ public class Bombe : MonoBehaviour {
             { morse, 0 },
             { filsVerticaux, 0 },
             //{ sequencesFils, 0 },
-            //{ labyrinthe, 0 },
+            { labyrinthe, 0 },
             { motDePasse, 0 }
         };
 
