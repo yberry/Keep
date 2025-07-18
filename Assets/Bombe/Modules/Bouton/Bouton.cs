@@ -114,7 +114,7 @@ public class Bouton : Module {
     {
         if (bande.enabled)
         {
-            if (aMaintenir && Timer.Instance.HasNb(chiffre))
+            if (aMaintenir && Bombe.instance.HasTimerNum(chiffre))
             {
                 Resolu();
             }

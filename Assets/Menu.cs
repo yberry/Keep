@@ -10,11 +10,11 @@ public class Menu : MonoBehaviour {
     [SerializeField]
     private TMP_InputField modulesInput = default;
 
-    private int time = 60;
-    private int modules = 3;
+    private int time = GameManager.DEFAULT_TIME;
+    private int modules = GameManager.DEFAULT_MODULES;
 
-    public bool Hardcore { get; set; } = false;
-    public bool Needy { get; set; } = false;
+    public bool Hardcore { get; set; } = GameManager.DEFAULT_HARDCORE;
+    public bool Needy { get; set; } = GameManager.DEFAULT_NEEDY;
 
     public void CheckTime(string t)
     {

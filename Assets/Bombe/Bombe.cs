@@ -1,73 +1,57 @@
 ﻿using UnityEngine;
-using UnityEngine.UI;
 using System.Collections.Generic;
 using System.Linq;
 
 public class Bombe : Instance<Bombe> {
 
     #region NumSerie
-    private const string charsSerie = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-    private const int nbCharSerie = 6;
-    private string numSerie;
-    public bool NumPair
-    {
-        get
-        {
-            return (numSerie[nbCharSerie - 1] & 1) == 0;
-        }
-    }
-    public bool Voyelle
-    {
-        get
-        {
-            return "AEIOUY".Any(c => numSerie.Contains(c));
-        }
-    }
     [Header("Numéro de série")]
-    [Tooltip("Affichage du numéro de série")]
-    public Text textSerie;
+    [SerializeField, Tooltip("Affichage du numéro de série")]
+    private Serial serial;
     #endregion
 
     #region Prefabs
-    [Tooltip("Préfab de timer")]
-    public Timer preTimer;
+    [SerializeField, Tooltip("Préfab de timer")]
+    private Timer preTimer;
+    [SerializeField, Tooltip("Préfab de module vide")]
+    private Transform dummyPrefab;
     [Header("Préfabs de modules")]
-    [Tooltip("Préfab de fils horizontaux")]
-    public FilsHorizontaux filsHorizontaux;
-    [Tooltip("Préfab de bouton")]
-    public Bouton bouton;
-    [Tooltip("Préfab de symboles")]
-    public Symboles symboles;
-    [Tooltip("Préfab de simon")]
-    public Simon simon;
-    [Tooltip("Préfab de qui est le premier")]
-    public QuiEstLePremier quiEstLePremier;
-    [Tooltip("Préfab de memoire")]
-    public Memoire memoire;
-    [Tooltip("Préfab de morse")]
-    public Morse morse;
-    [Tooltip("Préfab de fils verticaux")]
-    public FilsVerticaux filsVerticaux;
-    [Tooltip("Préfab de séquences de fils")]
-    public SequencesFils sequencesFils;
-    [Tooltip("Préfab de labyrinthe")]
-    public Labyrinthe labyrinthe;
-    [Tooltip("Préfab de mot de passe")]
-    public MotDePasse motDePasse;
+    [SerializeField, Tooltip("Préfab de fils horizontaux")]
+    private FilsHorizontaux filsHorizontaux;
+    [SerializeField, Tooltip("Préfab de bouton")]
+    private Bouton bouton;
+    [SerializeField, Tooltip("Préfab de symboles")]
+    private Symboles symboles;
+    [SerializeField, Tooltip("Préfab de simon")]
+    private Simon simon;
+    [SerializeField, Tooltip("Préfab de qui est le premier")]
+    private QuiEstLePremier quiEstLePremier;
+    [SerializeField, Tooltip("Préfab de memoire")]
+    private Memoire memoire;
+    [SerializeField, Tooltip("Préfab de morse")]
+    private Morse morse;
+    [SerializeField, Tooltip("Préfab de fils verticaux")]
+    private FilsVerticaux filsVerticaux;
+    [SerializeField, Tooltip("Préfab de séquences de fils")]
+    private SequencesFils sequencesFils;
+    [SerializeField, Tooltip("Préfab de labyrinthe")]
+    private Labyrinthe labyrinthe;
+    [SerializeField, Tooltip("Préfab de mot de passe")]
+    private MotDePasse motDePasse;
 
     [Header("Préfabs de needy")]
-    [Tooltip("Préfab de question")]
-    public Question question;
-    [Tooltip("Préfab de condensateur")]
-    public Condensateur condensateur;
-    [Tooltip("Préfab de knob")]
-    public Knob knob;
+    [SerializeField, Tooltip("Préfab de question")]
+    private Question question;
+    [SerializeField, Tooltip("Préfab de condensateur")]
+    private Condensateur condensateur;
+    [SerializeField, Tooltip("Préfab de knob")]
+    private Knob knob;
     #endregion
 
     #region Places
     [Header("Places")]
-    [Tooltip("Places pour carrés")]
-    public List<Transform> places;
+    [SerializeField, Tooltip("Places pour carrés")]
+    private List<Transform> places;
     private Transform RandomPlace
     {
         get
@@ -98,6 +82,7 @@ public class Bombe : Instance<Bombe> {
     private List<Indic> indicateurs;
     private List<Port> ports;
     private List<Pile> piles;
+
     public int NbPiles
     {
         get
@@ -113,7 +98,7 @@ public class Bombe : Instance<Bombe> {
         Erreurs = 0;
         carres = new List<Carre>();
         modules = new List<Module>();
-        SetSerial();
+        serial.Generate();
         SetIndics();
         SetPorts();
         SetPiles();
@@ -121,22 +106,6 @@ public class Bombe : Instance<Bombe> {
         hardcore = GameManager.instance.Hardcore;
         SetTimer();
         SetModules();
-    }
-
-    void SetSerial()
-    {
-        char[] tab = new char[nbCharSerie];
-        for (int i = 0; i < nbCharSerie; i++)
-        {
-            tab[i] = RandomLetter(i == nbCharSerie - 1);
-        }
-        numSerie = new string(tab);
-        textSerie.text = numSerie;
-    }
-
-    static char RandomLetter(bool last)
-    {
-        return charsSerie[Random.Range(last ? 26 : 0, 36)];
     }
 
     void SetPorts()
@@ -161,7 +130,7 @@ public class Bombe : Instance<Bombe> {
         Transform place = RandomPlace;
         timer = Instantiate(preTimer, place.position, place.rotation, transform);
         timer.SetStart(GameManager.instance.Time, hardcore);
-        timer.defile = true;
+        timer.StartTime();
         carres.Add(timer);
         Destroy(place.gameObject);
     }
@@ -221,6 +190,12 @@ public class Bombe : Instance<Bombe> {
                 Destroy(place.gameObject);
             }
         }
+
+        for (int i = 0; i < places.Count; i++)
+        {
+            Transform place = places[i];
+            Instantiate(dummyPrefab, place.position, place.rotation, transform);
+        }
     }
 
     private void Update()
@@ -228,8 +203,7 @@ public class Bombe : Instance<Bombe> {
         if (Input.GetMouseButton(0))
         {
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            RaycastHit hit;
-            if (Physics.Raycast(ray, out hit) && hit.transform == transform)
+            if (Physics.Raycast(ray, out RaycastHit hit) && hit.transform == transform)
             {
                 Debug.DrawLine(Camera.main.transform.position, hit.point, Color.red);
             }
@@ -239,6 +213,11 @@ public class Bombe : Instance<Bombe> {
     public bool HasLightIndic(string ind)
     {
         return indicateurs.Any(i => i.Mention == ind && i.lumiere.enabled);
+    }
+
+    public bool HasTimerNum(char num)
+    {
+        return timer.HasNum(num);
     }
 
     public bool HasPort(Port.Type t)
@@ -262,12 +241,12 @@ public class Bombe : Instance<Bombe> {
         }
         else
         {
-            timer.Erreur();
+            timer.AddError();
             foreach (Module module in modules)
             {
-                if (module is Simon)
+                if (module is Simon simon)
                 {
-                    (module as Simon).CheckReponse();
+                    simon.CheckReponse();
                 }
             }
         }
@@ -275,7 +254,7 @@ public class Bombe : Instance<Bombe> {
 
     void Defused()
     {
-        timer.defile = false;
+        timer.StopTime();
     }
 
     public void Mort()

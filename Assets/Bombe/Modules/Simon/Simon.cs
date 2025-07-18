@@ -46,7 +46,7 @@ public class Simon : Module {
         reponse = new List<Losange>();
         reponseJoueur = new List<Losange>();
 
-        if (Bombe.instance.Voyelle)
+        if (Serial.instance.HasVowel)
         {
             corresp = new Dictionary<Color, Losange[]>()
             {

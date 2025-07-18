@@ -67,7 +67,7 @@ public class FilsHorizontaux : Module {
                 return;
 
             case 4:
-                if (NbCouleurs(Color.red) > 1 && !Bombe.instance.NumPair)
+                if (NbCouleurs(Color.red) > 1 && !Serial.instance.NumPair)
                 {
                     fils.Last(f => f.Couleur == Color.red).Objectif();
                 }
@@ -90,7 +90,7 @@ public class FilsHorizontaux : Module {
                 return;
 
             case 5:
-                if (fils[nbFils - 1].Couleur == Color.black && !Bombe.instance.NumPair)
+                if (fils[nbFils - 1].Couleur == Color.black && !Serial.instance.NumPair)
                 {
                     fils[3].Objectif();
                 }
@@ -109,7 +109,7 @@ public class FilsHorizontaux : Module {
                 return;
 
             case 6:
-                if (NbCouleurs(Color.yellow) == 0 && !Bombe.instance.NumPair)
+                if (NbCouleurs(Color.yellow) == 0 && !Serial.instance.NumPair)
                 {
                     fils[2].Objectif();
                 }

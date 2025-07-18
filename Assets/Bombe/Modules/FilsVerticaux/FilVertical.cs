@@ -77,7 +77,7 @@ public class FilVertical : MonoBehaviour {
 
         else if (!e && ((r && (b || !l)) || (!r && b && !l)))
         {
-            aCouper = Bombe.instance.NumPair;
+            aCouper = Serial.instance.NumPair;
         }
 
         else if (!b && l && (r || e))

@@ -1,34 +1,30 @@
-﻿using UnityEngine;
-using UnityEngine.UI;
+﻿using TMPro;
+using UnityEngine;
 
 [RequireComponent(typeof(AudioSource))]
 public class Timer : Carre {
 
-    #region Timer
-    public static Timer Instance { get; private set; }
-    #endregion
+    [SerializeField]
+    private bool defile = false;
+    [SerializeField]
+    private TextMeshPro counter;
+    [SerializeField]
+    private GameObject errorPanel;
+    [SerializeField]
+    private GameObject[] crosses;
 
     private float tempsDepart;
     private float temps;
     private string chiffres;
 
-    private bool hardcore;
-    private int erreurs;
+    private int errors;
 
     private AudioSource source;
 
-    public bool defile = false;
-    public Text affichageTemps;
-    
-
     // Use this for initialization
     void Start () {
-        if (Instance == null)
-        {
-            Instance = this;
-        }
         chiffres = "";
-        erreurs = 0;
+        errors = 0;
         source = GetComponent<AudioSource>();
 	}
 	
@@ -36,7 +32,7 @@ public class Timer : Carre {
 	void Update () {
 	    if (defile)
         {
-            temps -= Time.deltaTime * (1f + erreurs * 0.25f);
+            temps -= Time.deltaTime * (1f + errors * 0.25f);
             if (temps <= 0f)
             {
                 Bombe.instance.Mort();
@@ -49,8 +45,22 @@ public class Timer : Carre {
     {
         tempsDepart = sec;
         temps = tempsDepart;
-        hardcore = hard;
+        errorPanel.SetActive(!hard);
+        for (int i = 0; i < crosses.Length; i++)
+        {
+            crosses[i].SetActive(false);
+        }
         SetChiffres();
+    }
+
+    public void StartTime()
+    {
+        defile = true;
+    }
+
+    public void StopTime()
+    {
+        defile = false;
     }
 
     void SetChiffres()
@@ -61,22 +71,23 @@ public class Timer : Carre {
         }
         else
         {
-            int sec = (int)temps % 60;
-            int min = ((int)temps - sec) / 60;
+            int t = (int)temps;
+            int sec = t % 60;
+            int min = t / 60;
 
-            chiffres = min.ToString("D2") + ":" + sec.ToString("D2");
+            chiffres = string.Format("{0:D2}:{1:D2}", min, sec);
         }
 
-        affichageTemps.text = chiffres;
+        counter.text = chiffres;
     }
 
-    public bool HasNb(char nb)
+    public bool HasNum(char num)
     {
-        return chiffres.IndexOf(nb) != -1;
+        return chiffres.Contains(num);
     }
 
-    public void Erreur()
+    public void AddError()
     {
-        ++erreurs;
+        crosses[errors++].SetActive(true);
     }
 }
