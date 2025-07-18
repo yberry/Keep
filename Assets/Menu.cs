@@ -1,35 +1,38 @@
 ﻿using UnityEngine;
-using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using TMPro;
 
 public class Menu : MonoBehaviour {
 
-    public InputField time;
-    public InputField modules;
-    public Toggle hardcore;
-    public Toggle needy;
+    [SerializeField]
+    private TMP_InputField timeInput = default;
 
-	void Start ()
-    {
-        time.onEndEdit.AddListener(CheckTime);
-        modules.onEndEdit.AddListener(CheckModules);
-	}
+    [SerializeField]
+    private TMP_InputField modulesInput = default;
 
-    void CheckTime(string t)
+    private int time = 60;
+    private int modules = 3;
+
+    public bool Hardcore { get; set; } = false;
+    public bool Needy { get; set; } = false;
+
+    public void CheckTime(string t)
     {
         int intT = int.Parse(t);
-        time.text = Mathf.Clamp(intT, 30, 600).ToString();
+        time = Mathf.Clamp(intT, 30, 600);
+        timeInput.SetTextWithoutNotify(time.ToString());
     }
 
-    void CheckModules(string m)
+    public void CheckModules(string m)
     {
         int intM = int.Parse(m);
-        modules.text = Mathf.Clamp(intM, 3, 11).ToString();
+        modules = Mathf.Clamp(intM, 3, 11);
+        modulesInput.SetTextWithoutNotify(modules.ToString());
     }
 
     public void GO()
     {
-        GameManager.instance.SetProps(int.Parse(time.text), int.Parse(modules.text), hardcore.isOn, needy.isOn);
+        GameManager.instance.SetProps(time, modules, Hardcore, Needy);
         SceneManager.LoadScene("Bombe");
     }
 
