@@ -1,11 +1,15 @@
 ﻿using UnityEngine;
-using UnityEngine.UI;
 using System.Collections.Generic;
+using TMPro;
 
 public class Memoire : Module
 {
-    public Touche[] touches;
-    public Light[] succes;
+    [SerializeField]
+    private Touche[] touches;
+    [SerializeField]
+    private Light[] succes;
+    [SerializeField]
+    private TextMeshProUGUI numDisplay;
 
     private int chiffre;
     private int Chiffre
@@ -19,7 +23,7 @@ public class Memoire : Module
             if (value >= 1 && value <= 4)
             {
                 chiffre = value;
-                affichageChiffre.text = chiffre.ToString();
+                numDisplay.text = chiffre.ToString();
             }
         }
     }
@@ -29,8 +33,6 @@ public class Memoire : Module
 
     private const int objEtapes = 5;
     private int nbEtapes = 0;
-
-    public Text affichageChiffre;
 
     // Use this for initialization
     void Start()

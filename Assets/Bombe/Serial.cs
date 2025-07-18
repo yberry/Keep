@@ -3,8 +3,8 @@ using UnityEngine;
 
 public class Serial : Instance<Serial>
 {
-    private const string vowels = "AEIOUY";
-    private const int nbCharSerial = 6;
+    private const string VOWELS = "AEIOUY";
+    private const int SERIAL_LENGTH = 6;
 
     private string serial;
 
@@ -13,15 +13,15 @@ public class Serial : Instance<Serial>
 
     public void Generate()
     {
-        char[] tab = new char[nbCharSerial];
-        for (int i = 0; i < nbCharSerial; i++)
+        char[] tab = new char[SERIAL_LENGTH];
+        for (int i = 0; i < SERIAL_LENGTH; i++)
         {
             char ch;
-            if (i < nbCharSerial - 1)
+            if (i < SERIAL_LENGTH - 1)
             {
                 int index = Random.Range(0, 26);
                 ch = (char)('A' + index);
-                HasVowel |= vowels.Contains(ch);
+                HasVowel |= VOWELS.Contains(ch);
             }
             else
             {
@@ -33,5 +33,35 @@ public class Serial : Instance<Serial>
         }
         serial = new string(tab);
         GetComponent<TextMeshPro>().text = serial;
+
+        float ty, tz;
+        float rx, ry;
+
+        // Up / Down
+        if (Random.Range(0, 2) == 0)
+        {
+            ty = 1.01f;
+            rx = 90f;
+        }
+        else
+        {
+            ty = -1.01f;
+            rx = -90f;
+        }
+
+        // Front / Back
+        if (Random.Range(0, 2) == 0)
+        {
+            tz = -0.8f;
+            ry = 0f;
+        }
+        else
+        {
+            tz = 0.8f;
+            ry = 180f;
+        }
+
+        transform.localPosition = new Vector3(Random.Range(-1, 2), ty, tz);
+        transform.localEulerAngles = new Vector3(rx, ry, 0f);
     }
 }
