@@ -29,7 +29,7 @@ public class Menu : MonoBehaviour {
 
     public void GO()
     {
-        GameManager.Instance.SetProps(int.Parse(time.text), int.Parse(modules.text), hardcore.isOn, needy.isOn);
+        GameManager.instance.SetProps(int.Parse(time.text), int.Parse(modules.text), hardcore.isOn, needy.isOn);
         SceneManager.LoadScene("Bombe");
     }
 

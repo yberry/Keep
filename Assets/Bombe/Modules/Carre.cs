@@ -14,6 +14,6 @@ public abstract class Carre : MonoBehaviour {
 
     public virtual void Faute()
     {
-        Bombe.Instance.Erreur();
+        Bombe.instance.Erreur();
     }
 }

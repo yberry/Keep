@@ -3,11 +3,7 @@ using UnityEngine.UI;
 using System.Collections.Generic;
 using System.Linq;
 
-public class Bombe : MonoBehaviour {
-
-    #region Bombe
-    public static Bombe Instance { get; private set; }
-    #endregion
+public class Bombe : Instance<Bombe> {
 
     #region NumSerie
     private const string charsSerie = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
@@ -114,16 +110,6 @@ public class Bombe : MonoBehaviour {
     // Use this for initialization
     void Start()
     {
-        if (Instance == null)
-        {
-            Instance = this;
-        }
-        else
-        {
-            Destroy(gameObject);
-            return;
-        }
-
         Erreurs = 0;
         carres = new List<Carre>();
         modules = new List<Module>();
@@ -132,7 +118,7 @@ public class Bombe : MonoBehaviour {
         SetPorts();
         SetPiles();
 
-        hardcore = GameManager.Instance.Hardcore;
+        hardcore = GameManager.instance.Hardcore;
         SetTimer();
         SetModules();
     }
@@ -174,7 +160,7 @@ public class Bombe : MonoBehaviour {
     {
         Transform place = RandomPlace;
         timer = Instantiate(preTimer, place.position, place.rotation, transform);
-        timer.SetStart(GameManager.Instance.Time, hardcore);
+        timer.SetStart(GameManager.instance.Time, hardcore);
         timer.defile = true;
         carres.Add(timer);
         Destroy(place.gameObject);
@@ -182,7 +168,7 @@ public class Bombe : MonoBehaviour {
 
     void SetModules()
     {
-        int nbModules = GameManager.Instance.Modules;
+        int nbModules = GameManager.instance.Modules;
 
         Dictionary<Module, int> dico = new Dictionary<Module, int>()
         {
@@ -237,6 +223,19 @@ public class Bombe : MonoBehaviour {
         }
     }
 
+    private void Update()
+    {
+        if (Input.GetMouseButton(0))
+        {
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            RaycastHit hit;
+            if (Physics.Raycast(ray, out hit) && hit.transform == transform)
+            {
+                Debug.DrawLine(Camera.main.transform.position, hit.point, Color.red);
+            }
+        }
+    }
+
     public bool HasLightIndic(string ind)
     {
         return indicateurs.Any(i => i.Mention == ind && i.lumiere.enabled);
@@ -249,7 +248,7 @@ public class Bombe : MonoBehaviour {
 
     public void Verif()
     {
-        if (modules.All(m => m.Desamorce))
+        if (modules.TrueForAll(m => m.Desamorce))
         {
             Defused();
         }
@@ -257,8 +256,7 @@ public class Bombe : MonoBehaviour {
 
     public void Erreur()
     {
-        ++Erreurs;
-        if (hardcore || Erreurs >= 3)
+        if (hardcore || ++Erreurs >= 3)
         {
             Mort();
         }
@@ -282,7 +280,6 @@ public class Bombe : MonoBehaviour {
 
     public void Mort()
     {
-        Instance = null;
         Destroy(gameObject);
     }
 }

@@ -121,7 +121,7 @@ public class Laby
         rond2 = r2;
     }
 
-    public bool HasMur(Vector2 pos, Dir dir)
+    public bool HasWall(Vector2 pos, Dir dir)
     {
         byte pl = places[(int)pos.y, (int)pos.x];
 

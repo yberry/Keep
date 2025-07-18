@@ -73,7 +73,7 @@ public class Bouton : Module {
 
     void SetObjectif()
     {
-        Bombe bombe = Bombe.Instance;
+        Bombe bombe = Bombe.instance;
 
         if (couleur == Color.blue && texte == "ABORT")
         {

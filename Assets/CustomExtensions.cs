@@ -16,29 +16,41 @@ public static class CustomExtensions {
         return source.ElementAt(random);
     }
 
+    public static IEnumerable<T> RandomList<T>(this IEnumerable<T> source)
+    {
+        List<T> list = new List<T>(source);
+
+        int n = list.Count;
+        while (n > 0)
+        {
+            int k = Random.Range(0, n--);
+            yield return list[k];
+            list.RemoveAt(k);
+        }
+    }
+
     public static void Shuffle<T>(this IList<T> list)
     {
         int n = list.Count;
-        while (n-- > 1)
+        while (n > 0)
         {
-            int k = Random.Range(0, n + 1);
-            T value = list[k];
-            list[k] = list[n];
-            list[n] = value;
+            int k = Random.Range(0, n--);
+            (list[n], list[k]) = (list[k], list[n]);
         }
     }
 
     public static T GetOrAddComponent<T>(this GameObject gameObject) where T : Component
     {
-        T comp = gameObject.GetComponent<T>();
+        if (gameObject.TryGetComponent(out T component))
+        {
+            return component;
+        }
 
-        return comp ?? gameObject.AddComponent<T>();
+        return gameObject.AddComponent<T>();
     }
 
     public static T GetOrAddComponent<T>(this Component component) where T : Component
     {
-        T comp = component.GetComponent<T>();
-
-        return comp ?? component.gameObject.AddComponent<T>();
+        return component.gameObject.GetOrAddComponent<T>();
     }
 }

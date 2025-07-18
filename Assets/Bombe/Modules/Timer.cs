@@ -39,7 +39,7 @@ public class Timer : Carre {
             temps -= Time.deltaTime * (1f + erreurs * 0.25f);
             if (temps <= 0f)
             {
-                Bombe.Instance.Mort();
+                Bombe.instance.Mort();
             }
             SetChiffres();
         }

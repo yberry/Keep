@@ -25,6 +25,7 @@ public class Simon : Module {
     private List<Losange> signaux;
     private List<Losange> reponse;
     private List<Losange> reponseJoueur;
+    private Dictionary<Color, Losange[]> corresp;
 
     public Losange rouge;
     public Losange bleu;
@@ -44,6 +45,28 @@ public class Simon : Module {
         signaux = new List<Losange>();
         reponse = new List<Losange>();
         reponseJoueur = new List<Losange>();
+
+        if (Bombe.instance.Voyelle)
+        {
+            corresp = new Dictionary<Color, Losange[]>()
+            {
+                { Color.red, new Losange[] { bleu, jaune, vert } },
+                { Color.blue, new Losange[] { rouge, vert, rouge } },
+                { Color.green, new Losange[] { jaune, bleu, jaune } },
+                { Color.yellow, new Losange[] { vert, rouge, bleu } }
+            };
+        }
+        else
+        {
+            corresp = new Dictionary<Color, Losange[]>()
+            {
+                { Color.red, new Losange[] { bleu, rouge, jaune } },
+                { Color.blue, new Losange[] { jaune, bleu, vert } },
+                { Color.green, new Losange[] { vert, jaune, bleu } },
+                { Color.yellow, new Losange[] { rouge, vert, rouge } }
+            };
+        }
+
         AddColor();
 	}
 
@@ -90,79 +113,11 @@ public class Simon : Module {
     public void CheckReponse()
     {
         reponse.Clear();
-        bool voyelle = Bombe.Instance.Voyelle;
-        int fautes = Bombe.Instance.Erreurs;
+        int fautes = Bombe.instance.Erreurs;
 
         foreach (Color color in flashs)
         {
-            if (color == Color.red)
-            {
-                switch (fautes)
-                {
-                    case 0:
-                        reponse.Add(bleu);
-                        break;
-
-                    case 1:
-                        reponse.Add(voyelle ? jaune : rouge);
-                        break;
-
-                    case 2:
-                        reponse.Add(voyelle ? vert : jaune);
-                        break;
-                }
-            }
-            else if (color == Color.blue)
-            {
-                switch (fautes)
-                {
-                    case 0:
-                        reponse.Add(voyelle ? rouge : jaune);
-                        break;
-
-                    case 1:
-                        reponse.Add(voyelle ? vert : bleu);
-                        break;
-
-                    case 2:
-                        reponse.Add(voyelle ? rouge : vert);
-                        break;
-                }
-            }
-            else if (color == Color.green)
-            {
-                switch (fautes)
-                {
-                    case 0:
-                        reponse.Add(voyelle ? jaune : vert);
-                        break;
-
-                    case 1:
-                        reponse.Add(voyelle ? bleu : jaune);
-                        break;
-
-                    case 2:
-                        reponse.Add(voyelle ? jaune : bleu);
-                        break;
-                }
-            }
-            else if (color == Color.yellow)
-            {
-                switch (fautes)
-                {
-                    case 0:
-                        reponse.Add(voyelle ? vert : rouge);
-                        break;
-
-                    case 1:
-                        reponse.Add(voyelle ? rouge : vert);
-                        break;
-
-                    case 2:
-                        reponse.Add(voyelle ? bleu : rouge);
-                        break;
-                }
-            }
+            reponse.Add(corresp[color][fautes]);
         }
     }
 
@@ -193,7 +148,7 @@ public class Simon : Module {
             if (reponse.Count == reponseJoueur.Count)
             {
                 reponseRecue = false;
-                nbEtapes++;
+                ++nbEtapes;
                 Verif();
             }
         }
@@ -209,6 +164,13 @@ public class Simon : Module {
     {
         Losange[] losanges = new Losange[] { vert, bleu, rouge, jaune };
 
+        for (int i = 0; i < losanges.Length; i++)
+        {
+            if (losanges[i] != losange)
+            {
+                losange.Stop();
+            }
+        }
     }
 
     void Verif()

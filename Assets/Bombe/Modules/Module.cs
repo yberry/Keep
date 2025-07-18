@@ -24,7 +24,7 @@ public abstract class Module : Carre {
         Desamorce = true;
         lumiere.color = Color.green;
         lumiere.enabled = true;
-        Bombe.Instance.Verif();
+        Bombe.instance.Verif();
     }
 
     public override void Faute()

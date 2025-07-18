@@ -79,7 +79,7 @@ public class Labyrinthe : Module {
             return;
         }
 
-        if (laby.HasMur(carre, Laby.Dir.Haut))
+        if (laby.HasWall(carre, Laby.Dir.Haut))
         {
             CurrentCell.ShowMur(Laby.Dir.Haut);
             Faute();
@@ -100,7 +100,7 @@ public class Labyrinthe : Module {
             return;
         }
 
-        if (laby.HasMur(carre, Laby.Dir.Gauche))
+        if (laby.HasWall(carre, Laby.Dir.Gauche))
         {
             CurrentCell.ShowMur(Laby.Dir.Gauche);
             Faute();
@@ -121,7 +121,7 @@ public class Labyrinthe : Module {
             return;
         }
 
-        if (laby.HasMur(carre, Laby.Dir.Bas))
+        if (laby.HasWall(carre, Laby.Dir.Bas))
         {
             CurrentCell.ShowMur(Laby.Dir.Bas);
             Faute();
@@ -142,7 +142,7 @@ public class Labyrinthe : Module {
             return;
         }
 
-        if (laby.HasMur(carre, Laby.Dir.Droite))
+        if (laby.HasWall(carre, Laby.Dir.Droite))
         {
             CurrentCell.ShowMur(Laby.Dir.Droite);
             Faute();
