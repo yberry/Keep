@@ -352,6 +352,22 @@ PrefabInstance:
       propertyPath: m_PresetInfoIsWorld
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 11462310, guid: a6041f3322d3e0347b1c8921deee1563, type: 3}
+      propertyPath: debugMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11462310, guid: a6041f3322d3e0347b1c8921deee1563, type: 3}
+      propertyPath: debugSimon
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 11462310, guid: a6041f3322d3e0347b1c8921deee1563, type: 3}
+      propertyPath: debugMemory
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 11462310, guid: a6041f3322d3e0347b1c8921deee1563, type: 3}
+      propertyPath: debugHoriWires
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 22357766, guid: a6041f3322d3e0347b1c8921deee1563, type: 3}
       propertyPath: m_Camera
       value: 

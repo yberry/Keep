@@ -2,48 +2,52 @@
 
 public class FilHorizontal : MonoBehaviour {
 
-    private static readonly Color[] couleurs = new Color[]
-    {
-        Color.white,
-        Color.black,
-        Color.blue,
-        Color.yellow,
-        Color.red
-    };
+    [SerializeField]
+    private Renderer fullWire;
+
+    [SerializeField]
+    private Renderer[] cutWires;
 
     private FilsHorizontaux fils;
 
-    private bool aCouper = false;
-    private bool estCoupe = false;
+    private bool isTarget = false;
+    private bool isCut = false;
 
-    public Color Couleur { get; private set; }
+    public FilsHorizontaux.WireColor Color { get; private set; }
 
-    // Use this for initialization
-    void Start () {
-        Couleur = couleurs.RandomItem();
-        GetComponent<Renderer>().material.color = Couleur;
-	}
-	
-	public void SetModule(FilsHorizontaux f)
+    public void SetModule(FilsHorizontaux f, FilsHorizontaux.WireMat wireMat)
     {
         fils = f;
+        Color = wireMat.color;
+        fullWire.material = wireMat.material;
+        for (int i = 0; i < cutWires.Length; i++)
+        {
+            cutWires[i].material = wireMat.material;
+            cutWires[i].gameObject.SetActive(false);
+        }
     }
 
-    public void Objectif()
+    public void SetTarget()
     {
-        aCouper = true;
+        isTarget = true;
     }
 
     void OnMouseDown()
     {
-        if (estCoupe)
+        if (isCut)
         {
             return;
         }
 
-        estCoupe = true;
+        isCut = true;
+        fullWire.gameObject.SetActive(false);
+        for (int i = 0; i < cutWires.Length; i++)
+        {
+            cutWires[i].gameObject.SetActive(true);
+        }
+        GetComponent<Collider>().enabled = false;
 
-        if (aCouper)
+        if (isTarget)
         {
             fils.Resolu();
         }

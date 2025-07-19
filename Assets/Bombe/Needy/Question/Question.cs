@@ -15,7 +15,7 @@ public class Question : Needy {
     {
         base.Restart();
 
-        if (Random.Range(0, 2) == 0)
+        if (Bombe.HeadsOrTails)
         {
             question.text = yesResponse;
             yes.onClick.AddListener(Desamorce);

@@ -32,7 +32,7 @@ public class FilsVerticaux : Module {
 
         for (int i = 0; i < 6; i++)
         {
-            if (plein > 0 && Random.Range(0, 2) == 0)
+            if (plein > 0 && Bombe.HeadsOrTails)
             {
                 prefabsFils[i].SetModule(this);
                 fils.Add(prefabsFils[i]);

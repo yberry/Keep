@@ -32,7 +32,7 @@ public class Indic : MonoBehaviour {
         }
         while (pris.Contains(Mention));
 
-        lumiere.enabled = Random.Range(0, 2) == 0;
+        lumiere.enabled = Bombe.HeadsOrTails;
         pris.Add(Mention);
 	}
 

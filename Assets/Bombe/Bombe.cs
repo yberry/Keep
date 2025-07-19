@@ -4,18 +4,56 @@ using System.Linq;
 
 public class Bombe : Instance<Bombe> {
 
+    public static bool HeadsOrTails => Random.Range(0, 2) == 0;
+
     #region NumSerie
     [Header("Numéro de série")]
     [SerializeField, Tooltip("Affichage du numéro de série")]
     private Serial serial;
     #endregion
 
+#if UNITY_EDITOR
+    #region Debug
+    [Header("Debug")]
+    [SerializeField]
+    private bool debugMode = false;
+    [SerializeField]
+    private bool debugHoriWires = false;
+    [SerializeField]
+    private bool debugBigButton = false;
+    [SerializeField]
+    private bool debugSymbols = false;
+    [SerializeField]
+    private bool debugSimon = false;
+    [SerializeField]
+    private bool debugWhoFirst = false;
+    [SerializeField]
+    private bool debugMemory = false;
+    [SerializeField]
+    private bool debugMorse = false;
+    [SerializeField]
+    private bool debugVertWires = false;
+    [SerializeField]
+    private bool debugSequence = false;
+    [SerializeField]
+    private bool debugLabyrinth = false;
+    [SerializeField]
+    private bool debugPassword = false;
+    [SerializeField]
+    private bool debugQuestion = false;
+    [SerializeField]
+    private bool debugCondenser = false;
+    [SerializeField]
+    private bool debugKnob = false;
+    #endregion
+#endif
+
     #region Prefabs
+    [Header("Préfabs de modules")]
     [SerializeField, Tooltip("Préfab de timer")]
     private Timer preTimer;
     [SerializeField, Tooltip("Préfab de module vide")]
     private Transform dummyPrefab;
-    [Header("Préfabs de modules")]
     [SerializeField, Tooltip("Préfab de fils horizontaux")]
     private FilsHorizontaux filsHorizontaux;
     [SerializeField, Tooltip("Préfab de bouton")]
@@ -105,7 +143,18 @@ public class Bombe : Instance<Bombe> {
 
         hardcore = GameManager.instance.Hardcore;
         SetTimer();
+#if UNITY_EDITOR
+        if (debugMode)
+        {
+            SetDebugModules();
+        }
+        else
+        {
+            SetModules();
+        }
+#else
         SetModules();
+#endif
     }
 
     void SetPorts()
@@ -135,7 +184,7 @@ public class Bombe : Instance<Bombe> {
         Destroy(place.gameObject);
     }
 
-    void SetModules()
+    private void SetModules()
     {
         int nbModules = GameManager.instance.Modules;
 
@@ -197,6 +246,104 @@ public class Bombe : Instance<Bombe> {
             Instantiate(dummyPrefab, place.position, place.rotation, transform);
         }
     }
+
+#if UNITY_EDITOR
+    private void SetDebugModules()
+    {
+        List<Module> preModules = new List<Module>();
+
+        if (debugHoriWires)
+        {
+            preModules.Add(filsHorizontaux);
+        }
+        if (debugBigButton)
+        {
+            preModules.Add(bouton);
+        }
+        if (debugSymbols)
+        {
+            preModules.Add(symboles);
+        }
+        if (debugSimon)
+        {
+            preModules.Add(simon);
+        }
+        if (debugWhoFirst)
+        {
+            preModules.Add(quiEstLePremier);
+        }
+        if (debugMemory)
+        {
+            preModules.Add(memoire);
+        }
+        if (debugMorse)
+        {
+            preModules.Add(morse);
+        }
+        if (debugVertWires)
+        {
+            preModules.Add(filsVerticaux);
+        }
+        if (debugSequence)
+        {
+            preModules.Add(sequencesFils);
+        }
+        if (debugLabyrinth)
+        {
+            preModules.Add(labyrinthe);
+        }
+        if (debugPassword)
+        {
+            preModules.Add(morse);
+        }
+
+        if (preModules.Count == 0)
+        {
+            preModules.Add(filsHorizontaux);
+        }
+
+        List<Needy> needy = new List<Needy>();
+        if (debugQuestion)
+        {
+            needy.Add(question);
+        }
+        if (debugCondenser)
+        {
+            needy.Add(condensateur);
+        }
+        if (debugKnob)
+        {
+            needy.Add(knob);
+        }
+        
+        while (preModules.Count + needy.Count > 11)
+        {
+            needy.RemoveRandom();
+        }
+
+        foreach (Module preModule in preModules)
+        {
+            Transform place = RandomPlace;
+            Module module = Instantiate(preModule, place.position, place.rotation, transform);
+            modules.Add(module);
+            carres.Add(module);
+            Destroy(place.gameObject);
+        }
+
+        foreach (Needy need in needy)
+        {
+            Transform place = RandomPlace;
+            carres.Add(Instantiate(need, place.position, place.rotation, transform));
+            Destroy(place.gameObject);
+        }
+
+        for (int i = 0; i < places.Count; i++)
+        {
+            Transform place = places[i];
+            Instantiate(dummyPrefab, place.position, place.rotation, transform);
+        }
+    }
+#endif
 
     private void Update()
     {

@@ -55,8 +55,8 @@ public class FilVertical : MonoBehaviour {
 
             couleurs.Add(couleursDispo[rand]);
         }
-        LED.enabled = Random.Range(0, 2) == 0;
-        etoile.SetActive(Random.Range(0, 2) == 0);
+        LED.enabled = Bombe.HeadsOrTails;
+        etoile.SetActive(Bombe.HeadsOrTails);
         Objectif();
     }
 
@@ -79,7 +79,7 @@ public class FilVertical : MonoBehaviour {
 
         else if (!e && ((r && (b || !l)) || (!r && b && !l)))
         {
-            aCouper = Serial.instance.NumPair;
+            aCouper = Serial.instance.LastEven;
         }
 
         else if (!b && l && (r || e))

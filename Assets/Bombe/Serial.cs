@@ -8,7 +8,7 @@ public class Serial : Instance<Serial>
 
     private string serial;
 
-    public bool NumPair { get; private set; } = false;
+    public bool LastEven { get; private set; } = false;
     public bool HasVowel { get; private set; } = false;
 
     public void Generate()
@@ -27,7 +27,7 @@ public class Serial : Instance<Serial>
             {
                 int index = Random.Range(0, 10);
                 ch = (char)('0' + index);
-                NumPair = (index & 1) == 0;
+                LastEven = (index & 1) == 0;
             }
             tab[i] = ch;
         }
@@ -38,7 +38,7 @@ public class Serial : Instance<Serial>
         float rx, ry;
 
         // Up / Down
-        if (Random.Range(0, 2) == 0)
+        if (Bombe.HeadsOrTails)
         {
             ty = 1.01f;
             rx = 90f;
@@ -50,7 +50,7 @@ public class Serial : Instance<Serial>
         }
 
         // Front / Back
-        if (Random.Range(0, 2) == 0)
+        if (Bombe.HeadsOrTails)
         {
             tz = -0.8f;
             ry = 0f;

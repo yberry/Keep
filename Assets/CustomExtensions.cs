@@ -16,6 +16,12 @@ public static class CustomExtensions {
         return source.ElementAt(random);
     }
 
+    public static void RemoveRandom<T>(this IList<T> source)
+    {
+        int index = Random.Range(0, source.Count);
+        source.RemoveAt(index);
+    }
+
     public static IEnumerable<T> RandomList<T>(this IEnumerable<T> source)
     {
         List<T> list = new List<T>(source);

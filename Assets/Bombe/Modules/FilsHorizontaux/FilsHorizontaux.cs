@@ -4,134 +4,151 @@ using System.Linq;
 
 public class FilsHorizontaux : Module {
 
-    [SerializeField]
-    private FilHorizontal[] prefabsFils;
+    public enum WireColor
+    {
+        White, Black, Blue, Yellow, Red
+    }
 
-    private int nbFils;
-    private List<FilHorizontal> fils;
+    [System.Serializable]
+    public struct WireMat
+    {
+        public WireColor color;
+        public Material material;
+    }
+
+    [SerializeField]
+    private WireMat[] wireMats;
+
+    [SerializeField]
+    private FilHorizontal[] startWires;
+
+    private int wireCount;
+    private List<FilHorizontal> wires;
 
 	void Start ()
     {
-        nbFils = Random.Range(3, 7);
-        RemplirListe();
-        DefinirObjectif();
+        wireCount = Random.Range(3, 7);
+        FillList();
+        SetTarget();
 	}
 
-    void RemplirListe()
+    void FillList()
     {
-        fils = new List<FilHorizontal>();
+        wires = new List<FilHorizontal>();
 
-        int plein = nbFils;
-        int vide = 6 - nbFils;
+        int fill = wireCount;
+        bool[] tab = new bool[6];
+        for (int i = 6; i > 0; i--)
+        {
+            if (i == fill || fill > 0 && Bombe.HeadsOrTails)
+            {
+                fill -= 1;
+                tab[i - 1] = true;
+            }
+        }
 
         for (int i = 0; i < 6; i++)
         {
-            if (plein > 0 && Random.Range(0, 2) == 0)
+            if (tab[i])
             {
-                prefabsFils[i].SetModule(this);
-                fils.Add(prefabsFils[i]);
-                plein--;
-            }
-            else if (vide > 0)
-            {
-                prefabsFils[i].gameObject.SetActive(false);
-                vide--;
+                startWires[i].SetModule(this, wireMats.RandomItem());
+                wires.Add(startWires[i]);
             }
             else
             {
-                i--;
+                startWires[i].gameObject.SetActive(false);
             }
         }
     }
 
-    void DefinirObjectif()
+    void SetTarget()
     {
-        switch (nbFils)
+        switch (wireCount)
         {
             case 3:
-                if (NbCouleurs(Color.red) == 0)
+                if (ColorCount(WireColor.Red) == 0)
                 {
-                    fils[1].Objectif();
+                    wires[1].SetTarget();
                 }
-                else if (fils[nbFils - 1].Couleur == Color.white)
+                else if (wires[^1].Color == WireColor.White)
                 {
-                    fils[nbFils - 1].Objectif();
+                    wires[^1].SetTarget();
                 }
-                else if (NbCouleurs(Color.blue) > 1)
+                else if (ColorCount(WireColor.Blue) > 1)
                 {
-                    fils.Last(f => f.Couleur == Color.blue).Objectif();
+                    wires.Last(f => f.Color == WireColor.Blue).SetTarget();
                 }
                 else
                 {
-                    fils[nbFils - 1].Objectif();
+                    wires[^1].SetTarget();
                 }
                 return;
 
             case 4:
-                if (NbCouleurs(Color.red) > 1 && !Serial.instance.NumPair)
+                if (ColorCount(WireColor.Red) > 1 && !Serial.instance.LastEven)
                 {
-                    fils.Last(f => f.Couleur == Color.red).Objectif();
+                    wires.Last(f => f.Color == WireColor.Red).SetTarget();
                 }
-                else if (fils[nbFils - 1].Couleur == Color.yellow && NbCouleurs(Color.red) == 0)
+                else if (wires[^1].Color == WireColor.Yellow && ColorCount(WireColor.Red) == 0)
                 {
-                    fils[0].Objectif();
+                    wires[0].SetTarget();
                 }
-                else if (NbCouleurs(Color.blue) == 1)
+                else if (ColorCount(WireColor.Blue) == 1)
                 {
-                    fils[0].Objectif();
+                    wires[0].SetTarget();
                 }
-                else if (NbCouleurs(Color.yellow) > 1)
+                else if (ColorCount(WireColor.Yellow) > 1)
                 {
-                    fils[nbFils - 1].Objectif();
+                    wires[^1].SetTarget();
                 }
                 else
                 {
-                    fils[1].Objectif();
+                    wires[1].SetTarget();
                 }
                 return;
 
             case 5:
-                if (fils[nbFils - 1].Couleur == Color.black && !Serial.instance.NumPair)
+                if (wires[^1].Color == WireColor.Black && !Serial.instance.LastEven)
                 {
-                    fils[3].Objectif();
+                    wires[3].SetTarget();
                 }
-                else if (NbCouleurs(Color.red) == 1 && NbCouleurs(Color.yellow) > 1)
+                else if (ColorCount(WireColor.Red) == 1 && ColorCount(WireColor.Yellow) > 1)
                 {
-                    fils[0].Objectif();
+                    wires[0].SetTarget();
                 }
-                else if (NbCouleurs(Color.black) == 0)
+                else if (ColorCount(WireColor.Black) == 0)
                 {
-                    fils[1].Objectif();
+                    wires[1].SetTarget();
                 }
                 else
                 {
-                    fils[0].Objectif();
+                    wires[0].SetTarget();
                 }
                 return;
 
             case 6:
-                if (NbCouleurs(Color.yellow) == 0 && !Serial.instance.NumPair)
+                if (ColorCount(WireColor.Yellow) == 0 && !Serial.instance.LastEven)
                 {
-                    fils[2].Objectif();
+                    wires[2].SetTarget();
                 }
-                else if (NbCouleurs(Color.yellow) == 1 && NbCouleurs(Color.white) > 1)
+                else if (ColorCount(WireColor.Yellow) == 1 && ColorCount(WireColor.White) > 1)
                 {
-                    fils[3].Objectif();
+                    wires[3].SetTarget();
                 }
-                else if (NbCouleurs(Color.red) == 0)
+                else if (ColorCount(WireColor.Red) == 0)
                 {
-                    fils[nbFils - 1].Objectif();
+                    wires[^1].SetTarget();
                 }
                 else
                 {
-                    fils[3].Objectif();
+                    wires[3].SetTarget();
                 }
                 return;
         }
     }
 
-    int NbCouleurs(Color c)
+    int ColorCount(WireColor color)
     {
-        return fils.Count(f => f.Couleur == c);
+        return wires.Count(f => f.Color == color);
     }
 }
