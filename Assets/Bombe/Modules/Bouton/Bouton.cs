@@ -3,7 +3,6 @@ using UnityEngine.UI;
 
 public class Bouton : Module {
 
-    #region Config bouton
     private static readonly Color[] couleurs = new Color[]
     {
         Color.yellow,
@@ -11,7 +10,7 @@ public class Bouton : Module {
         Color.red,
         Color.blue
     };
-    private Color couleur;
+    
 
     private static readonly string[] textes = new string[]
     {
@@ -20,19 +19,22 @@ public class Bouton : Module {
         "ABORT",
         "HOLD"
     };
-    private string texte;
-
-    private bool aMaintenir;
-    private char chiffre;
-
-    public Transform bouton;
-    public Text affichage;
-    public Light bande;
-    #endregion
 
     private const float tempsActivation = 0.5f;
+
+    [SerializeField]
+    private Transform bouton;
+    [SerializeField]
+    private Text affichage;
+    [SerializeField]
+    private Light bande;
+
+    private string texte;
+    private bool aMaintenir;
+    private char chiffre;
     private float temps;
     private bool maintien;
+    private Color couleur;
 
     // Use this for initialization
     void Start () {

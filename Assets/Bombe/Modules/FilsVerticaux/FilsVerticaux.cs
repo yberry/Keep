@@ -3,7 +3,8 @@ using System.Collections.Generic;
 
 public class FilsVerticaux : Module {
 
-    public FilVertical[] prefabsFils;
+    [SerializeField]
+    private FilVertical[] prefabsFils;
 
     private int nbFils;
     private List<FilVertical> fils;

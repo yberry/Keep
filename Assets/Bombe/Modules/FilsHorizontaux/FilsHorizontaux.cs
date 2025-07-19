@@ -4,7 +4,8 @@ using System.Linq;
 
 public class FilsHorizontaux : Module {
 
-    public FilHorizontal[] prefabsFils;
+    [SerializeField]
+    private FilHorizontal[] prefabsFils;
 
     private int nbFils;
     private List<FilHorizontal> fils;

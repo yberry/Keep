@@ -10,15 +10,16 @@ public class FilHorizontal : MonoBehaviour {
         Color.yellow,
         Color.red
     };
-    public Color Couleur { get; private set; }
 
     private FilsHorizontaux fils;
 
     private bool aCouper = false;
     private bool estCoupe = false;
 
-	// Use this for initialization
-	void Start () {
+    public Color Couleur { get; private set; }
+
+    // Use this for initialization
+    void Start () {
         Couleur = couleurs.RandomItem();
         GetComponent<Renderer>().material.color = Couleur;
 	}

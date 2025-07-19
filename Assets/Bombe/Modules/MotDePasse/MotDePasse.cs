@@ -18,12 +18,15 @@ public class MotDePasse : Module {
     private const string alpha = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
     private const int choixParLettre = 6;
 
+    [SerializeField]
+    private Lettre[] lettres;
+    [SerializeField]
+    private Button submit;
+
     private string mot;
 
     private List<char>[] choixLettres;
-    public Lettre[] lettres;
-
-    public Button submit;
+    
 
 	// Use this for initialization
 	void Start () {

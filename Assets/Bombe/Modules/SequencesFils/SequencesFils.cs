@@ -13,13 +13,18 @@ public class SequencesFils : Module {
     };
 
     private const int nbPanneaux = 4;
+
+    [SerializeField]
+    private Button boutonHaut;
+    [SerializeField]
+    private Button boutonBas;
+    [SerializeField]
+    private Light[] succes;
+    [SerializeField]
+    private Panneau prefabPanneau;
+
     private int currentLayer = 0;
     private Panneau[] panneaux;
-
-    public Button boutonHaut;
-    public Button boutonBas;
-    public Light[] succes;
-    public Panneau prefabPanneau;
 
     private void Start()
     {

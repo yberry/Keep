@@ -13,21 +13,12 @@ public class Symboles : Module {
         TroisAntennes, EtoileNoire, Inegal, AE, NEnvers, Omega
     }
 
-    public int nb = 4;
-    public Canvas canvas;
-    public Symbole prefabSymbole;
-
     [System.Serializable]
     public struct Img
     {
         public Type type;
         public Sprite sprite;
     }
-
-    public Img[] images;
-
-    private const int nbColonnes = 6;
-    private const int nbSymboles = 7;
 
     private static readonly Type[,] colonnes = new Type[,]
     {
@@ -39,6 +30,18 @@ public class Symboles : Module {
         { Type.SixEcrase, Type.Euro, Type.Inegal, Type.AE, Type.Trident, Type.NEnvers, Type.Omega }
     };
 
+    private const int COLUMNS = 6;
+    private const int SYMB_PER_COL = 7;
+
+    [SerializeField]
+    private int nb = 4;
+    [SerializeField]
+    private Canvas canvas;
+    [SerializeField]
+    private Symbole prefabSymbole;
+    [SerializeField]
+    private Img[] images;
+
     private List<int> ordre;
     private Symbole[] symboles;
 
@@ -47,7 +50,7 @@ public class Symboles : Module {
 
         symboles = new Symbole[nb];
 
-        int col = Random.Range(0, nbColonnes);
+        int col = Random.Range(0, COLUMNS);
 
         List<int> numPris = new List<int>();
 
@@ -57,7 +60,7 @@ public class Symboles : Module {
 
             do
             {
-                num = Random.Range(0, nbSymboles);
+                num = Random.Range(0, SYMB_PER_COL);
             }
             while (numPris.Contains(num));
 

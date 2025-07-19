@@ -5,19 +5,22 @@ using System.Collections;
 [RequireComponent(typeof(Button))]
 public class Symbole : MonoBehaviour {
 
+    private const float tempsFaute = 0.5f;
+
+    [SerializeField]
+    private Light bande;
+    [SerializeField]
+    private Image image;
+
     private Symboles symboles;
 
     private Button bouton;
     private bool suivant = false;
+
     public bool Appuye { get; private set; }
 
-    private const float tempsFaute = 0.5f;
-
-    public Light bande;
-    public Image image;
-
-	// Use this for initialization
-	void Awake () {
+    // Use this for initialization
+    void Awake () {
         Appuye = false;
         bande.enabled = false;
         bouton = GetComponent<Button>();

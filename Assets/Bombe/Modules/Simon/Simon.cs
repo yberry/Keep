@@ -14,6 +14,16 @@ public class Simon : Module {
 
     private const float tempsBoucle = 1.5f;
     private const float tempsAttente = 3f;
+
+    [SerializeField]
+    private Losange rouge;
+    [SerializeField]
+    private Losange bleu;
+    [SerializeField]
+    private Losange vert;
+    [SerializeField]
+    private Losange jaune;
+
     private float tempsReponse = 0f;
 
     private bool reponseRecue = false;
@@ -26,11 +36,6 @@ public class Simon : Module {
     private List<Losange> reponse;
     private List<Losange> reponseJoueur;
     private Dictionary<Color, Losange[]> corresp;
-
-    public Losange rouge;
-    public Losange bleu;
-    public Losange vert;
-    public Losange jaune;
 
     // Use this for initialization
     void Start () {

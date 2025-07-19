@@ -6,19 +6,25 @@ public class Labyrinthe : Module {
     private const int nbColonnes = 6;
     private const int nbLignes = 6;
 
+    [SerializeField]
+    private Button flecheHaut;
+    [SerializeField]
+    private Button flecheGauche;
+    [SerializeField]
+    private Button flecheBas;
+    [SerializeField]
+    private Button flecheDroite;
+
+    [SerializeField]
+    private Transform place;
+    [SerializeField]
+    private Cell prefabCell;
+
     private Vector2 triangle;
     private Vector2 carre;
 
     private Laby laby;
     private Cell[,] cells;
-
-    public Button flecheHaut;
-    public Button flecheGauche;
-    public Button flecheBas;
-    public Button flecheDroite;
-
-    public Transform place;
-    public Cell prefabCell;
 
     Cell CurrentCell
     {

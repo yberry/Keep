@@ -4,8 +4,14 @@ using UnityEngine.UI;
 [RequireComponent(typeof(Text))]
 public class Lettre : MonoBehaviour
 {
+    [SerializeField]
+    private Button flecheHaut;
+    [SerializeField]
+    private Button flecheBas;
+
     private char[] lettres;
     private int currentIndex = 0;
+    private Text affichage;
 
     private int CurrentIndex
     {
@@ -40,11 +46,6 @@ public class Lettre : MonoBehaviour
             return lettres[currentIndex];
         }
     }
-
-    private Text affichage;
-
-    public Button flecheHaut;
-    public Button flecheBas;
 
     void Start()
     {

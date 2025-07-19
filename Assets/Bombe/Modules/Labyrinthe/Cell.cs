@@ -2,14 +2,21 @@
 
 public class Cell : MonoBehaviour
 {
-    public GameObject murHaut;
-    public GameObject murGauche;
-    public GameObject murBas;
-    public GameObject murDroit;
+    [SerializeField]
+    private GameObject murHaut;
+    [SerializeField]
+    private GameObject murGauche;
+    [SerializeField]
+    private GameObject murBas;
+    [SerializeField]
+    private GameObject murDroit;
 
-    public Renderer square;
-    public Transform triangle;
-    public GameObject circle;
+    [SerializeField]
+    private Renderer square;
+    [SerializeField]
+    private Transform triangle;
+    [SerializeField]
+    private GameObject circle;
 
     private bool objective = false;
     private float angle = 0f;

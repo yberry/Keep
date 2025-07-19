@@ -6,11 +6,11 @@ public class Losange : MonoBehaviour {
 
     public const float tempsFlash = 0.6f;
 
+    [SerializeField]
+    private Light lumiere;
+
     private Simon simon;
     private float temps = 0f;
-
-    public Light lumiere;
-    
 
 	// Use this for initialization
 	void Start () {

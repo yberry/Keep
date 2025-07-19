@@ -11,14 +11,16 @@ public class FilVertical : MonoBehaviour {
         Color.yellow
     };
 
-    private List<Color> couleurs;
-    public Light LED;
-    public GameObject etoile;
+    [SerializeField]
+    private Light LED;
+    [SerializeField]
+    private GameObject etoile;
 
     private FilsVerticaux fils;
-
+    private List<Color> couleurs;
     private bool aCouper = false;
     private bool estCoupe = false;
+
     public bool Complet
     {
         get

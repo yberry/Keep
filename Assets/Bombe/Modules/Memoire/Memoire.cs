@@ -11,7 +11,13 @@ public class Memoire : Module
     [SerializeField]
     private TextMeshProUGUI numDisplay;
 
+    private const int objEtapes = 5;
+
     private int chiffre;
+    private List<int> chiffres;
+    private List<int> positions;
+    private int nbEtapes = 0;
+
     private int Chiffre
     {
         get
@@ -27,12 +33,6 @@ public class Memoire : Module
             }
         }
     }
-
-    private List<int> chiffres;
-    private List<int> positions;
-
-    private const int objEtapes = 5;
-    private int nbEtapes = 0;
 
     // Use this for initialization
     void Start()

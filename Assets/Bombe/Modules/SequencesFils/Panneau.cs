@@ -12,10 +12,11 @@ public class Panneau : MonoBehaviour {
         public bool isCut;
     }
 
+    [SerializeField]
+    private Text[] labelsFils;
+
     private SequencesFils sequence;
     private List<Fil> fils;
-
-    public Text[] labelsFils;
 
     public bool Complete
     {

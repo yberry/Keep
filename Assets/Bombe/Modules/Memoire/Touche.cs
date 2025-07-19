@@ -5,6 +5,10 @@ using UnityEngine.UI;
 public class Touche : MonoBehaviour
 {
     private int chiffre;
+    private Memoire memoire;
+    private bool cible = false;
+    private Button affichageChiffre;
+
     public int Chiffre
     {
         get
@@ -20,12 +24,6 @@ public class Touche : MonoBehaviour
             }
         }
     }
-
-    private Memoire memoire;
-
-    private bool cible = false;
-
-    private Button affichageChiffre;
 
     void Start()
     {

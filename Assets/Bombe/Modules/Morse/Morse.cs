@@ -66,7 +66,28 @@ public class Morse : Module {
         { "beats", 3.600f }
     };
 
+    private const float tempsPoint = 0.3f;
+
+    [SerializeField]
+    private Light signal;
+    [SerializeField]
+    private Slider slider;
+    [SerializeField]
+    private Text affichageFreq;
+    [SerializeField]
+    private Button gauche;
+    [SerializeField]
+    private Button droite;
+    [SerializeField]
+    private Button TX;
+
     private int current = 0;
+
+    private string mot;
+    private int index;
+
+    private Coroutine lecture;
+
     private int Current
     {
         get
@@ -80,6 +101,7 @@ public class Morse : Module {
             Affiche();
         }
     }
+
     private float CurrentFreq
     {
         get
@@ -88,22 +110,8 @@ public class Morse : Module {
         }
     }
 
-    private const float tempsPoint = 0.3f;
-
-    private string mot;
-    private int index;
-
-    public Light signal;
-    public Slider slider;
-    public Text affichageFreq;
-    public Button gauche;
-    public Button droite;
-    public Button TX;
-
-    private Coroutine lecture;
-
-	// Use this for initialization
-	void Start () {
+    // Use this for initialization
+    void Start () {
         signal.enabled = false;
 
         slider.wholeNumbers = false;

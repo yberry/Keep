@@ -94,6 +94,10 @@ public class Laby
         }, new Vector2(0f, 4f), new Vector2(2f, 1f))
     };
 
+    private byte[,] places;
+    private Vector2 rond1;
+    private Vector2 rond2;
+
     public static Laby RandomLaby
     {
         get
@@ -109,10 +113,6 @@ public class Laby
             return new Vector2[] { rond1, rond2 };
         }
     }
-
-    private byte[,] places;
-    private Vector2 rond1;
-    private Vector2 rond2;
 
     public Laby(byte[,] pl, Vector2 r1, Vector2 r2)
     {

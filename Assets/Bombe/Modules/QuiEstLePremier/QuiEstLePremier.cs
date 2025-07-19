@@ -52,13 +52,17 @@ public class QuiEstLePremier : Module {
     };
 
     private const int objReussites = 3;
+
+    [SerializeField]
+    private Text titre;
+    [SerializeField]
+    private Mot[] mots;
+    [SerializeField]
+    private Light[] succes;
+
     private int nbReussites = 0;
 
     private int numCle;
-
-    public Text titre;
-    public Mot[] mots;
-    public Light[] succes;
 
 	// Use this for initialization
 	void Start () {
