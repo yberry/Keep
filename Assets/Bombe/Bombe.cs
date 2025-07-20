@@ -57,7 +57,7 @@ public class Bombe : Instance<Bombe> {
     [SerializeField, Tooltip("Préfab de fils horizontaux")]
     private HorizontalWires filsHorizontaux;
     [SerializeField, Tooltip("Préfab de bouton")]
-    private Bouton bouton;
+    private BigButton bouton;
     [SerializeField, Tooltip("Préfab de symboles")]
     private Symbols symboles;
     [SerializeField, Tooltip("Préfab de simon")]
@@ -69,7 +69,7 @@ public class Bombe : Instance<Bombe> {
     [SerializeField, Tooltip("Préfab de morse")]
     private Morse morse;
     [SerializeField, Tooltip("Préfab de fils verticaux")]
-    private FilsVerticaux filsVerticaux;
+    private VerticalWires filsVerticaux;
     [SerializeField, Tooltip("Préfab de séquences de fils")]
     private SequencesFils sequencesFils;
     [SerializeField, Tooltip("Préfab de labyrinthe")]

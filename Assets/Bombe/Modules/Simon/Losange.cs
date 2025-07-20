@@ -9,7 +9,7 @@ public class Losange : MonoBehaviour {
     [SerializeField]
     private Light lumiere;
 
-    private Simon simon;
+    private Simon module;
     private float temps = 0f;
 
 	// Use this for initialization
@@ -43,12 +43,12 @@ public class Losange : MonoBehaviour {
 	
 	public void SetModule(Simon s)
     {
-        simon = s;
+        module = s;
     }
 
     void Clic()
     {
         Flash();
-        simon.Clic(this);
+        module.Clic(this);
     }
 }

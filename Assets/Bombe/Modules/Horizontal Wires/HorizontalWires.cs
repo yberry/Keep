@@ -12,8 +12,8 @@ public class HorizontalWires : Module {
     [System.Serializable]
     public struct WireMat
     {
-        public WireColor color;
-        public Material material;
+        public WireColor label;
+        public Color color;
     }
 
     [SerializeField]

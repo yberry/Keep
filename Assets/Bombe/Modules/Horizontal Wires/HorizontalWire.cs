@@ -8,7 +8,7 @@ public class HorizontalWire : MonoBehaviour {
     [SerializeField]
     private Renderer[] cutWires;
 
-    private HorizontalWires fils;
+    private HorizontalWires module;
 
     private bool isTarget = false;
     private bool isCut = false;
@@ -17,12 +17,12 @@ public class HorizontalWire : MonoBehaviour {
 
     public void SetModule(HorizontalWires f, HorizontalWires.WireMat wireMat)
     {
-        fils = f;
-        Color = wireMat.color;
-        fullWire.material = wireMat.material;
+        module = f;
+        Color = wireMat.label;
+        fullWire.material.color = wireMat.color;
         for (int i = 0; i < cutWires.Length; i++)
         {
-            cutWires[i].material = wireMat.material;
+            cutWires[i].material.color = wireMat.color;
             cutWires[i].gameObject.SetActive(false);
         }
     }
@@ -49,11 +49,11 @@ public class HorizontalWire : MonoBehaviour {
 
         if (isTarget)
         {
-            fils.Resolu();
+            module.Resolu();
         }
         else
         {
-            fils.Faute();
+            module.Faute();
         }
     }
 }

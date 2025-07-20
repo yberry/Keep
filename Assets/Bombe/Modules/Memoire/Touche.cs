@@ -1,11 +1,12 @@
-﻿using UnityEngine;
+﻿using TMPro;
+using UnityEngine;
 using UnityEngine.UI;
 
 [RequireComponent(typeof(Button))]
 public class Touche : MonoBehaviour
 {
     private int chiffre;
-    private Memoire memoire;
+    private Memoire module;
     private bool cible = false;
     private Button affichageChiffre;
 
@@ -20,7 +21,7 @@ public class Touche : MonoBehaviour
             if (value >= 1 && value <= 4)
             {
                 chiffre = value;
-                affichageChiffre.GetComponentInChildren<Text>().text = chiffre.ToString();
+                affichageChiffre.GetComponentInChildren<TMP_Text>().text = chiffre.ToString();
             }
         }
     }
@@ -33,13 +34,13 @@ public class Touche : MonoBehaviour
 
     public void SetModule(Memoire m)
     {
-        memoire = m;
+        module = m;
     }
 
     public void Restart()
     {
         affichageChiffre = GetComponent<Button>();
-        affichageChiffre.GetComponentInChildren<Text>().text = "";
+        affichageChiffre.GetComponentInChildren<TMP_Text>().text = "";
         cible = false;
     }
 
@@ -52,11 +53,11 @@ public class Touche : MonoBehaviour
     {
         if (cible)
         {
-            memoire.Verif();
+            module.Verif();
         }
         else
         {
-            memoire.Faute();
+            module.Faute();
         }
     }
 }

@@ -3,8 +3,9 @@ using UnityEngine;
 
 public class Serial : Instance<Serial>
 {
+    private const string CHARS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
     private const string VOWELS = "AEIOUY";
-    private const int SERIAL_LENGTH = 6;
+    private const int LENGTH = 6;
 
     private string serial;
 
@@ -13,14 +14,13 @@ public class Serial : Instance<Serial>
 
     public void Generate()
     {
-        char[] tab = new char[SERIAL_LENGTH];
-        for (int i = 0; i < SERIAL_LENGTH; i++)
+        char[] tab = new char[LENGTH];
+        for (int i = 0; i < LENGTH; i++)
         {
             char ch;
-            if (i < SERIAL_LENGTH - 1)
+            if (i < LENGTH - 1)
             {
-                int index = Random.Range(0, 26);
-                ch = (char)('A' + index);
+                ch = CHARS.RandomItem();
                 HasVowel |= VOWELS.Contains(ch);
             }
             else
@@ -32,7 +32,7 @@ public class Serial : Instance<Serial>
             tab[i] = ch;
         }
         serial = new string(tab);
-        GetComponent<TextMeshPro>().text = serial;
+        GetComponent<TMP_Text>().text = serial;
 
         float ty, tz;
         float rx, ry;

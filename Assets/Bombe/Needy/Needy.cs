@@ -1,5 +1,5 @@
-﻿using UnityEngine;
-using UnityEngine.UI;
+﻿using TMPro;
+using UnityEngine;
 
 public abstract class Needy : Carre {
 
@@ -8,7 +8,7 @@ public abstract class Needy : Carre {
     protected float temps;
 
     [Header("Paramètres Needy")]
-    public Text compteur;
+    public TMP_Text compteur;
 
 	void Start ()
     {
@@ -37,7 +37,7 @@ public abstract class Needy : Carre {
 
     void AfficheTemps()
     {
-        compteur.text = ((int)temps).ToString("D2");
+        compteur.text = Mathf.Ceil(temps).ToString();
     }
 
     protected virtual void Restart()

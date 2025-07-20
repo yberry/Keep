@@ -1,6 +1,6 @@
-﻿using UnityEngine;
-using UnityEngine.UI;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using TMPro;
+using UnityEngine;
 
 public class QuiEstLePremier : Module {
 
@@ -54,7 +54,7 @@ public class QuiEstLePremier : Module {
     private const int objReussites = 3;
 
     [SerializeField]
-    private Text titre;
+    private TMP_Text titre;
     [SerializeField]
     private Mot[] mots;
     [SerializeField]

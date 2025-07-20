@@ -38,7 +38,7 @@ public class Symbols : Module {
     [SerializeField]
     private Canvas canvas;
     [SerializeField]
-    private Symbol prefabSymbole;
+    private Symbol prefabSymbol;
     [SerializeField]
     private Img[] images;
 
@@ -64,7 +64,7 @@ public class Symbols : Module {
             }
             while (numPris.Contains(num));
 
-            symbols[i] = Instantiate(prefabSymbole, canvas.transform);
+            symbols[i] = Instantiate(prefabSymbol, canvas.transform);
             symbols[i].SetModule(this);
             symbols[i].SetSymbol(GetSprite(colonnes[col, num]));
             numPris.Add(num);

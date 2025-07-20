@@ -1,7 +1,7 @@
-﻿using UnityEngine;
-using UnityEngine.UI;
+﻿using TMPro;
+using UnityEngine;
 
-public class Bouton : Module {
+public class BigButton : Module {
 
     private static readonly Color[] couleurs = new Color[]
     {
@@ -25,7 +25,7 @@ public class Bouton : Module {
     [SerializeField]
     private Transform bouton;
     [SerializeField]
-    private Text affichage;
+    private TMP_Text affichage;
     [SerializeField]
     private Light bande;
 

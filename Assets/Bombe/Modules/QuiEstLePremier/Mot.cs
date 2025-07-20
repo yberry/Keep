@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using TMPro;
+using UnityEngine;
 using UnityEngine.UI;
 
 [RequireComponent(typeof(Button))]
@@ -24,13 +25,13 @@ public class Mot : MonoBehaviour {
     public void Restart()
     {
         mot = GetComponent<Button>();
-        mot.GetComponentInChildren<Text>().text = "";
+        mot.GetComponentInChildren<TMP_Text>().text = "";
         aCliquer = false;
     }
 
     public void Show(string texte, bool clic)
     {
-        mot.GetComponentInChildren<Text>().text = texte;
+        mot.GetComponentInChildren<TMP_Text>().text = texte;
         aCliquer = clic;
     }
 

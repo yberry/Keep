@@ -1,6 +1,6 @@
-﻿using UnityEngine;
-using UnityEngine.UI;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using TMPro;
+using UnityEngine;
 
 public class Panneau : MonoBehaviour {
 
@@ -13,7 +13,7 @@ public class Panneau : MonoBehaviour {
     }
 
     [SerializeField]
-    private Text[] labelsFils;
+    private TMP_Text[] labelsFils;
 
     private SequencesFils sequence;
     private List<Fil> fils;

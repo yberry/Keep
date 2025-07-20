@@ -1,41 +1,35 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
 
-public class FilsVerticaux : Module {
+public class VerticalWires : Module {
 
     [SerializeField]
-    private FilVertical[] prefabsFils;
+    private VerticalWire[] prefabsFils;
 
-    private int nbFils;
-    private List<FilVertical> fils;
+    private int wireCount;
+    private List<VerticalWire> wires;
 
-    private bool Complet
-    {
-        get
-        {
-            return fils.TrueForAll(f => f.Complet);
-        }
-    }
+    private bool Complet => wires.TrueForAll(f => f.Complet);
 
 	// Use this for initialization
 	void Start () {
-        nbFils = Random.Range(3, 7);
+        wireCount = Random.Range(3, 7);
         RemplirListe();
 	}
 
     void RemplirListe()
     {
-        fils = new List<FilVertical>();
+        wires = new List<VerticalWire>();
 
-        int plein = nbFils;
-        int vide = 6 - nbFils;
+        int plein = wireCount;
+        int vide = 6 - wireCount;
 
         for (int i = 0; i < 6; i++)
         {
             if (plein > 0 && Bombe.HeadsOrTails)
             {
                 prefabsFils[i].SetModule(this);
-                fils.Add(prefabsFils[i]);
+                wires.Add(prefabsFils[i]);
                 plein--;
             }
             else if (vide > 0)
@@ -51,7 +45,7 @@ public class FilsVerticaux : Module {
 
         while (Complet)
         {
-            fils.ForEach(f => f.Restart());
+            wires.ForEach(f => f.Restart());
         }
     }
 

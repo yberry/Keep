@@ -18,6 +18,7 @@ public class Timer : Carre {
     private string chiffres;
 
     private int errors;
+    private float mult;
 
     private AudioSource source;
 
@@ -25,6 +26,7 @@ public class Timer : Carre {
     void Start () {
         chiffres = "";
         errors = 0;
+        mult = 1f;
         source = GetComponent<AudioSource>();
 	}
 	
@@ -32,7 +34,7 @@ public class Timer : Carre {
 	void Update () {
 	    if (defile)
         {
-            temps -= Time.deltaTime * (1f + errors * 0.25f);
+            temps -= Time.deltaTime * mult;
             if (temps <= 0f)
             {
                 Bombe.instance.Mort();
@@ -89,5 +91,6 @@ public class Timer : Carre {
     public void AddError()
     {
         crosses[errors++].SetActive(true);
+        mult += 0.25f;
     }
 }

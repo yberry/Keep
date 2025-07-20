@@ -227,16 +227,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   lumiere: {fileID: 108866537236270324}
   wireMats:
-  - color: 0
-    material: {fileID: 2100000, guid: 9f5928c913328e841a39e991569e1c9b, type: 2}
-  - color: 1
-    material: {fileID: 2100000, guid: 323bbeae755c1884da79cadb82494928, type: 2}
-  - color: 2
-    material: {fileID: 2100000, guid: b470fbd8d04b00949a02558619feed2b, type: 2}
-  - color: 3
-    material: {fileID: 2100000, guid: 4e053e9811bf10b429e65b55684ca135, type: 2}
-  - color: 4
-    material: {fileID: 2100000, guid: 58f3e0400e243284aaf2bd3657487066, type: 2}
+  - label: 0
+    color: {r: 1, g: 1, b: 1, a: 1}
+  - label: 1
+    color: {r: 0, g: 0, b: 0, a: 1}
+  - label: 2
+    color: {r: 0, g: 0, b: 1, a: 1}
+  - label: 3
+    color: {r: 1, g: 1, b: 0, a: 1}
+  - label: 4
+    color: {r: 1, g: 0, b: 0, a: 1}
   startWires:
   - {fileID: 114701319124760828}
   - {fileID: 1394284376825987899}

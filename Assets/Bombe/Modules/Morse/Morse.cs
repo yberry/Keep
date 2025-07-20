@@ -74,7 +74,7 @@ public class Morse : Module {
     [SerializeField]
     private Slider slider;
     [SerializeField]
-    private TextMeshProUGUI freqDisplay;
+    private TMP_Text freqDisplay;
     [SerializeField]
     private Button gauche;
     [SerializeField]

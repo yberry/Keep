@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using TMPro;
+using UnityEngine;
 using UnityEngine.UI;
 
 [RequireComponent(typeof(Text))]
@@ -11,7 +12,7 @@ public class Lettre : MonoBehaviour
 
     private char[] lettres;
     private int currentIndex = 0;
-    private Text affichage;
+    private TMP_Text affichage;
 
     private int CurrentIndex
     {
@@ -55,7 +56,7 @@ public class Lettre : MonoBehaviour
 
     public void SetLettres(char[] l)
     {
-        affichage = GetComponent<Text>();
+        affichage = GetComponent<TMP_Text>();
         lettres = l;
         Affiche();
     }

@@ -9,7 +9,7 @@ public class Memoire : Module
     [SerializeField]
     private Light[] succes;
     [SerializeField]
-    private TextMeshProUGUI numDisplay;
+    private TMP_Text numDisplay;
 
     private const int objEtapes = 5;
 

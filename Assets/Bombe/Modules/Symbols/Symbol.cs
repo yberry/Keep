@@ -12,7 +12,7 @@ public class Symbol : MonoBehaviour {
     [SerializeField]
     private Image image;
 
-    private Symbols symbols;
+    private Symbols module;
 
     private Button bouton;
     private bool suivant = false;
@@ -29,7 +29,7 @@ public class Symbol : MonoBehaviour {
 
     public void SetModule(Symbols s)
     {
-        symbols = s;
+        module = s;
     }
 
     public void SetSymbol(Sprite sprite)
@@ -56,11 +56,11 @@ public class Symbol : MonoBehaviour {
             bande.color = Color.green;
             suivant = false;
             bande.enabled = true;
-            symbols.Verif();
+            module.Verif();
         }
         else
         {
-            symbols.Faute();
+            module.Faute();
             StartCoroutine(TempsFaute());
         }
     }

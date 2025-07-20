@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
 
-public class FilVertical : MonoBehaviour {
+public class VerticalWire : MonoBehaviour {
 
     private static readonly Color[] couleursDispo = new Color[]
     {
@@ -16,16 +16,16 @@ public class FilVertical : MonoBehaviour {
     [SerializeField]
     private GameObject etoile;
 
-    private FilsVerticaux fils;
+    private VerticalWires fils;
     private List<Color> couleurs;
-    private bool aCouper = false;
-    private bool estCoupe = false;
+    private bool isTarget = false;
+    private bool isCut = false;
 
     public bool Complet
     {
         get
         {
-            return !aCouper || estCoupe;
+            return !isTarget || isCut;
         }
     }
 
@@ -34,7 +34,7 @@ public class FilVertical : MonoBehaviour {
         Restart();
 	}
 
-    public void SetModule(FilsVerticaux f)
+    public void SetModule(VerticalWires f)
     {
         fils = f;
     }
@@ -69,27 +69,27 @@ public class FilVertical : MonoBehaviour {
 
         if (!b && !l && (e || !r))
         {
-            aCouper = true;
+            isTarget = true;
         }
 
         else if (b && ((e && r && !l) || (l && !r)))
         {
-            aCouper = Bombe.instance.HasPort(Port.Type.Parallele);
+            isTarget = Bombe.instance.HasPort(Port.Type.Parallele);
         }
 
         else if (!e && ((r && (b || !l)) || (!r && b && !l)))
         {
-            aCouper = Serial.instance.LastEven;
+            isTarget = Serial.instance.LastEven;
         }
 
         else if (!b && l && (r || e))
         {
-            aCouper = Bombe.instance.NbPiles >= 2;
+            isTarget = Bombe.instance.NbPiles >= 2;
         }
 
         else
         {
-            aCouper = false;
+            isTarget = false;
         }
     }
 
@@ -102,14 +102,14 @@ public class FilVertical : MonoBehaviour {
 
     public void Coupe()
     {
-        if (estCoupe)
+        if (isCut)
         {
             return;
         }
 
-        estCoupe = true;
+        isCut = true;
 
-        if (aCouper)
+        if (isTarget)
         {
             fils.Verif();
         }
