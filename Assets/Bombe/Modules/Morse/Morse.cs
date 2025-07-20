@@ -3,6 +3,7 @@ using UnityEngine.UI;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using TMPro;
 
 public class Morse : Module {
 
@@ -73,7 +74,7 @@ public class Morse : Module {
     [SerializeField]
     private Slider slider;
     [SerializeField]
-    private Text affichageFreq;
+    private TextMeshProUGUI freqDisplay;
     [SerializeField]
     private Button gauche;
     [SerializeField]
@@ -90,25 +91,16 @@ public class Morse : Module {
 
     private int Current
     {
-        get
-        {
-            return current;
-        }
+        get => current;
 
         set
         {
             current = Mathf.Clamp(value, 0, motsFreqs.Count - 1);
-            Affiche();
+            UpdateFreq();
         }
     }
 
-    private float CurrentFreq
-    {
-        get
-        {
-            return motsFreqs.ElementAt(current).Value;
-        }
-    }
+    private float CurrentFreq => motsFreqs.ElementAt(current).Value;
 
     // Use this for initialization
     void Start () {
@@ -122,7 +114,7 @@ public class Morse : Module {
         index = Random.Range(0, motsFreqs.Count);
         mot = motsFreqs.ElementAt(index).Key;
 
-        Affiche();
+        UpdateFreq();
         gauche.onClick.AddListener(Gauche);
         droite.onClick.AddListener(Droite);
         TX.onClick.AddListener(Verif);
@@ -149,10 +141,10 @@ public class Morse : Module {
         }
     }
 
-    void Affiche()
+    void UpdateFreq()
     {
         float cur = CurrentFreq;
-        affichageFreq.text = cur.ToString("F4") + " MHz";
+        freqDisplay.text = string.Format("{0:F4} MHz", cur);
         slider.value = cur;
     }
 

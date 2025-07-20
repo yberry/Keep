@@ -59,7 +59,7 @@ public class Bombe : Instance<Bombe> {
     [SerializeField, Tooltip("Préfab de bouton")]
     private Bouton bouton;
     [SerializeField, Tooltip("Préfab de symboles")]
-    private Symboles symboles;
+    private Symbols symboles;
     [SerializeField, Tooltip("Préfab de simon")]
     private Simon simon;
     [SerializeField, Tooltip("Préfab de qui est le premier")]
