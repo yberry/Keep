@@ -2,9 +2,9 @@
 using UnityEngine.UI;
 using System.Collections.Generic;
 
-public class MotDePasse : Module {
+public class Password : Module {
 
-    private static readonly string[] motsPossibles = new string[]
+    private static readonly string[] wordsList = new string[]
     {
         "ABOUT", "AFTER", "AGAIN", "BELOW", "COULD",
         "EVERY", "FIRST", "FOUND", "GREAT", "HOUSE",
@@ -15,24 +15,24 @@ public class MotDePasse : Module {
         "WHERE", "WHICH", "WORLD", "WOULD", "WRITE"
     };
 
-    private const string alpha = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-    private const int choixParLettre = 6;
+    private const string ALPHA = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    private const int CHOICES_PER_CHAR = 6;
 
     [SerializeField]
-    private Lettre[] lettres;
+    private PasswordChar[] passwordChars;
     [SerializeField]
     private Button submit;
 
-    private string mot;
+    private string word;
 
-    private List<char>[] choixLettres;
+    private List<char>[] choices;
     
 
 	// Use this for initialization
 	void Start () {
-        mot = motsPossibles.RandomItem();
+        word = wordsList.RandomItem();
 
-        choixLettres = new List<char>[mot.Length];
+        choices = new List<char>[word.Length];
 
         do
         {
@@ -40,39 +40,39 @@ public class MotDePasse : Module {
         }
         while (CheckMulitple());
 
-        for (int i = 0; i < lettres.Length; i++)
+        for (int i = 0; i < passwordChars.Length; i++)
         {
-            lettres[i].SetLettres(choixLettres[i].ToArray());
+            passwordChars[i].SetLettres(choices[i].ToArray());
         }
         submit.onClick.AddListener(Verif);
 	}
 
     void Restart()
     {
-        for (int i = 0; i < mot.Length; i++)
+        for (int i = 0; i < word.Length; i++)
         {
-            choixLettres[i] = new List<char>(alpha);
+            choices[i] = new List<char>(ALPHA);
             
-            while (choixLettres[i].Count > choixParLettre)
+            while (choices[i].Count > CHOICES_PER_CHAR)
             {
                 int rand;
                 do
                 {
-                    rand = Random.Range(0, choixLettres[i].Count);
+                    rand = Random.Range(0, choices[i].Count);
                 }
-                while (choixLettres[i][rand] == mot[i]);
-                choixLettres[i].RemoveAt(rand);
+                while (choices[i][rand] == word[i]);
+                choices[i].RemoveAt(rand);
             }
 
-            choixLettres[i].Shuffle();
+            choices[i].Shuffle();
         }
     }
 
     bool CheckMulitple()
     {
-        foreach (string m in motsPossibles)
+        foreach (string m in wordsList)
         {
-            if (m == mot)
+            if (m == word)
             {
                 continue;
             }
@@ -80,7 +80,7 @@ public class MotDePasse : Module {
             bool contains = true;
             for (int i = 0; i < m.Length; i++)
             {
-                if (!choixLettres[i].Contains(m[i]))
+                if (!choices[i].Contains(m[i]))
                 {
                     contains = false;
                     break;
@@ -97,9 +97,9 @@ public class MotDePasse : Module {
 
     void Verif()
     {
-        for (int i = 0; i < mot.Length; i++)
+        for (int i = 0; i < word.Length; i++)
         {
-            if (lettres[i].CurrentLettre != mot[i])
+            if (passwordChars[i].CurrentLettre != word[i])
             {
                 Faute();
                 return;

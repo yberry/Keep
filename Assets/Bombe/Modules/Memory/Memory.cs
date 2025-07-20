@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using TMPro;
 
-public class Memoire : Module
+public class Memory : Module
 {
     [SerializeField]
-    private Touche[] touches;
+    private MemoryButton[] buttons;
     [SerializeField]
     private Light[] succes;
     [SerializeField]
@@ -20,10 +20,8 @@ public class Memoire : Module
 
     private int Chiffre
     {
-        get
-        {
-            return chiffre;
-        }
+        get => chiffre;
+
         set
         {
             if (value >= 1 && value <= 4)
@@ -39,7 +37,7 @@ public class Memoire : Module
     {
         chiffres = new List<int>();
         positions = new List<int>();
-        foreach (Touche touche in touches)
+        foreach (MemoryButton touche in buttons)
         {
             touche.SetModule(this);
         }
@@ -57,7 +55,7 @@ public class Memoire : Module
 
         List<int> chiffresPris = new List<int>();
 
-        foreach (Touche touche in touches)
+        foreach (MemoryButton touche in buttons)
         {
             touche.Restart();
             int ch;
@@ -175,8 +173,8 @@ public class Memoire : Module
     void ClickOnPosition(int pos)
     {
         positions.Add(pos);
-        chiffres.Add(touches[pos].Chiffre);
-        touches[pos].SetCible();
+        chiffres.Add(buttons[pos].Chiffre);
+        buttons[pos].SetCible();
     }
 
     void ClickOnChiffre(int ch)
@@ -184,13 +182,13 @@ public class Memoire : Module
         chiffres.Add(ch);
         int pos = GetPositionChiffre(ch);
         positions.Add(pos);
-        touches[pos].SetCible();
+        buttons[pos].SetCible();
     }
 
     int GetPositionChiffre(int ch)
     {
         int i = 0;
-        while (touches[i].Chiffre != ch)
+        while (buttons[i].Chiffre != ch)
         {
             ++i;
         }

@@ -2,8 +2,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-[RequireComponent(typeof(Text))]
-public class Lettre : MonoBehaviour
+public class PasswordChar : MonoBehaviour
 {
     [SerializeField]
     private Button flecheHaut;

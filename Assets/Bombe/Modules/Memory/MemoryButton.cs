@@ -3,19 +3,17 @@ using UnityEngine;
 using UnityEngine.UI;
 
 [RequireComponent(typeof(Button))]
-public class Touche : MonoBehaviour
+public class MemoryButton : MonoBehaviour
 {
     private int chiffre;
-    private Memoire module;
+    private Memory module;
     private bool cible = false;
     private Button affichageChiffre;
 
     public int Chiffre
     {
-        get
-        {
-            return chiffre;
-        }
+        get => chiffre;
+
         set
         {
             if (value >= 1 && value <= 4)
@@ -32,7 +30,7 @@ public class Touche : MonoBehaviour
         affichageChiffre.onClick.AddListener(Clic);
     }
 
-    public void SetModule(Memoire m)
+    public void SetModule(Memory m)
     {
         module = m;
     }

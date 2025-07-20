@@ -65,7 +65,7 @@ public class Bombe : Instance<Bombe> {
     [SerializeField, Tooltip("Préfab de qui est le premier")]
     private WhoFirst quiEstLePremier;
     [SerializeField, Tooltip("Préfab de memoire")]
-    private Memoire memoire;
+    private Memory memoire;
     [SerializeField, Tooltip("Préfab de morse")]
     private Morse morse;
     [SerializeField, Tooltip("Préfab de fils verticaux")]
@@ -75,7 +75,7 @@ public class Bombe : Instance<Bombe> {
     [SerializeField, Tooltip("Préfab de labyrinthe")]
     private Labyrinthe labyrinthe;
     [SerializeField, Tooltip("Préfab de mot de passe")]
-    private MotDePasse motDePasse;
+    private Password motDePasse;
 
     [Header("Préfabs de needy")]
     [SerializeField, Tooltip("Préfab de question")]
