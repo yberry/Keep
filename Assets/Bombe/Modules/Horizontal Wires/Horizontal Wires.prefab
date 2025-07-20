@@ -111,7 +111,7 @@ GameObject:
   - component: {fileID: 23983979643778988}
   - component: {fileID: 114180834280272922}
   m_Layer: 0
-  m_Name: FilsHorizontaux
+  m_Name: Horizontal Wires
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

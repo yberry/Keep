@@ -55,7 +55,7 @@ public class Bombe : Instance<Bombe> {
     [SerializeField, Tooltip("Préfab de module vide")]
     private Transform dummyPrefab;
     [SerializeField, Tooltip("Préfab de fils horizontaux")]
-    private FilsHorizontaux filsHorizontaux;
+    private HorizontalWires filsHorizontaux;
     [SerializeField, Tooltip("Préfab de bouton")]
     private Bouton bouton;
     [SerializeField, Tooltip("Préfab de symboles")]

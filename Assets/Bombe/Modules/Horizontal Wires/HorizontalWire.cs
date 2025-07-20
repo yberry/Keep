@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class FilHorizontal : MonoBehaviour {
+public class HorizontalWire : MonoBehaviour {
 
     [SerializeField]
     private Renderer fullWire;
@@ -8,14 +8,14 @@ public class FilHorizontal : MonoBehaviour {
     [SerializeField]
     private Renderer[] cutWires;
 
-    private FilsHorizontaux fils;
+    private HorizontalWires fils;
 
     private bool isTarget = false;
     private bool isCut = false;
 
-    public FilsHorizontaux.WireColor Color { get; private set; }
+    public HorizontalWires.WireColor Color { get; private set; }
 
-    public void SetModule(FilsHorizontaux f, FilsHorizontaux.WireMat wireMat)
+    public void SetModule(HorizontalWires f, HorizontalWires.WireMat wireMat)
     {
         fils = f;
         Color = wireMat.color;

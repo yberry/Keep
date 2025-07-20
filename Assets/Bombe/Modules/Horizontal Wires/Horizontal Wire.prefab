@@ -64,7 +64,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 33c901ed6c3d8d2418651082a3bc083a, type: 2}
+  - {fileID: 2100000, guid: 9f5928c913328e841a39e991569e1c9b, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -99,7 +99,7 @@ GameObject:
   - component: {fileID: 4431729494239264130}
   - component: {fileID: 4464439972297956830}
   m_Layer: 0
-  m_Name: Hori Wire
+  m_Name: Horizontal Wire
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -234,7 +234,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 33c901ed6c3d8d2418651082a3bc083a, type: 2}
+  - {fileID: 2100000, guid: 9f5928c913328e841a39e991569e1c9b, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -320,7 +320,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 33c901ed6c3d8d2418651082a3bc083a, type: 2}
+  - {fileID: 2100000, guid: 9f5928c913328e841a39e991569e1c9b, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-public class FilsHorizontaux : Module {
+public class HorizontalWires : Module {
 
     public enum WireColor
     {
@@ -20,10 +20,10 @@ public class FilsHorizontaux : Module {
     private WireMat[] wireMats;
 
     [SerializeField]
-    private FilHorizontal[] startWires;
+    private HorizontalWire[] startWires;
 
     private int wireCount;
-    private List<FilHorizontal> wires;
+    private List<HorizontalWire> wires;
 
 	void Start ()
     {
@@ -34,7 +34,7 @@ public class FilsHorizontaux : Module {
 
     void FillList()
     {
-        wires = new List<FilHorizontal>();
+        wires = new List<HorizontalWire>();
 
         int fill = wireCount;
         bool[] tab = new bool[6];
