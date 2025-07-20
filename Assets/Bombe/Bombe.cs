@@ -63,7 +63,7 @@ public class Bombe : Instance<Bombe> {
     [SerializeField, Tooltip("Préfab de simon")]
     private Simon simon;
     [SerializeField, Tooltip("Préfab de qui est le premier")]
-    private QuiEstLePremier quiEstLePremier;
+    private WhoFirst quiEstLePremier;
     [SerializeField, Tooltip("Préfab de memoire")]
     private Memoire memoire;
     [SerializeField, Tooltip("Préfab de morse")]

@@ -3,11 +3,11 @@ using UnityEngine;
 using UnityEngine.UI;
 
 [RequireComponent(typeof(Button))]
-public class Mot : MonoBehaviour {
+public class WhoFirstWord : MonoBehaviour {
 
-    private bool aCliquer = false;
+    private bool isTarget = false;
 
-    private QuiEstLePremier qui;
+    private WhoFirst module;
 
     private Button mot;
 
@@ -17,33 +17,33 @@ public class Mot : MonoBehaviour {
         mot.onClick.AddListener(Clic);
 	}
 
-    public void SetModule(QuiEstLePremier q)
+    public void SetModule(WhoFirst q)
     {
-        qui = q;
+        module = q;
     }
 
     public void Restart()
     {
         mot = GetComponent<Button>();
         mot.GetComponentInChildren<TMP_Text>().text = "";
-        aCliquer = false;
+        isTarget = false;
     }
 
     public void Show(string texte, bool clic)
     {
         mot.GetComponentInChildren<TMP_Text>().text = texte;
-        aCliquer = clic;
+        isTarget = clic;
     }
 
     void Clic()
     {
-        if (aCliquer)
+        if (isTarget)
         {
-            qui.Verif();
+            module.Verif();
         }
         else
         {
-            qui.Faute();
+            module.Faute();
         }
     }
 }

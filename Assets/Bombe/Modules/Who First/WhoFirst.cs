@@ -2,9 +2,9 @@
 using TMPro;
 using UnityEngine;
 
-public class QuiEstLePremier : Module {
+public class WhoFirst : Module {
 
-    private static readonly string[][] titresPossibles = new string[][]
+    private static readonly string[][] englishTitles = new string[][]
     {
         new string[] { "UR" },
         new string[] { "FIRST", "OKAY", "C" },
@@ -14,12 +14,12 @@ public class QuiEstLePremier : Module {
         new string[] { "DISPLAY", "SAYS", "NO", "LEAD", "HOLD ON", "YOU ARE", "THERE", "SEE", "CEE" }
     };
 
-    private static readonly string[] motsCle = new string[] {
+    private static readonly string[] englishKeywords = new string[] {
         "READY", "FIRST", "NO", "BLANK", "NOTHING", "YES", "WHAT", "UHHH", "LEFT", "RIGHT", "MIDDLE", "OKAY", "WAIT", "PRESS",
         "YOU", "YOU ARE", "YOUR", "YOU'RE", "UR", "U", "UH HUH", "UH UH", "WHAT?", "DONE", "NEXT", "HOLD", "SURE", "LIKE"
     };
 
-    private static readonly int[][] motsSuivants = new int[][]
+    private static readonly int[][] nextWords = new int[][]
     {
         new int[] { 5, 11, 6, 10, 8, 13, 9, 3, 0, 2, 1, 7, 4, 12 },
         new int[] { 8, 11, 5, 10, 2, 9, 4, 7, 12, 0, 3, 6, 13, 1 },
@@ -54,11 +54,11 @@ public class QuiEstLePremier : Module {
     private const int objReussites = 3;
 
     [SerializeField]
-    private TMP_Text titre;
+    private TMP_Text keywordDisplay;
     [SerializeField]
-    private Mot[] mots;
+    private WhoFirstWord[] words;
     [SerializeField]
-    private Light[] succes;
+    private Light[] successes;
 
     private int nbReussites = 0;
 
@@ -66,11 +66,11 @@ public class QuiEstLePremier : Module {
 
 	// Use this for initialization
 	void Start () {
-        foreach (Mot mot in mots)
+        foreach (WhoFirstWord mot in words)
         {
             mot.SetModule(this);
         }
-        foreach (Light light in succes)
+        foreach (Light light in successes)
         {
             light.color = Color.green;
             light.enabled = false;
@@ -80,24 +80,24 @@ public class QuiEstLePremier : Module {
 
     void Restart()
     {
-        numCle = Random.Range(0, mots.Length);
+        numCle = Random.Range(0, words.Length);
 
-        titre.text = titresPossibles[numCle].RandomItem();
-        foreach (Mot mot in mots)
+        keywordDisplay.text = englishTitles[numCle].RandomItem();
+        foreach (WhoFirstWord mot in words)
         {
             mot.Restart();
         }
 
-        int rand = Random.Range(0, motsCle.Length);
+        int rand = Random.Range(0, englishKeywords.Length);
 
         Dictionary<int, int> indicesMis = new Dictionary<int, int>();
 
-        List<int> indicesLigne = new List<int>(motsSuivants[rand]);
+        List<int> indicesLigne = new List<int>(nextWords[rand]);
         int indexCle = indicesLigne.IndexOf(rand);
 
         int min = indexCle;
 
-        for (int i = 0; i < mots.Length; i++)
+        for (int i = 0; i < words.Length; i++)
         {
             if (i != numCle)
             {
@@ -124,13 +124,13 @@ public class QuiEstLePremier : Module {
         int j = 0;
         foreach (KeyValuePair<int, int> pair in indicesMis)
         {
-            mots[j++].Show(motsCle[pair.Key], pair.Value == min);
+            words[j++].Show(englishKeywords[pair.Key], pair.Value == min);
         }
     }
 
     public void Verif()
     {
-        succes[nbReussites].enabled = true;
+        successes[nbReussites].enabled = true;
 
         if (++nbReussites >= objReussites)
         {
