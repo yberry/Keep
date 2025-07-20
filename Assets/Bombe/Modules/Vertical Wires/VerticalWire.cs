@@ -1,71 +1,49 @@
 ﻿using UnityEngine;
-using System.Collections.Generic;
 
 public class VerticalWire : MonoBehaviour {
 
-    private static readonly Color[] couleursDispo = new Color[]
-    {
-        Color.blue,
-        Color.red,
-        Color.white,
-        Color.yellow
-    };
-
+    [SerializeField]
+    private Renderer fullWire;
+    [SerializeField]
+    private Renderer[] cutWires;
     [SerializeField]
     private Light LED;
     [SerializeField]
-    private GameObject etoile;
+    private GameObject star;
 
-    private VerticalWires fils;
-    private List<Color> couleurs;
+    private VerticalWires module;
+    private VerticalWires.WireColor colors;
     private bool isTarget = false;
     private bool isCut = false;
 
-    public bool Complet
-    {
-        get
-        {
-            return !isTarget || isCut;
-        }
-    }
-
-	// Use this for initialization
-	void Start () {
-        Restart();
-	}
+    public bool Finished => !isTarget || isCut;
 
     public void SetModule(VerticalWires f)
     {
-        fils = f;
+        module = f;
     }
 
-    public void Restart()
+    public void Restart(VerticalWires.WireMat[] wireMats)
     {
-        int nbCouleurs = Random.Range(1, 3);
-        couleurs = new List<Color>();
-        for (int i = 0; i < nbCouleurs; i++)
+        int colorCount = Random.Range(1, 3);
+        colors = VerticalWires.WireColor.None;
+        for (int i = 0; i < colorCount; i++)
         {
-            int rand;
-
-            do
-            {
-                rand = Random.Range(0, couleursDispo.Length);
-            }
-            while (couleurs.Contains(couleursDispo[rand]));
-
-            couleurs.Add(couleursDispo[rand]);
+            VerticalWires.WireColor color = (VerticalWires.WireColor)(1 << Random.Range(0, 4));
+            colors |= color;
+            //Set Material color
         }
         LED.enabled = Bombe.HeadsOrTails;
-        etoile.SetActive(Bombe.HeadsOrTails);
-        Objectif();
+        star.SetActive(Bombe.HeadsOrTails);
+        SetTarget();
     }
 
-    void Objectif()
+    void SetTarget()
     {
-        bool b = couleurs.Contains(Color.blue);
-        bool r = couleurs.Contains(Color.red);
+        bool b = (colors & VerticalWires.WireColor.Blue) != 0;
+        bool r = (colors & VerticalWires.WireColor.Red) != 0;
         bool l = LED.enabled;
-        bool e = etoile.activeInHierarchy;
+        bool e = star.activeSelf;
 
         if (!b && !l && (e || !r))
         {
@@ -93,14 +71,7 @@ public class VerticalWire : MonoBehaviour {
         }
     }
 
-    public void Desaffiche()
-    {
-        LED.enabled = false;
-        etoile.SetActive(false);
-        gameObject.SetActive(false);
-    }
-
-    public void Coupe()
+    void OnMouseDown()
     {
         if (isCut)
         {
@@ -108,14 +79,20 @@ public class VerticalWire : MonoBehaviour {
         }
 
         isCut = true;
+        fullWire.gameObject.SetActive(false);
+        for (int i = 0; i < cutWires.Length; i++)
+        {
+            cutWires[i].gameObject.SetActive(false);
+        }
+        GetComponent<Collider>().enabled = false;
 
         if (isTarget)
         {
-            fils.Verif();
+            module.Verif();
         }
         else
         {
-            fils.Faute();
+            module.Faute();
         }
     }
 }

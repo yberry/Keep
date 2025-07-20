@@ -129,7 +129,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lumiere: {fileID: 108479013600789342}
-  prefabsFils:
+  wireMats:
+  - label: 1
+    color: {r: 0, g: 0, b: 1, a: 1}
+  - label: 2
+    color: {r: 1, g: 0, b: 0, a: 1}
+  - label: 4
+    color: {r: 1, g: 1, b: 1, a: 1}
+  - label: 8
+    color: {r: 1, g: 1, b: 0, a: 1}
+  startWires:
   - {fileID: 114916148114118096}
   - {fileID: 1332781801908252109}
   - {fileID: 722557354373193601}

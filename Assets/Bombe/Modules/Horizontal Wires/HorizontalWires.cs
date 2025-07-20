@@ -36,16 +36,7 @@ public class HorizontalWires : Module {
     {
         wires = new List<HorizontalWire>();
 
-        int fill = wireCount;
-        bool[] tab = new bool[6];
-        for (int i = 6; i > 0; i--)
-        {
-            if (i == fill || fill > 0 && Bombe.HeadsOrTails)
-            {
-                fill -= 1;
-                tab[i - 1] = true;
-            }
-        }
+        bool[] tab = Bombe.GetRepartition(wireCount, 6);
 
         for (int i = 0; i < 6; i++)
         {

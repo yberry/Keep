@@ -408,4 +408,18 @@ public class Bombe : Instance<Bombe> {
     {
         Destroy(gameObject);
     }
+
+    public static bool[] GetRepartition(int fill, int max)
+    {
+        bool[] tab = new bool[max];
+        for (int i = max; i > 0; i--)
+        {
+            if (i == fill || fill > 0 && HeadsOrTails)
+            {
+                fill -= 1;
+                tab[i - 1] = true;
+            }
+        }
+        return tab;
+    }
 }

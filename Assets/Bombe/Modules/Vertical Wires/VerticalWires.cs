@@ -3,55 +3,72 @@ using System.Collections.Generic;
 
 public class VerticalWires : Module {
 
+    [System.Flags]
+    public enum WireColor
+    {
+        None = 0,
+        Blue = 1,
+        Red = 2,
+        White = 4, 
+        Yellow = 8
+    }
+
+    [System.Serializable]
+    public struct WireMat
+    {
+        public WireColor label;
+        public Color color;
+    }
+
     [SerializeField]
-    private VerticalWire[] prefabsFils;
+    private WireMat[] wireMats;
+
+    [SerializeField]
+    private VerticalWire[] startWires;
 
     private int wireCount;
     private List<VerticalWire> wires;
 
-    private bool Complet => wires.TrueForAll(f => f.Complet);
+    private bool Finished => wires.TrueForAll(f => f.Finished);
 
 	// Use this for initialization
 	void Start () {
         wireCount = Random.Range(3, 7);
-        RemplirListe();
+        FillList();
+        SetTargets();
 	}
 
-    void RemplirListe()
+    void FillList()
     {
         wires = new List<VerticalWire>();
 
-        int plein = wireCount;
-        int vide = 6 - wireCount;
+        bool[] tab = Bombe.GetRepartition(wireCount, 6);
 
         for (int i = 0; i < 6; i++)
         {
-            if (plein > 0 && Bombe.HeadsOrTails)
+            if (tab[i])
             {
-                prefabsFils[i].SetModule(this);
-                wires.Add(prefabsFils[i]);
-                plein--;
-            }
-            else if (vide > 0)
-            {
-                prefabsFils[i].Desaffiche();
-                vide--;
+                startWires[i].SetModule(this);
+                wires.Add(startWires[i]);
             }
             else
             {
-                i--;
+                startWires[i].gameObject.SetActive(false);
             }
-        }
+        }       
+    }
 
-        while (Complet)
+    private void SetTargets()
+    {
+        while (Finished)
         {
-            wires.ForEach(f => f.Restart());
+            wires.ForEach(f => f.Restart(wireMats));
         }
     }
 
     public void Verif()
     {
-        if (Complet)
+        if (Finished)
         {
             Resolu();
         }
