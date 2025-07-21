@@ -14,9 +14,24 @@ public class WhoFirst : Module {
         new string[] { "DISPLAY", "SAYS", "NO", "LEAD", "HOLD ON", "YOU ARE", "THERE", "SEE", "CEE" }
     };
 
+    private static readonly string[][] frenchTitles = new string[][]
+    {
+        new string[] { "THON" },
+        new string[] { "PREMIER", "OK", "C" },
+        new string[] { "OUI", "RIEN", "MOT", "VERT" },
+        new string[] { "VIDE", "BOUGE", "ROUGE", "TES", "TON", "TONS", "VERS" },
+        new string[] { "", "AU", "EAU", "HAUT" },
+        new string[] { "VERRE", "MOTS", "NON", "MAUX", "ATTENDS", "T'ES", "TU ES", "C'EST", "VER" }
+    };
+
     private static readonly string[] englishKeywords = new string[] {
         "READY", "FIRST", "NO", "BLANK", "NOTHING", "YES", "WHAT", "UHHH", "LEFT", "RIGHT", "MIDDLE", "OKAY", "WAIT", "PRESS",
         "YOU", "YOU ARE", "YOUR", "YOU'RE", "UR", "U", "UH HUH", "UH UH", "WHAT?", "DONE", "NEXT", "HOLD", "SURE", "LIKE"
+    };
+
+    private static readonly string[] frenchKeywords = new string[] {
+        "PRÊT", "PREMIER", "NON", "VIDE", "RIEN", "OUI", "EUX", "EUHHH", "GAUCHE", "DROITE", "MILIEU", "E", "ATTENDS", "APPUIE",
+        "TOI", "THON", "TON", "TONS", "T'ES", "TES", "AVANT", "QUOI", "QUOI ?", "FAIT", "SUIVANT", "MAINTIENS", "OK", "COMME"
     };
 
     private static readonly int[][] nextWords = new int[][]

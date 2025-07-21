@@ -2,6 +2,7 @@
 
 public class Laby
 {
+    [System.Flags]
     public enum Dir
     {
         Haut = 8,
@@ -98,21 +99,9 @@ public class Laby
     private Vector2 rond1;
     private Vector2 rond2;
 
-    public static Laby RandomLaby
-    {
-        get
-        {
-            return labys.RandomItem();
-        }        
-    }
+    public static Laby RandomLaby => labys.RandomItem();
 
-    public Vector2[] Circles
-    {
-        get
-        {
-            return new Vector2[] { rond1, rond2 };
-        }
-    }
+    public Vector2[] Circles => new Vector2[] { rond1, rond2 };
 
     public Laby(byte[,] pl, Vector2 r1, Vector2 r2)
     {

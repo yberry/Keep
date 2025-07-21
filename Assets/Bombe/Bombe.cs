@@ -73,7 +73,7 @@ public class Bombe : Instance<Bombe> {
     [SerializeField, Tooltip("Préfab de séquences de fils")]
     private SequencesFils sequencesFils;
     [SerializeField, Tooltip("Préfab de labyrinthe")]
-    private Labyrinthe labyrinthe;
+    private Labyrinth labyrinthe;
     [SerializeField, Tooltip("Préfab de mot de passe")]
     private Password motDePasse;
 

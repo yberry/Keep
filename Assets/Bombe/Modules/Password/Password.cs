@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 public class Password : Module {
 
-    private static readonly string[] wordsList = new string[]
+    private static readonly string[] englishWords = new string[]
     {
         "ABOUT", "AFTER", "AGAIN", "BELOW", "COULD",
         "EVERY", "FIRST", "FOUND", "GREAT", "HOUSE",
@@ -13,6 +13,17 @@ public class Password : Module {
         "SPELL", "STILL", "STUDY", "THEIR", "THERE",
         "THESE", "THING", "THINK", "THREE", "WATER",
         "WHERE", "WHICH", "WORLD", "WOULD", "WRITE"
+    };
+
+    private static readonly string[] frenchWords = new string[]
+    {
+        "ABATS", "ABIME", "ABOIS", "ADIEU", "DELTA",
+        "DENSE", "DEVIN", "DIVIN", "DRAME", "DROIT",
+        "ENVOL", "ENVIE", "ENVOI", "ERRES", "ESSAI",
+        "FLEUR", "FINIT", "FIOLE", "KILOS", "LITRE",
+        "LIVRE", "MASSE", "MATCH", "MATIN", "MAUVE",
+        "POSER", "PORTS", "POULE", "SALIR", "TAIRE",
+        "TARIF", "TASSE", "VALVE", "VANNE", "VENTE"
     };
 
     private const string ALPHA = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
@@ -30,7 +41,7 @@ public class Password : Module {
 
 	// Use this for initialization
 	void Start () {
-        word = wordsList.RandomItem();
+        word = englishWords.RandomItem();
 
         choices = new List<char>[word.Length];
 
@@ -70,7 +81,7 @@ public class Password : Module {
 
     bool CheckMulitple()
     {
-        foreach (string m in wordsList)
+        foreach (string m in englishWords)
         {
             if (m == word)
             {

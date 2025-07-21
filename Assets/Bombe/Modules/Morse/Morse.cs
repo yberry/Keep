@@ -47,7 +47,7 @@ public class Morse : Module {
         { '0', "-----" }
     };
 
-    private static readonly Dictionary<string, float> motsFreqs = new Dictionary<string, float>()
+    private static readonly Dictionary<string, float> englishWords = new Dictionary<string, float>()
     {
         { "shell", 3.505f },
         { "halls", 3.515f },
@@ -65,6 +65,26 @@ public class Morse : Module {
         { "sting", 3.592f },
         { "vector", 3.595f },
         { "beats", 3.600f }
+    };
+
+    private static readonly Dictionary<string, float> frenchWords = new Dictionary<string, float>()
+    {
+        { "vitre", 3.505f },
+        { "ville", 3.515f },
+        { "chose", 3.522f },
+        { "signe", 3.532f },
+        { "linge", 3.535f },
+        { "ligne", 3.542f },
+        { "champ", 3.545f },
+        { "litre", 3.552f },
+        { "phase", 3.555f },
+        { "chaud", 3.565f },
+        { "bille", 3.572f },
+        { "balle", 3.575f },
+        { "singe", 3.582f },
+        { "plume", 3.592f },
+        { "pluie", 3.595f },
+        { "salle", 3.600f }
     };
 
     private const float tempsPoint = 0.3f;
@@ -95,24 +115,24 @@ public class Morse : Module {
 
         set
         {
-            current = Mathf.Clamp(value, 0, motsFreqs.Count - 1);
+            current = Mathf.Clamp(value, 0, englishWords.Count - 1);
             UpdateFreq();
         }
     }
 
-    private float CurrentFreq => motsFreqs.ElementAt(current).Value;
+    private float CurrentFreq => englishWords.ElementAt(current).Value;
 
     // Use this for initialization
     void Start () {
         signal.enabled = false;
 
         slider.wholeNumbers = false;
-        slider.maxValue = motsFreqs.Values.Max();
-        slider.minValue = motsFreqs.Values.Min();
+        slider.maxValue = englishWords.Values.Max();
+        slider.minValue = englishWords.Values.Min();
         slider.interactable = false;
 
-        index = Random.Range(0, motsFreqs.Count);
-        mot = motsFreqs.ElementAt(index).Key;
+        index = Random.Range(0, englishWords.Count);
+        mot = englishWords.ElementAt(index).Key;
 
         UpdateFreq();
         gauche.onClick.AddListener(Gauche);
